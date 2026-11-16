@@ -1,0 +1,61 @@
+// Shared save and cancel actions throughout application forms.
+.btn.btn-cancel,
+.btn.btn-save {
+    --#{$prefix}btn-padding-x: 0.75rem;
+    --#{$prefix}btn-padding-y: 0.375rem;
+    --#{$prefix}btn-font-size: 0.75rem;
+    --#{$prefix}btn-font-weight: 500;
+    --#{$prefix}btn-line-height: 1.5;
+    --#{$prefix}btn-border-radius: 0.25rem;
+    --#{$prefix}btn-disabled-opacity: 0.65;
+
+    min-height: 2rem;
+    white-space: nowrap;
+
+    &:focus-visible {
+        outline: 2px solid #64748b;
+        outline-offset: 2px;
+    }
+}
+
+.btn.btn-cancel {
+    --#{$prefix}btn-color: #6b7280;
+    --#{$prefix}btn-bg: #edf2f7;
+    --#{$prefix}btn-border-color: #edf2f7;
+    --#{$prefix}btn-hover-color: #4b5563;
+    --#{$prefix}btn-hover-bg: #e2e8f0;
+    --#{$prefix}btn-hover-border-color: #e2e8f0;
+    --#{$prefix}btn-active-color: #4b5563;
+    --#{$prefix}btn-active-bg: #cbd5e1;
+    --#{$prefix}btn-active-border-color: #cbd5e1;
+    --#{$prefix}btn-disabled-color: #6b7280;
+    --#{$prefix}btn-disabled-bg: #edf2f7;
+    --#{$prefix}btn-disabled-border-color: #edf2f7;
+}
+
+.btn.btn-save {
+    --#{$prefix}btn-color: #fff;
+    --#{$prefix}btn-bg: #55be88;
+    --#{$prefix}btn-border-color: #55be88;
+    --#{$prefix}btn-hover-color: #fff;
+    --#{$prefix}btn-hover-bg: #45ac77;
+    --#{$prefix}btn-hover-border-color: #45ac77;
+    --#{$prefix}btn-active-color: #fff;
+    --#{$prefix}btn-active-bg: #379765;
+    --#{$prefix}btn-active-border-color: #379765;
+    --#{$prefix}btn-disabled-color: #fff;
+    --#{$prefix}btn-disabled-bg: #55be88;
+    --#{$prefix}btn-disabled-border-color: #55be88;
+}
+
+.form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.25rem;
+
+    > .btn {
+        margin: 0;
+    }
+}

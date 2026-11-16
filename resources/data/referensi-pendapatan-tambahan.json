@@ -1,0 +1,32 @@
+[
+  {
+    "kode_rek": "4.1.04.16.02.0001",
+    "uraian": "Pendapatan BLUD dari Jasa Layanan",
+    "pelayanan": [{"uraian": "Pendapatan BLUD dari Jasa Layanan", "harga_satuan": null}]
+  },
+  {
+    "kode_rek": "4.2.01.01.01.0001",
+    "uraian": "Pendapatan Hibah",
+    "pelayanan": [{"uraian": "Pendapatan Hibah", "harga_satuan": null}]
+  },
+  {
+    "kode_rek": "4.3.01.01.01.0001",
+    "uraian": "Hasil Kerja Sama",
+    "pelayanan": [{"uraian": "Hasil Kerja Sama", "harga_satuan": null}]
+  },
+  {
+    "kode_rek": "4.4.01.01.01.0001",
+    "uraian": "Pendapatan BLUD dari APBD",
+    "pelayanan": [{"uraian": "Pendapatan BLUD dari APBD", "harga_satuan": null}]
+  },
+  {
+    "kode_rek": "4.5.01.01.01.0001",
+    "uraian": "Jasa Giro/Bunga",
+    "pelayanan": [{"uraian": "Jasa Giro/Bunga", "harga_satuan": null}]
+  },
+  {
+    "kode_rek": "4.5.05.01.01.0001",
+    "uraian": "Investasi",
+    "pelayanan": [{"uraian": "Investasi", "harga_satuan": null}]
+  }
+]

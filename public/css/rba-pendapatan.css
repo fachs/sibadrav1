@@ -1,0 +1,218 @@
+.rba-pendapatan {
+    --pendapatan-surface: var(--bs-secondary-bg);
+    --pendapatan-soft: var(--bs-tertiary-bg);
+    --pendapatan-border: var(--bs-border-color);
+    border: 1px solid var(--pendapatan-border);
+    border-radius: 12px;
+}
+
+.rba-pendapatan .pendapatan-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--pendapatan-border);
+}
+
+.rba-pendapatan .pendapatan-heading-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: var(--bs-primary-bg-subtle);
+    color: var(--bs-primary-text-emphasis);
+    font-size: 24px;
+}
+
+.rba-pendapatan .pendapatan-count,
+.rba-pendapatan .pendapatan-group-count {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 6px;
+    background: var(--pendapatan-soft);
+    color: var(--bs-secondary-color);
+    font-size: .75rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.rba-pendapatan .pendapatan-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.rba-pendapatan .pendapatan-toolbar > .btn { white-space: normal; }
+.rba-pendapatan .pendapatan-toolbar > a { margin-left: auto; }
+
+.rba-pendapatan .pendapatan-filter {
+    display: flex;
+    flex: 1 1 340px;
+    align-items: center;
+    gap: 10px;
+    max-width: 520px;
+    min-width: 0;
+}
+
+.rba-pendapatan .pendapatan-filter .form-select { min-width: 0; }
+.rba-pendapatan .pendapatan-filter .btn { flex-shrink: 0; }
+
+.rba-pendapatan .pendapatan-table-wrap {
+    border: 1px solid var(--pendapatan-border);
+    border-radius: 10px;
+    scrollbar-color: var(--bs-secondary-color) var(--pendapatan-soft);
+}
+
+.rba-pendapatan .pendapatan-table {
+    --bs-table-bg: var(--pendapatan-surface);
+    --bs-table-color: var(--bs-body-color);
+    --bs-table-border-color: var(--pendapatan-border);
+    width: 100%;
+    min-width: 860px;
+    table-layout: fixed;
+    margin-bottom: 0;
+}
+
+.rba-pendapatan .pendapatan-col-code { width: 185px; }
+.rba-pendapatan .pendapatan-col-amount { width: 210px; }
+.rba-pendapatan .pendapatan-col-actions { width: 112px; }
+
+.rba-pendapatan .pendapatan-table > :not(caption) > * > * {
+    padding: 16px;
+    border-bottom: 1px solid var(--pendapatan-border);
+    overflow-wrap: anywhere;
+}
+
+.rba-pendapatan .pendapatan-table > thead > tr > th {
+    --bs-table-bg: var(--pendapatan-soft);
+    color: var(--bs-emphasis-color);
+    padding-block: 14px;
+    font-size: .75rem;
+    font-weight: 600;
+}
+
+.rba-pendapatan .pendapatan-item:hover > td {
+    --bs-table-bg: var(--pendapatan-soft);
+}
+
+.rba-pendapatan .pendapatan-account-code {
+    display: inline-block;
+    padding: 5px 8px;
+    border: 1px solid var(--pendapatan-border);
+    border-radius: 5px;
+    background: var(--pendapatan-soft);
+    color: #1e293b;
+    font-family: var(--bs-font-monospace);
+    font-size: .875rem;
+    font-weight: 600;
+}
+
+[data-bs-theme="dark"] .rba-pendapatan .pendapatan-account-code { color: #f8fafc; }
+
+.rba-pendapatan .pendapatan-amount {
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+.rba-pendapatan .pendapatan-group {
+    --pendapatan-group-bg: var(--bs-success-bg-subtle);
+    --pendapatan-group-color: var(--bs-success-text-emphasis);
+}
+
+.rba-pendapatan .pendapatan-group--jasa_layanan {
+    --pendapatan-group-bg: var(--bs-primary-bg-subtle);
+    --pendapatan-group-color: var(--bs-primary-text-emphasis);
+}
+
+.rba-pendapatan .pendapatan-group--hibah {
+    --pendapatan-group-bg: var(--bs-info-bg-subtle);
+    --pendapatan-group-color: var(--bs-info-text-emphasis);
+}
+
+.rba-pendapatan .pendapatan-table > tbody > .pendapatan-group > * {
+    --bs-table-bg: var(--pendapatan-group-bg);
+    color: var(--pendapatan-group-color);
+    padding-block: 12px;
+    font-weight: 600;
+    font-size: .8rem;
+}
+
+.rba-pendapatan .pendapatan-group > th { border-left: 3px solid var(--pendapatan-group-color); }
+.rba-pendapatan .pendapatan-group-count { background: var(--pendapatan-surface); color: var(--pendapatan-group-color); }
+
+.rba-pendapatan .pendapatan-service-details { margin-top: 10px; }
+.rba-pendapatan .pendapatan-service-details > summary {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: fit-content;
+    padding: 5px 8px;
+    border-radius: 6px;
+    background: var(--bs-primary-bg-subtle);
+    color: var(--bs-primary-text-emphasis);
+    cursor: pointer;
+    list-style: none;
+    font-size: .75rem;
+    font-weight: 500;
+}
+
+.rba-pendapatan .pendapatan-service-details > summary::-webkit-details-marker { display: none; }
+.rba-pendapatan .pendapatan-service-details[open] .pendapatan-disclosure-icon { transform: rotate(90deg); }
+.rba-pendapatan .pendapatan-service-details .table-responsive {
+    border: 1px solid var(--pendapatan-border);
+    border-radius: 6px;
+}
+
+.rba-pendapatan .pendapatan-service-details .table {
+    --bs-table-bg: var(--pendapatan-surface);
+    --bs-table-color: var(--bs-body-color);
+    --bs-table-border-color: var(--pendapatan-border);
+    min-width: 640px;
+    font-size: .875rem;
+}
+
+.rba-pendapatan .pendapatan-service-details .table thead {
+    --bs-table-bg: var(--pendapatan-soft);
+    --bs-table-color: var(--bs-emphasis-color);
+    --bs-table-border-color: var(--pendapatan-border);
+}
+
+.rba-pendapatan .pendapatan-service-details .table > :not(caption) > * > * { padding: 10px 12px; }
+
+.rba-pendapatan .pendapatan-table > tfoot > tr > * {
+    --bs-table-bg: var(--bs-primary-bg-subtle);
+    color: var(--bs-primary-text-emphasis);
+    border-top: 2px solid var(--bs-primary-border-subtle);
+    border-bottom: 0;
+    padding-block: 18px;
+    font-weight: 700;
+}
+
+.rba-pendapatan .pendapatan-table .pendapatan-empty {
+    padding: 48px 20px;
+    color: var(--bs-secondary-color);
+    text-align: center;
+}
+
+.rba-pendapatan .pendapatan-empty > i { display: block; margin-bottom: 12px; font-size: 36px; }
+.rba-pendapatan :is(summary, .pendapatan-table-wrap):focus-visible {
+    outline: 2px solid var(--bs-primary-text-emphasis);
+    outline-offset: 3px;
+}
+
+@media (max-width: 767.98px) {
+    .rba-pendapatan .pendapatan-heading { padding: 16px; }
+    .rba-pendapatan .pendapatan-toolbar { align-items: stretch; }
+    .rba-pendapatan .pendapatan-toolbar > .btn,
+    .rba-pendapatan .pendapatan-filter { flex: 1 1 100%; max-width: none; }
+    .rba-pendapatan .pendapatan-toolbar > a { margin-left: 0; }
+    .rba-pendapatan .pendapatan-filter { flex-wrap: wrap; }
+    .rba-pendapatan .pendapatan-filter > label { flex-basis: 100%; }
+    .rba-pendapatan .pendapatan-filter .form-select { flex: 1; width: auto; }
+}

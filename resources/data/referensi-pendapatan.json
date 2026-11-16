@@ -1,0 +1,879 @@
+{
+  "sumber": {
+    "nama_file": "Klasifikasi Kode Rekening per Jenis Layanan.xlsx",
+    "sheet": "Sheet2",
+    "sha256": "7a77d662df17ee33afb5377927f8d94ce4bfade0444f390173b1d70254f76ac9",
+    "baris_pelayanan": 121
+  },
+  "rekening": [
+    {
+      "kode_rek": "4.1.02.01.01.0001",
+      "uraian": "Pendapatan Pelayanan Rawat Jalan",
+      "baris_sumber": 2,
+      "pelayanan": [
+        {
+          "uraian": "Pelayanan Rawat Jalan",
+          "harga_satuan": "15000.00",
+          "baris_sumber": [
+            3
+          ]
+        },
+        {
+          "uraian": "Pemeriksaan Kesehatan Anak Sekolah",
+          "harga_satuan": "1000.00",
+          "baris_sumber": [
+            4
+          ]
+        },
+        {
+          "uraian": "Pemeriksaan Kesehatan untuk melanjutkan pendidikan/sekolah",
+          "harga_satuan": "2000.00",
+          "baris_sumber": [
+            5
+          ]
+        },
+        {
+          "uraian": "Pemeriksaan Kesehatan untuk melamar pekerjaan",
+          "harga_satuan": "5000.00",
+          "baris_sumber": [
+            6
+          ]
+        },
+        {
+          "uraian": "Pemeriksaan Kesehatan calon pengantin",
+          "harga_satuan": "7000.00",
+          "baris_sumber": [
+            7
+          ]
+        },
+        {
+          "uraian": "Pemeriksaan Kesehatan sakit/cuti hamil",
+          "harga_satuan": "2000.00",
+          "baris_sumber": [
+            8
+          ]
+        },
+        {
+          "uraian": "Pemeriksaan Kesehatan bebas buta warna",
+          "harga_satuan": "7000.00",
+          "baris_sumber": [
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "kode_rek": "4.1.02.01.06.0001",
+      "uraian": "Pendapatan Pelayanan Kunjungan Rumah",
+      "baris_sumber": 10,
+      "pelayanan": [
+        {
+          "uraian": "Pemeriksaan/Perawatan Kesehatan di Rumah",
+          "harga_satuan": "25000.00",
+          "baris_sumber": [
+            11
+          ]
+        },
+        {
+          "uraian": "Pemeriksaan/Perawatan dan Tindakan Kesehatan di Rumah (Home Care)",
+          "harga_satuan": "100000.00",
+          "baris_sumber": [
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "kode_rek": "4.1.02.01.04.0001",
+      "uraian": "Pendapatan Pelayanan Tindakan Medik dan Terapi",
+      "baris_sumber": 13,
+      "pelayanan": [
+        {
+          "uraian": "Perawatan Luka Tanpa Jahitan",
+          "harga_satuan": "10000.00",
+          "baris_sumber": [
+            14
+          ]
+        },
+        {
+          "uraian": "Perawatan Luka dengan 1 (satu) Jahitan pertama",
+          "harga_satuan": "15000.00",
+          "baris_sumber": [
+            15
+          ]
+        },
+        {
+          "uraian": "Penambahan setiap Jahitan",
+          "harga_satuan": "5000.00",
+          "baris_sumber": [
+            16
+          ]
+        },
+        {
+          "uraian": "Buka Jahitan",
+          "harga_satuan": "10000.00",
+          "baris_sumber": [
+            17,
+            77
+          ]
+        },
+        {
+          "uraian": "Incisi Abses",
+          "harga_satuan": "15000.00",
+          "baris_sumber": [
+            18
+          ]
+        },
+        {
+          "uraian": "Eksterpasi",
+          "harga_satuan": "25000.00",
+          "baris_sumber": [
+            19
+          ]
+        },
+        {
+          "uraian": "Ekstraksi Corpus Alienum (termasuk Serumen)/ irigasi mata atau telinga",
+          "harga_satuan": "15000.00",
+          "baris_sumber": [
+            20
+          ]
+        },
+        {
+          "uraian": "Ekstraksi Kuku",
+          "harga_satuan": "25000.00",
+          "baris_sumber": [
+            21
+          ]
+        },
+        {
+          "uraian": "Pemasangan/Pengangkatan Kateter Urine",
+          "harga_satuan": "30000.00",
+          "baris_sumber": [
+            22
+          ]
+        },
+        {
+          "uraian": "Pemasangan/Pengangkatan NGT",
+          "harga_satuan": "50000.00",
+          "baris_sumber": [
+            23
+          ]
+        },
+        {
+          "uraian": "Circumsisi/Pelayanan Khitanan",
+          "harga_satuan": "100000.00",
+          "baris_sumber": [
+            24
+          ]
+        },
+        {
+          "uraian": "Tindik telinga anak",
+          "harga_satuan": "10000.00",
+          "baris_sumber": [
+            25
+          ]
+        },
+        {
+          "uraian": "Tindik telinga dewasa",
+          "harga_satuan": "15000.00",
+          "baris_sumber": [
+            26
+          ]
+        },
+        {
+          "uraian": "ECG",
+          "harga_satuan": "50000.00",
+          "baris_sumber": [
+            27
+          ]
+        },
+        {
+          "uraian": "Nebulizer",
+          "harga_satuan": "30000.00",
+          "baris_sumber": [
+            28
+          ]
+        },
+        {
+          "uraian": "Pemasangan/Pengangkatan Tampon Hidung",
+          "harga_satuan": "30000.00",
+          "baris_sumber": [
+            29
+          ]
+        },
+        {
+          "uraian": "Pemasangan Infus",
+          "harga_satuan": "50000.00",
+          "baris_sumber": [
+            30
+          ]
+        },
+        {
+          "uraian": "Pemasangan 1 Spalk Ektremitas Atas",
+          "harga_satuan": "50000.00",
+          "baris_sumber": [
+            31
+          ]
+        },
+        {
+          "uraian": "Pemasangan 1 Spalk Ektremitas Bawah",
+          "harga_satuan": "75000.00",
+          "baris_sumber": [
+            32
+          ]
+        },
+        {
+          "uraian": "Ekstraksi Clavus/verruca vulgaris",
+          "harga_satuan": "100000.00",
+          "baris_sumber": [
+            33
+          ]
+        },
+        {
+          "uraian": "Pemakaian Oksigen",
+          "harga_satuan": "20000.00",
+          "baris_sumber": [
+            34
+          ]
+        },
+        {
+          "uraian": "Injeksi Obat",
+          "harga_satuan": "0.00",
+          "baris_sumber": [
+            35
+          ]
+        },
+        {
+          "uraian": "Pemasangan dan/atau pencabutan alat kontrasepsi dalam rahim (AKDR)",
+          "harga_satuan": "105000.00",
+          "baris_sumber": [
+            36
+          ]
+        },
+        {
+          "uraian": "Pemasangan dan/atau pencabutan Implan",
+          "harga_satuan": "105000.00",
+          "baris_sumber": [
+            37
+          ]
+        },
+        {
+          "uraian": "Pelayanan suntik KB setiap kali suntik",
+          "harga_satuan": "20000.00",
+          "baris_sumber": [
+            38
+          ]
+        },
+        {
+          "uraian": "Pemasangan komplikasi KB",
+          "harga_satuan": "125000.00",
+          "baris_sumber": [
+            39
+          ]
+        },
+        {
+          "uraian": "Pelayanan Keluarga Berencana Metode Operasi Pria (KBMOP)/vasektomi",
+          "harga_satuan": "370000.00",
+          "baris_sumber": [
+            40
+          ]
+        },
+        {
+          "uraian": "Pemeriksaaan pap smear untuk penyakit kanker leher rahim",
+          "harga_satuan": "125000.00",
+          "baris_sumber": [
+            41
+          ]
+        },
+        {
+          "uraian": "Pijat Bayi",
+          "harga_satuan": "15000.00",
+          "baris_sumber": [
+            42
+          ]
+        },
+        {
+          "uraian": "Pemeriksaan IVA Test",
+          "harga_satuan": "25000.00",
+          "baris_sumber": [
+            43
+          ]
+        },
+        {
+          "uraian": "DIDTK",
+          "harga_satuan": "10000.00",
+          "baris_sumber": [
+            44
+          ]
+        },
+        {
+          "uraian": "Senam Hamil",
+          "harga_satuan": "10000.00",
+          "baris_sumber": [
+            45
+          ]
+        },
+        {
+          "uraian": "Krioterapi dengan CO2",
+          "harga_satuan": "250000.00",
+          "baris_sumber": [
+            46
+          ]
+        },
+        {
+          "uraian": "Pelayanan ANC yang dilakukan oleh dokter disertai pelayanan USG",
+          "harga_satuan": "140000.00",
+          "baris_sumber": [
+            47
+          ]
+        },
+        {
+          "uraian": "Pelayanan ANC yang dilakukan oleh dokter",
+          "harga_satuan": "80000.00",
+          "baris_sumber": [
+            48
+          ]
+        },
+        {
+          "uraian": "Pelayanan ANC yang dilakukan oleh bidan Puskesmas",
+          "harga_satuan": "60000.00",
+          "baris_sumber": [
+            49
+          ]
+        },
+        {
+          "uraian": "Persalinan yang dilakukan oleh tim paling sedikit 1 (satu) orang dokter dan 2 (dua) orang tenaga Kesehatan",
+          "harga_satuan": "1000000.00",
+          "baris_sumber": [
+            50
+          ]
+        },
+        {
+          "uraian": "Persalinan yang dilakukan oleh tim paling sedikit 2 (dua) orang tenaga kesehatan dalam kondisi tidak ada dokter dan tanpa komplikasi",
+          "harga_satuan": "800000.00",
+          "baris_sumber": [
+            51
+          ]
+        },
+        {
+          "uraian": "Persalinan dengan tindakan emergensi dasar di FKTP PONED untuk lama perawatan 2 (dua) hari",
+          "harga_satuan": "1250000.00",
+          "baris_sumber": [
+            52
+          ]
+        },
+        {
+          "uraian": "Persalinan dengan tindakan emergensi dasar di FKTP PONED untuk lama perawatan 3 (tiga) hari",
+          "harga_satuan": "1500000.00",
+          "baris_sumber": [
+            53
+          ]
+        },
+        {
+          "uraian": "Abortus (Digital)",
+          "harga_satuan": "100000.00",
+          "baris_sumber": [
+            54
+          ]
+        },
+        {
+          "uraian": "Pelayanan kesehatan masa setelah melahirkan bagi ibu",
+          "harga_satuan": "40000.00",
+          "baris_sumber": [
+            55
+          ]
+        },
+        {
+          "uraian": "Pelayanan Kesehatan bayi baru lahir",
+          "harga_satuan": "40000.00",
+          "baris_sumber": [
+            56
+          ]
+        },
+        {
+          "uraian": "Pelayanan pra rujukan pada komplikasi kehamilan di puskesmas",
+          "harga_satuan": "180000.00",
+          "baris_sumber": [
+            57
+          ]
+        },
+        {
+          "uraian": "Pencabutan Gigi Sulung Tanpa Suntikan",
+          "harga_satuan": "5000.00",
+          "baris_sumber": [
+            58
+          ]
+        },
+        {
+          "uraian": "Pencabutan Gigi Sulung Dengan Suntikan",
+          "harga_satuan": "7000.00",
+          "baris_sumber": [
+            59
+          ]
+        },
+        {
+          "uraian": "Pencabutan Gigi Sulung dengan Citoject",
+          "harga_satuan": "40000.00",
+          "baris_sumber": [
+            60
+          ]
+        },
+        {
+          "uraian": "Pencabutan Gigi Tetap Tanpa Penyulit",
+          "harga_satuan": "10000.00",
+          "baris_sumber": [
+            61
+          ]
+        },
+        {
+          "uraian": "Pencabutan Gigi Tetap Dengan Penyulit",
+          "harga_satuan": "15000.00",
+          "baris_sumber": [
+            62
+          ]
+        },
+        {
+          "uraian": "Pencabutan Gigi Tetap Odontectomy",
+          "harga_satuan": "250000.00",
+          "baris_sumber": [
+            63
+          ]
+        },
+        {
+          "uraian": "Pencabutan Gigi M3",
+          "harga_satuan": "100000.00",
+          "baris_sumber": [
+            64
+          ]
+        },
+        {
+          "uraian": "Perawatan Gigi Tambalan Sementara",
+          "harga_satuan": "7000.00",
+          "baris_sumber": [
+            65
+          ]
+        },
+        {
+          "uraian": "Perawatan Gigi Tambalan Tetap dengan Glass Ionomer",
+          "harga_satuan": "50000.00",
+          "baris_sumber": [
+            66
+          ]
+        },
+        {
+          "uraian": "Perawatan Gigi Fissure Sealent",
+          "harga_satuan": "100000.00",
+          "baris_sumber": [
+            67
+          ]
+        },
+        {
+          "uraian": "Perawatan Gigi Pulp Capping",
+          "harga_satuan": "25000.00",
+          "baris_sumber": [
+            68
+          ]
+        },
+        {
+          "uraian": "Perawatan Gigi Light Cure",
+          "harga_satuan": "100000.00",
+          "baris_sumber": [
+            69
+          ]
+        },
+        {
+          "uraian": "Perawatan Gigi Devitalisasi",
+          "harga_satuan": "40000.00",
+          "baris_sumber": [
+            70
+          ]
+        },
+        {
+          "uraian": "Perawatan Gigi Mumyfikasi",
+          "harga_satuan": "40000.00",
+          "baris_sumber": [
+            71
+          ]
+        },
+        {
+          "uraian": "Pembersihan Karang Gigi/Regio Manual per Regio",
+          "harga_satuan": "15000.00",
+          "baris_sumber": [
+            72
+          ]
+        },
+        {
+          "uraian": "Pembersihan Karang Gigi/Regio Ultra Sonic per Rahang",
+          "harga_satuan": "120000.00",
+          "baris_sumber": [
+            73
+          ]
+        },
+        {
+          "uraian": "Incisi Abses (Gigi)",
+          "harga_satuan": "20000.00",
+          "baris_sumber": [
+            74
+          ]
+        },
+        {
+          "uraian": "Operculektomi",
+          "harga_satuan": "25000.00",
+          "baris_sumber": [
+            75
+          ]
+        },
+        {
+          "uraian": "Hecting",
+          "harga_satuan": "25000.00",
+          "baris_sumber": [
+            76
+          ]
+        },
+        {
+          "uraian": "Curetage Gigi",
+          "harga_satuan": "15000.00",
+          "baris_sumber": [
+            78
+          ]
+        },
+        {
+          "uraian": "Open Bur",
+          "harga_satuan": "20000.00",
+          "baris_sumber": [
+            79
+          ]
+        },
+        {
+          "uraian": "Perawatan Dry Socket",
+          "harga_satuan": "50000.00",
+          "baris_sumber": [
+            80
+          ]
+        },
+        {
+          "uraian": "Bongkar Protesa",
+          "harga_satuan": "30000.00",
+          "baris_sumber": [
+            81
+          ]
+        },
+        {
+          "uraian": "Pembuatan Protesa Akrilik 1 (satu) Gigi",
+          "harga_satuan": "250000.00",
+          "baris_sumber": [
+            82
+          ]
+        },
+        {
+          "uraian": "Pembuatan Protesa Akrilik Penambahan Setiap Gigi Berikutnya",
+          "harga_satuan": "100000.00",
+          "baris_sumber": [
+            83
+          ]
+        },
+        {
+          "uraian": "Pembuatan Protesa Valplast 1 (satu) Gigi",
+          "harga_satuan": "550000.00",
+          "baris_sumber": [
+            84
+          ]
+        },
+        {
+          "uraian": "Pembuatan Protesa Valplast Penambahan Setiap Gigi Berikutnya",
+          "harga_satuan": "100000.00",
+          "baris_sumber": [
+            85
+          ]
+        },
+        {
+          "uraian": "Selective Grinding",
+          "harga_satuan": "15000.00",
+          "baris_sumber": [
+            86
+          ]
+        }
+      ]
+    },
+    {
+      "kode_rek": "4.1.02.02.01.0001",
+      "uraian": "Pendapatan Pelayanan Penunjang Diagnosis",
+      "baris_sumber": 87,
+      "pelayanan": [
+        {
+          "uraian": "Hemoglobin (Fotometri)",
+          "harga_satuan": "8000.00",
+          "baris_sumber": [
+            88
+          ]
+        },
+        {
+          "uraian": "Laju Endap Darah",
+          "harga_satuan": "6000.00",
+          "baris_sumber": [
+            89
+          ]
+        },
+        {
+          "uraian": "Masa Perdarahan",
+          "harga_satuan": "6000.00",
+          "baris_sumber": [
+            90
+          ]
+        },
+        {
+          "uraian": "Masa Pembekuan",
+          "harga_satuan": "6000.00",
+          "baris_sumber": [
+            91
+          ]
+        },
+        {
+          "uraian": "Golongan Darah + Rhesus",
+          "harga_satuan": "14000.00",
+          "baris_sumber": [
+            92
+          ]
+        },
+        {
+          "uraian": "Hematologi Lengkap (Hematologi Analyzer)",
+          "harga_satuan": "50000.00",
+          "baris_sumber": [
+            93
+          ]
+        },
+        {
+          "uraian": "Albumin/Protein",
+          "harga_satuan": "5000.00",
+          "baris_sumber": [
+            94
+          ]
+        },
+        {
+          "uraian": "Urin Lengkap",
+          "harga_satuan": "20000.00",
+          "baris_sumber": [
+            95
+          ]
+        },
+        {
+          "uraian": "Tes Kehamilan",
+          "harga_satuan": "10000.00",
+          "baris_sumber": [
+            96
+          ]
+        },
+        {
+          "uraian": "Faeces/Tinja",
+          "harga_satuan": "10000.00",
+          "baris_sumber": [
+            97
+          ]
+        },
+        {
+          "uraian": "BTA (Kusta/TBC)",
+          "harga_satuan": "6000.00",
+          "baris_sumber": [
+            98
+          ]
+        },
+        {
+          "uraian": "Jamur",
+          "harga_satuan": "6000.00",
+          "baris_sumber": [
+            99
+          ]
+        },
+        {
+          "uraian": "Mikrofilaria",
+          "harga_satuan": "6000.00",
+          "baris_sumber": [
+            100
+          ]
+        },
+        {
+          "uraian": "Trichomonas",
+          "harga_satuan": "6000.00",
+          "baris_sumber": [
+            101
+          ]
+        },
+        {
+          "uraian": "Plasmodium",
+          "harga_satuan": "6000.00",
+          "baris_sumber": [
+            102
+          ]
+        },
+        {
+          "uraian": "Nisseria Gonnorhoeae",
+          "harga_satuan": "6000.00",
+          "baris_sumber": [
+            103
+          ]
+        },
+        {
+          "uraian": "Glukosa",
+          "harga_satuan": "11000.00",
+          "baris_sumber": [
+            104
+          ]
+        },
+        {
+          "uraian": "Cholesterol",
+          "harga_satuan": "11000.00",
+          "baris_sumber": [
+            105
+          ]
+        },
+        {
+          "uraian": "HDL-Cholesterol",
+          "harga_satuan": "12000.00",
+          "baris_sumber": [
+            106
+          ]
+        },
+        {
+          "uraian": "LDL-Cholesterol",
+          "harga_satuan": "10000.00",
+          "baris_sumber": [
+            107
+          ]
+        },
+        {
+          "uraian": "Trigliserida",
+          "harga_satuan": "13000.00",
+          "baris_sumber": [
+            108
+          ]
+        },
+        {
+          "uraian": "Ureum",
+          "harga_satuan": "9000.00",
+          "baris_sumber": [
+            109
+          ]
+        },
+        {
+          "uraian": "Kreatinin",
+          "harga_satuan": "9000.00",
+          "baris_sumber": [
+            110
+          ]
+        },
+        {
+          "uraian": "Asam Urat",
+          "harga_satuan": "11000.00",
+          "baris_sumber": [
+            111
+          ]
+        },
+        {
+          "uraian": "SGOT",
+          "harga_satuan": "9000.00",
+          "baris_sumber": [
+            112
+          ]
+        },
+        {
+          "uraian": "SGPT",
+          "harga_satuan": "9000.00",
+          "baris_sumber": [
+            113
+          ]
+        },
+        {
+          "uraian": "Alkali Glutamil Tranferase",
+          "harga_satuan": "14000.00",
+          "baris_sumber": [
+            114
+          ]
+        },
+        {
+          "uraian": "Gamma Glutamil Tranferase",
+          "harga_satuan": "14000.00",
+          "baris_sumber": [
+            115
+          ]
+        },
+        {
+          "uraian": "Protein",
+          "harga_satuan": "8000.00",
+          "baris_sumber": [
+            116
+          ]
+        },
+        {
+          "uraian": "Albumin",
+          "harga_satuan": "8000.00",
+          "baris_sumber": [
+            117
+          ]
+        },
+        {
+          "uraian": "Bilirubin Total",
+          "harga_satuan": "8000.00",
+          "baris_sumber": [
+            118
+          ]
+        },
+        {
+          "uraian": "Bilirubin Direct",
+          "harga_satuan": "8000.00",
+          "baris_sumber": [
+            119
+          ]
+        },
+        {
+          "uraian": "Anti HIV Rapid",
+          "harga_satuan": "30000.00",
+          "baris_sumber": [
+            120
+          ]
+        },
+        {
+          "uraian": "HBsAg Rapid",
+          "harga_satuan": "30000.00",
+          "baris_sumber": [
+            121
+          ]
+        },
+        {
+          "uraian": "Syphilis Rapid",
+          "harga_satuan": "30000.00",
+          "baris_sumber": [
+            122
+          ]
+        },
+        {
+          "uraian": "Widal",
+          "harga_satuan": "40000.00",
+          "baris_sumber": [
+            123
+          ]
+        },
+        {
+          "uraian": "Pelayanan Konsultasi",
+          "harga_satuan": "10000.00",
+          "baris_sumber": [
+            124
+          ]
+        },
+        {
+          "uraian": "Layanan Program Terapi Rumatan Metadon (PTRM)",
+          "harga_satuan": "10000.00",
+          "baris_sumber": [
+            125
+          ]
+        },
+        {
+          "uraian": "Pelayanan Akupressure",
+          "harga_satuan": "50000.00",
+          "baris_sumber": [
+            126
+          ]
+        }
+      ]
+    }
+  ]
+}

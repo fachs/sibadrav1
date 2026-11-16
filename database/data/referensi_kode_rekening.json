@@ -1,0 +1,4313 @@
+[
+  {
+    "akun": 5,
+    "kelompok": null,
+    "jenis": null,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "5",
+    "uraian": "BELANJA DAERAH"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": null,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "5.1",
+    "uraian": "BELANJA OPERASI"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": null,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "5.2",
+    "uraian": "BELANJA MODAL"
+  },
+  {
+    "akun": 5,
+    "kelompok": 3,
+    "jenis": null,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "5.3",
+    "uraian": "BELANJA TIDAK TERDUGA"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": null,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "5.4",
+    "uraian": "BELANJA TRANSFER"
+  },
+  {
+    "akun": 6,
+    "kelompok": null,
+    "jenis": null,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "6",
+    "uraian": "PEMBIAYAAN DAERAH"
+  },
+  {
+    "akun": 6,
+    "kelompok": 1,
+    "jenis": null,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "6.1",
+    "uraian": "PENERIMAAN PEMBIAYAAN"
+  },
+  {
+    "akun": 4,
+    "kelompok": 3,
+    "jenis": 3,
+    "objek": 4,
+    "rincian_objek": 1,
+    "kode_rek": "4.3.03.04.001",
+    "uraian": "Kontribusi dari Sumber Lain yang Sah dan Tidak Mengikat"
+  },
+  {
+    "akun": 4,
+    "kelompok": 3,
+    "jenis": 3,
+    "objek": 5,
+    "rincian_objek": null,
+    "kode_rek": "4.3.03.05",
+    "uraian": "Pendapatan Klaim Pelayanan Kesehatan/Nonkapitasi"
+  },
+  {
+    "akun": 4,
+    "kelompok": 3,
+    "jenis": 3,
+    "objek": 5,
+    "rincian_objek": 1,
+    "kode_rek": "4.3.03.05.001",
+    "uraian": "Pendapatan Klaim Pelayanan Kesehatan/Nonkapitasi"
+  },
+  {
+    "akun": 4,
+    "kelompok": 3,
+    "jenis": 3,
+    "objek": 6,
+    "rincian_objek": null,
+    "kode_rek": "4.3.03.06",
+    "uraian": "Pendapatan Bonus Produksi Panas Bumi"
+  },
+  {
+    "akun": 4,
+    "kelompok": 3,
+    "jenis": 3,
+    "objek": 6,
+    "rincian_objek": 1,
+    "kode_rek": "4.3.03.06.001",
+    "uraian": "Pendapatan Bonus Produksi Panas Bumi"
+  },
+  {
+    "akun": 4,
+    "kelompok": 3,
+    "jenis": 3,
+    "objek": 7,
+    "rincian_objek": null,
+    "kode_rek": "4.3.03.07",
+    "uraian": "Pendapatan Bonus Tandatangan dan Bonus Produksi Pemerintah Aceh"
+  },
+  {
+    "akun": 4,
+    "kelompok": 3,
+    "jenis": 3,
+    "objek": 7,
+    "rincian_objek": 1,
+    "kode_rek": "4.3.03.07.001",
+    "uraian": "Pendapatan Bonus Tandatangan dan Bonus Produksi Pemerintah Aceh"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "5.1.01",
+    "uraian": "Belanja Pegawai"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": null,
+    "kode_rek": "5.1.01.01",
+    "uraian": "Belanja Gaji dan Tunjangan ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.01.01.001",
+    "uraian": "Belanja Gaji Pokok ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.01.01.002",
+    "uraian": "Belanja Tunjangan Keluarga ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.01.01.003",
+    "uraian": "Belanja Tunjangan Jabatan ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 4,
+    "kode_rek": "5.1.01.01.004",
+    "uraian": "Belanja Tunjangan Fungsional ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 5,
+    "kode_rek": "5.1.01.01.005",
+    "uraian": "Belanja Tunjangan Fungsional Umum ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 6,
+    "kode_rek": "5.1.01.01.006",
+    "uraian": "Belanja Tunjangan Beras ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 7,
+    "kode_rek": "5.1.01.01.007",
+    "uraian": "Belanja Tunjangan PPh/Tunjangan Khusus ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 8,
+    "kode_rek": "5.1.01.01.008",
+    "uraian": "Belanja Pembulatan Gaji ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 9,
+    "kode_rek": "5.1.01.01.009",
+    "uraian": "Belanja Iuran Jaminan Kesehatan ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 10,
+    "kode_rek": "5.1.01.01.010",
+    "uraian": "Belanja Iuran Jaminan Kecelakaan Kerja ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 11,
+    "kode_rek": "5.1.01.01.011",
+    "uraian": "Belanja Iuran Jaminan Kematian ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 12,
+    "kode_rek": "5.1.01.01.012",
+    "uraian": "Belanja Iuran Simpanan Peserta Tabungan Perumahan Rakyat ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 13,
+    "kode_rek": "5.1.01.01.013",
+    "uraian": "Belanja Jaminan Hari Tua ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 14,
+    "kode_rek": "5.1.01.01.014",
+    "uraian": "Belanja Tunjangan Khusus*)"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 15,
+    "kode_rek": "5.1.01.01.015",
+    "uraian": "Belanja Zakat ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 2,
+    "rincian_objek": null,
+    "kode_rek": "5.1.01.02",
+    "uraian": "Belanja Tambahan Penghasilan ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 2,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.01.02.001",
+    "uraian": "Tambahan Penghasilan berdasarkan Beban Kerja ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 2,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.01.02.002",
+    "uraian": "Tambahan Penghasilan berdasarkan Tempat Bertugas ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 2,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.01.02.003",
+    "uraian": "Tambahan Penghasilan berdasarkan Kondisi Kerja ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 2,
+    "rincian_objek": 4,
+    "kode_rek": "5.1.01.02.004",
+    "uraian": "Tambahan Penghasilan berdasarkan Kelangkaan Profesi ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 2,
+    "rincian_objek": 5,
+    "kode_rek": "5.1.01.02.005",
+    "uraian": "Tambahan Penghasilan berdasarkan Prestasi Kerja ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 2,
+    "rincian_objek": 6,
+    "kode_rek": "5.1.01.02.006",
+    "uraian": "Tambahan Penghasilan berdasarkan Pertimbangan Objektif Lainnya ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 3,
+    "rincian_objek": null,
+    "kode_rek": "5.1.01.03",
+    "uraian": "Tambahan Penghasilan berdasarkan Pertimbangan Objektif Lainnya ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 3,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.01.03.001",
+    "uraian": "Belanja Insentif bagi ASN atas Pemungutan Pajak Daerah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 3,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.01.03.002",
+    "uraian": "Belanja bagi ASN atas Insentif Pemungutan Retribusi Daerah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 3,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.01.03.003",
+    "uraian": "Belanja Tunjangan Profesi Guru (TPG) PNSD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 3,
+    "rincian_objek": 4,
+    "kode_rek": "5.1.01.03.004",
+    "uraian": "Belanja Tunjangan Khusus Guru (TKG) PNSD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 3,
+    "rincian_objek": 5,
+    "kode_rek": "5.1.01.03.005",
+    "uraian": "Belanja Tambahan Penghasilan (Tamsil) Guru PNSD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 3,
+    "rincian_objek": 6,
+    "kode_rek": "5.1.01.03.006",
+    "uraian": "Belanja Jasa Pelayanan Kesehatan bagi ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 3,
+    "rincian_objek": 7,
+    "kode_rek": "5.1.01.03.007",
+    "uraian": "Belanja Honorarium"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 3,
+    "rincian_objek": 8,
+    "kode_rek": "5.1.01.03.008",
+    "uraian": "Belanja Jasa Pengelolaan BMD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 3,
+    "rincian_objek": 9,
+    "kode_rek": "5.1.01.03.009",
+    "uraian": "Belanja Tunjangan Profesi Guru (TPG) PPPK"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 3,
+    "rincian_objek": 10,
+    "kode_rek": "5.1.01.03.010",
+    "uraian": "Belanja Tunjangan Khusus Guru (TKG) PPPK"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 3,
+    "rincian_objek": 11,
+    "kode_rek": "5.1.01.03.011",
+    "uraian": "Belanja Tambahan Penghasilan (Tamsil) Guru PPPK"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 3,
+    "rincian_objek": 12,
+    "kode_rek": "5.1.01.03.012",
+    "uraian": "Belanja Tunjangan Khusus bagi Penyelenggara Pelayanan Terpadu Satu Pintu (PTSP) Daerah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 4,
+    "rincian_objek": null,
+    "kode_rek": "5.1.01.04",
+    "uraian": "Belanja Gaji dan Tunjangan DPRD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 4,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.01.04.001",
+    "uraian": "Belanja Uang Representasi DPRD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 4,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.01.04.002",
+    "uraian": "Belanja Tunjangan Keluarga DPRD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 4,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.01.04.003",
+    "uraian": "Belanja Tunjangan Beras DPRD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 4,
+    "rincian_objek": 4,
+    "kode_rek": "5.1.01.04.004",
+    "uraian": "Belanja Uang Paket DPRD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 4,
+    "rincian_objek": 5,
+    "kode_rek": "5.1.01.04.005",
+    "uraian": "Belanja Tunjangan Jabatan DPRD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 4,
+    "rincian_objek": 6,
+    "kode_rek": "5.1.01.04.006",
+    "uraian": "Belanja Tunjangan Alat Kelengkapan DPRD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 4,
+    "rincian_objek": 7,
+    "kode_rek": "5.1.01.04.007",
+    "uraian": "Belanja Tunjangan Alat Kelengkapan Lainnya DPRD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 4,
+    "rincian_objek": 8,
+    "kode_rek": "5.1.01.04.008",
+    "uraian": "Belanja Tunjangan Komunikasi Intensif Pimpinan dan Anggota DPRD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 4,
+    "rincian_objek": 9,
+    "kode_rek": "5.1.01.04.009",
+    "uraian": "Belanja Tunjangan Reses DPRD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 4,
+    "rincian_objek": 10,
+    "kode_rek": "5.1.01.04.010",
+    "uraian": "Belanja Pembebanan PPh kepada Pimpinan dan Anggota DPRD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 4,
+    "rincian_objek": 11,
+    "kode_rek": "5.1.01.04.011",
+    "uraian": "Belanja Pembulatan Gaji DPRD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 4,
+    "rincian_objek": 12,
+    "kode_rek": "5.1.01.04.012",
+    "uraian": "Belanja Tunjangan Kesejahteraan Pimpinan dan Anggota DPRD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 4,
+    "rincian_objek": 13,
+    "kode_rek": "5.1.01.04.013",
+    "uraian": "Belanja Tunjangan Transportasi DPRD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 4,
+    "rincian_objek": 14,
+    "kode_rek": "5.1.01.04.014",
+    "uraian": "Belanja Uang Jasa Pengabdian DPRD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 5,
+    "rincian_objek": null,
+    "kode_rek": "5.1.01.05",
+    "uraian": "Belanja Gaji dan Tunjangan KDH/WKDH"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 5,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.01.05.001",
+    "uraian": "Belanja Gaji Pokok KDH/WKDH"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 5,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.01.05.002",
+    "uraian": "Belanja Tunjangan Keluarga KDH/WKDH"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 5,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.01.05.003",
+    "uraian": "Belanja Tunjangan Jabatan KDH/WKDH"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 5,
+    "rincian_objek": 4,
+    "kode_rek": "5.1.01.05.004",
+    "uraian": "Belanja Tunjangan Beras KDH/WKDH"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 5,
+    "rincian_objek": 5,
+    "kode_rek": "5.1.01.05.005",
+    "uraian": "Belanja Tunjangan PPh/Tunjangan Khusus KDH/WKDH"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 5,
+    "rincian_objek": 6,
+    "kode_rek": "5.1.01.05.006",
+    "uraian": "Belanja Pembulatan Gaji KDH/WKDH"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 5,
+    "rincian_objek": 7,
+    "kode_rek": "5.1.01.05.007",
+    "uraian": "Belanja Iuran Jaminan Kesehatan bagi KDH/WKDH"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 5,
+    "rincian_objek": 8,
+    "kode_rek": "5.1.01.05.008",
+    "uraian": "Belanja Iuran Jaminan Kecelakaan Kerja KDH/WKDH"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 5,
+    "rincian_objek": 9,
+    "kode_rek": "5.1.01.05.009",
+    "uraian": "Belanja Iuran Jaminan Kematian KDH/WKDH"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 5,
+    "rincian_objek": 10,
+    "kode_rek": "5.1.01.05.010",
+    "uraian": "Belanja Insentif bagi KDH/WKDH atas Pemungutan Pajak Daerah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 5,
+    "rincian_objek": 11,
+    "kode_rek": "5.1.01.05.011",
+    "uraian": "Belanja Insentif bagi KDH/WKDH atas Pemungutan Retribusi Daerah bagi KDH/WKDH"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 5,
+    "rincian_objek": 12,
+    "kode_rek": "5.1.01.05.012",
+    "uraian": "Belanja Jasa Pengelolaan BMD bagi KDH"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 6,
+    "rincian_objek": null,
+    "kode_rek": "5.1.01.06",
+    "uraian": "Belanja Penerimaan Lainnya Pimpinan DPRD serta KDH/WKDH"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 6,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.01.06.001",
+    "uraian": "Belanja Dana Operasional Pimpinan DPRD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 6,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.01.06.002",
+    "uraian": "Belanja Dana Operasional KDH/WKDH"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 7,
+    "rincian_objek": null,
+    "kode_rek": "5.1.01.07",
+    "uraian": "Belanja Gaji dan Tunjangan MRP"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 7,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.01.07.001",
+    "uraian": "Belanja Uang Representasi MRP"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 7,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.01.07.002",
+    "uraian": "Belanja Tunjangan Keluarga MRP"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 7,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.01.07.003",
+    "uraian": "Belanja Tunjangan Beras MRP"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 7,
+    "rincian_objek": 4,
+    "kode_rek": "5.1.01.07.004",
+    "uraian": "Belanja Uang Paket MRP"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 7,
+    "rincian_objek": 5,
+    "kode_rek": "5.1.01.07.005",
+    "uraian": "Belanja Tunjangan Jabatan MRP"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 7,
+    "rincian_objek": 6,
+    "kode_rek": "5.1.01.07.006",
+    "uraian": "Belanja Tunjangan Kelompok Kerja MRP"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 7,
+    "rincian_objek": 7,
+    "kode_rek": "5.1.01.07.007",
+    "uraian": "Belanja Uang Penghargaan MRP"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 7,
+    "rincian_objek": 8,
+    "kode_rek": "5.1.01.07.008",
+    "uraian": "Belanja Tunjangan Komunikasi Intensif MRP"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 7,
+    "rincian_objek": 9,
+    "kode_rek": "5.1.01.07.009",
+    "uraian": "Belanja Tunjangan Transportasi MRP"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 7,
+    "rincian_objek": 10,
+    "kode_rek": "5.1.01.07.010",
+    "uraian": "Belanja Pembebanan PPh kepada Pimpinan dan Anggota MRP"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 7,
+    "rincian_objek": 11,
+    "kode_rek": "5.1.01.07.011",
+    "uraian": "Belanja Pembulatan Gaji MRP"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 7,
+    "rincian_objek": 12,
+    "kode_rek": "5.1.01.07.012",
+    "uraian": "Belanja Tunjangan Kesejahteraan Pimpinan dan Anggota MRP"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 8,
+    "rincian_objek": null,
+    "kode_rek": "5.1.01.08",
+    "uraian": "Belanja Gaji dan Tunjangan Perangkat Lembaga Wali Nanggroe"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 8,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.01.08.001",
+    "uraian": "Belanja Gaji dan Tunjangan Wali Nanggroe"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 8,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.01.08.002",
+    "uraian": "Belanja Gaji dan Tunjangan Waliyul Ahdi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 8,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.01.08.003",
+    "uraian": "Belanja Gaji dan Tunjangan Majelis Tinggi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 8,
+    "rincian_objek": 4,
+    "kode_rek": "5.1.01.08.004",
+    "uraian": "Belanja Gaji dan Tunjangan Majelis Fungsional"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 88,
+    "rincian_objek": null,
+    "kode_rek": "5.1.01.88",
+    "uraian": "Belanja Pegawai BOS"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 88,
+    "rincian_objek": 88,
+    "kode_rek": "5.1.01.88.088",
+    "uraian": "Belanja Pegawai BOS"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 89,
+    "rincian_objek": null,
+    "kode_rek": "5.1.01.89",
+    "uraian": "Belanja Pegawai BOSP"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 89,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.01.89.001",
+    "uraian": "Belanja Pegawai BOSP-BOS"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 89,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.01.89.002",
+    "uraian": "Belanja Pegawai BOSP-BOP PAUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 89,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.01.89.003",
+    "uraian": "Belanja Pegawai BOSP-BOP Kesetaraan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 99,
+    "rincian_objek": null,
+    "kode_rek": "5.1.01.99",
+    "uraian": "Belanja Pegawai BLUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 99,
+    "rincian_objek": 99,
+    "kode_rek": "5.1.01.99.099",
+    "uraian": "Belanja Pegawai BLUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "5.1.02",
+    "uraian": "Belanja Barang dan Jasa"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 1,
+    "rincian_objek": null,
+    "kode_rek": "5.1.02.01",
+    "uraian": "Belanja Barang"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 1,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.02.01.001",
+    "uraian": "Belanja Barang Pakai Habis"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 1,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.02.01.002",
+    "uraian": "Belanja Barang Tak Habis Pakai"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 1,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.02.01.003",
+    "uraian": "Belanja Barang Bekas Dipakai"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 1,
+    "rincian_objek": 4,
+    "kode_rek": "5.1.02.01.004",
+    "uraian": "Belanja Aset Tetap yang Tidak Memenuhi Kriteria Kapitalisasi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": null,
+    "kode_rek": "5.1.02.02",
+    "uraian": "Belanja Jasa"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.02.02.001",
+    "uraian": "Belanja Jasa Kantor"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.02.02.002",
+    "uraian": "Belanja Iuran Jaminan/Asuransi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.02.02.003",
+    "uraian": "Belanja Sewa Tanah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 4,
+    "kode_rek": "5.1.02.02.004",
+    "uraian": "Belanja Sewa Peralatan dan Mesin"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 5,
+    "kode_rek": "5.1.02.02.005",
+    "uraian": "Belanja Sewa Gedung dan Bangunan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 6,
+    "kode_rek": "5.1.02.02.006",
+    "uraian": "Belanja Sewa Jalan, Jaringan dan Irigasi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 7,
+    "kode_rek": "5.1.02.02.007",
+    "uraian": "Belanja Sewa Aset Tetap Lainnya"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 8,
+    "kode_rek": "5.1.02.02.008",
+    "uraian": "Belanja Jasa Konsultansi Konstruksi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 9,
+    "kode_rek": "5.1.02.02.009",
+    "uraian": "Belanja Jasa Konsultansi Non Konstruksi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 10,
+    "kode_rek": "5.1.02.02.010",
+    "uraian": "Belanja Jasa Ketersediaan Layanan (Availibility Payment )"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 11,
+    "kode_rek": "5.1.02.02.011",
+    "uraian": "Belanja Beasiswa Pendidikan PNS"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 12,
+    "kode_rek": "5.1.02.02.012",
+    "uraian": "Belanja Kursus/Pelatihan, Sosialisasi, Bimbingan Teknis serta Pendidikan dan Pelatihan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 13,
+    "kode_rek": "5.1.02.02.013",
+    "uraian": "Belanja Jasa Insentif bagi Pegawai Non ASN atas Pemungutan Pajak Daerah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 14,
+    "kode_rek": "5.1.02.02.014",
+    "uraian": "Belanja Jasa Insentif bagi Pegawai Non ASN atas Pemungutan Retribusi Daerah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 15,
+    "kode_rek": "5.1.02.02.015",
+    "uraian": "Belanja Sewa Aset Tidak Berwujud"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 16,
+    "kode_rek": "5.1.02.02.016",
+    "uraian": "Belanja Gaji dan Tunjangan Perangkat Lembaga Wali Nanggroe"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 17,
+    "kode_rek": "5.1.02.02.017",
+    "uraian": "Belanja Jasa Kerja Sama Pemungutan Pajak Daerah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 18,
+    "kode_rek": "5.1.02.02.018",
+    "uraian": "Belanja Jasa Kerja Sama Pemungutan Retribusi Daerah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 19,
+    "kode_rek": "5.1.02.02.019",
+    "uraian": "Belanja Jasa Pelayanan Kesehatan bagi ASN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 3,
+    "rincian_objek": null,
+    "kode_rek": "5.1.02.03",
+    "uraian": "Belanja Pemeliharaan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 3,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.02.03.001",
+    "uraian": "Belanja Pemeliharaan Tanah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 3,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.02.03.002",
+    "uraian": "Belanja Pemeliharaan Peralatan dan Mesin"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 3,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.02.03.003",
+    "uraian": "Belanja Pemeliharaan Gedung dan Bangunan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 3,
+    "rincian_objek": 4,
+    "kode_rek": "5.1.02.03.004",
+    "uraian": "Belanja Pemeliharaan Jalan, Jaringan, dan Irigasi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 3,
+    "rincian_objek": 5,
+    "kode_rek": "5.1.02.03.005",
+    "uraian": "Belanja Pemeliharaan Aset Tetap Lainnya"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 3,
+    "rincian_objek": 6,
+    "kode_rek": "5.1.02.03.006",
+    "uraian": "Belanja Pemeliharaan Aset Tidak Berwujud"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 4,
+    "rincian_objek": null,
+    "kode_rek": "5.1.02.04",
+    "uraian": "Belanja Perjalanan Dinas"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 4,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.02.04.001",
+    "uraian": "Belanja Perjalanan Dinas Dalam Negeri"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 4,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.02.04.002",
+    "uraian": "Belanja Perjalanan Dinas Luar Negeri"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 5,
+    "rincian_objek": null,
+    "kode_rek": "5.1.02.05",
+    "uraian": "Belanja Uang dan/atau Jasa untuk Diberikan kepada Pihak Ketiga/Pihak Lain/Masyarakat"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 5,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.02.05.001",
+    "uraian": "Belanja Uang yang Diberikan kepada Pihak Ketiga/Pihak Lain/Masyarakat"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 5,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.02.05.002",
+    "uraian": "Belanja Jasa yang Diberikan kepada Pihak Ketiga/Pihak Lain/Masyarakat"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 6,
+    "rincian_objek": null,
+    "kode_rek": "5.1.02.06",
+    "uraian": "Belanja Penunjang Otonomi Khusus*)"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 6,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.02.06.001",
+    "uraian": "Belanja Penunjang Otonomi Khusus*)"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 88,
+    "rincian_objek": null,
+    "kode_rek": "5.1.02.88",
+    "uraian": "Belanja Barang dan Jasa BOS"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 88,
+    "rincian_objek": 88,
+    "kode_rek": "5.1.02.88.088",
+    "uraian": "Belanja Barang dan Jasa BOS"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 89,
+    "rincian_objek": null,
+    "kode_rek": "5.1.02.89",
+    "uraian": "Belanja Barang dan Jasa BOSP"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 89,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.02.89.001",
+    "uraian": "Belanja Barang dan Jasa BOSP-BOS"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 89,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.02.89.002",
+    "uraian": "Belanja Barang dan Jasa BOSP-BOP PAUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 89,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.02.89.003",
+    "uraian": "Belanja Barang dan Jasa BOSP-BOP Kesetaraan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 90,
+    "rincian_objek": null,
+    "kode_rek": "5.1.02.90",
+    "uraian": "Belanja Barang dan Jasa BOK Puskesmas"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 90,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.02.90.001",
+    "uraian": "Belanja Barang dan Jasa BOK Puskesmas"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 99,
+    "rincian_objek": null,
+    "kode_rek": "5.1.02.99",
+    "uraian": "Belanja Barang dan Jasa BLUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 2,
+    "objek": 99,
+    "rincian_objek": 99,
+    "kode_rek": "5.1.02.99.099",
+    "uraian": "Belanja Barang dan Jasa BLUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "5.1.03",
+    "uraian": "Belanja Bunga"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 1,
+    "rincian_objek": null,
+    "kode_rek": "5.1.03.01",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Pemerintah Pusat"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 1,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.03.01.001",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Pemerintah Pusat atas Penerusan Pinjaman Dalam Negeri-Jangka Menengah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 1,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.03.01.002",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Pemerintah Pusat atas Penerusan Pinjaman Dalam Negeri-Jangka Panjang"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 1,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.03.01.003",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Pemerintah Pusat atas Penerusan Pinjaman Luar Negeri-Jangka Menengah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 1,
+    "rincian_objek": 4,
+    "kode_rek": "5.1.03.01.004",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Pemerintah Pusat atas Penerusan Pinjaman Luar Negeri-Jangka Panjang"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 1,
+    "rincian_objek": 5,
+    "kode_rek": "5.1.03.01.005",
+    "uraian": "Belanja Bunga Utang Pinjaman Sumber Lainnya sesuai Ketentuan Peraturan Perundang-Undangan-Jangka Menengah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 1,
+    "rincian_objek": 6,
+    "kode_rek": "5.1.03.01.006",
+    "uraian": "Belanja Bunga Utang Pinjaman Sumber Lainnya sesuai Ketentuan Peraturan Perundang-Undangan-Jangka Panjang"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 2,
+    "rincian_objek": null,
+    "kode_rek": "5.1.03.02",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Pemerintah Daerah Lain"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 2,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.03.02.001",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Pemerintah Daerah-Jangka Pendek"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 3,
+    "rincian_objek": null,
+    "kode_rek": "5.1.03.03",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Lembaga Keuangan Bank (LKB)"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 3,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.03.03.001",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Lembaga Keuangan Bank (LKB)-BUMN- Jangka Pendek"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 3,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.03.03.002",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Lembaga Keuangan Bank (LKB)-BUMN- Jangka Menengah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 3,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.03.03.003",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Lembaga Keuangan Bank (LKB)-BUMN- Jangka Panjang"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 3,
+    "rincian_objek": 4,
+    "kode_rek": "5.1.03.03.004",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Lembaga Keuangan Bank (LKB)-BUMD- Jangka Pendek"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 3,
+    "rincian_objek": 5,
+    "kode_rek": "5.1.03.03.005",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Lembaga Keuangan Bank (LKB)-BUMD- Jangka Menengah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 3,
+    "rincian_objek": 6,
+    "kode_rek": "5.1.03.03.006",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Lembaga Keuangan Bank (LKB)-BUMD- Jangka Panjang"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 3,
+    "rincian_objek": 7,
+    "kode_rek": "5.1.03.03.007",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Lembaga Keuangan Bank (LKB)-Swasta- Jangka Pendek"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 3,
+    "rincian_objek": 8,
+    "kode_rek": "5.1.03.03.008",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Lembaga Keuangan Bank (LKB)-Swasta- Jangka Menengah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 3,
+    "rincian_objek": 9,
+    "kode_rek": "5.1.03.03.009",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Lembaga Keuangan Bank (LKB)-Swasta- Jangka Panjang"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 4,
+    "rincian_objek": null,
+    "kode_rek": "5.1.03.04",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Lembaga Keuangan Bukan Bank (LKBB)"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 4,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.03.04.001",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Lembaga Keuangan Bukan Bank (LKBB)- BUMN-Jangka Pendek"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 4,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.03.04.002",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Lembaga Keuangan Bukan Bank (LKBB)- BUMN-Jangka Menengah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 4,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.03.04.003",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Lembaga Keuangan Bukan Bank (LKBB)- BUMN-Jangka Panjang"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 4,
+    "rincian_objek": 4,
+    "kode_rek": "5.1.03.04.004",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Lembaga Keuangan Bukan Bank (LKBB)- BUMD-Jangka Pendek"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 4,
+    "rincian_objek": 5,
+    "kode_rek": "5.1.03.04.005",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Lembaga Keuangan Bukan Bank (LKBB)- BUMD-Jangka Menengah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 4,
+    "rincian_objek": 6,
+    "kode_rek": "5.1.03.04.006",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Lembaga Keuangan Bukan Bank (LKBB)- BUMD-Jangka Panjang"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 4,
+    "rincian_objek": 7,
+    "kode_rek": "5.1.03.04.007",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Lembaga Keuangan Bukan Bank (LKBB)- Swasta-Jangka Pendek"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 4,
+    "rincian_objek": 8,
+    "kode_rek": "5.1.03.04.008",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Lembaga Keuangan Bukan Bank (LKBB)- Swasta-Jangka Menengah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 4,
+    "rincian_objek": 9,
+    "kode_rek": "5.1.03.04.009",
+    "uraian": "Belanja Bunga Utang Pinjaman kepada Lembaga Keuangan Bukan Bank (LKBB)- Swasta-Jangka Panjang"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 5,
+    "rincian_objek": null,
+    "kode_rek": "5.1.03.05",
+    "uraian": "Belanja Bunga Utang Kepada Masyarakat (Obligasi)"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 5,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.03.05.001",
+    "uraian": "Belanja Bunga Utang Kepada Masyarakat (Obligasi)"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 6,
+    "rincian_objek": null,
+    "kode_rek": "5.1.03.06",
+    "uraian": "Belanja Bunga Utang Pinjaman melalui BLUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 6,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.03.06.001",
+    "uraian": "Belanja Bunga Utang Pinjaman melalui BLUD-Jangka Pendek"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 6,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.03.06.002",
+    "uraian": "Belanja Bunga Utang Pinjaman melalui BLUD-Jangka Menengah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 6,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.03.06.003",
+    "uraian": "Belanja Bunga Utang Pinjaman melalui BLUD-Jangka Panjang"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 7,
+    "rincian_objek": null,
+    "kode_rek": "5.1.03.07",
+    "uraian": "Belanja Bunga Pembiayaan Utang Daerah-Pinjaman Daerah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 7,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.03.07.001",
+    "uraian": "Belanja Bunga Pinjaman Daerah dari Pemerintah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 7,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.03.07.002",
+    "uraian": "Belanja Bunga Pinjaman Daerah dari Pemerintah Daerah Lain"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 7,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.03.07.003",
+    "uraian": "Belanja Bunga Pinjaman Daerah dari Lembaga Keuangan Bank (LKB)"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 7,
+    "rincian_objek": 4,
+    "kode_rek": "5.1.03.07.004",
+    "uraian": "Belanja Bunga Pinjaman Daerah dari Lembaga Keuangan Bukan Bank (LKBB)"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 8,
+    "rincian_objek": null,
+    "kode_rek": "5.1.03.08",
+    "uraian": "Belanja Bunga Pembiayaan Utang Daerah-Obligasi Daerah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 3,
+    "objek": 8,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.03.08.001",
+    "uraian": "Belanja Bunga Obligasi Daerah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 4,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "5.1.04",
+    "uraian": "Belanja Subsidi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 4,
+    "objek": 1,
+    "rincian_objek": null,
+    "kode_rek": "5.1.04.01",
+    "uraian": "Belanja Subsidi kepada BUMN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 4,
+    "objek": 1,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.04.01.001",
+    "uraian": "Belanja Subsidi kepada BUMN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 4,
+    "objek": 2,
+    "rincian_objek": null,
+    "kode_rek": "5.1.04.02",
+    "uraian": "Belanja Subsidi kepada BUMD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 4,
+    "objek": 2,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.04.02.002",
+    "uraian": "Belanja Subsidi kepada BUMD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 4,
+    "objek": 3,
+    "rincian_objek": null,
+    "kode_rek": "5.1.04.03",
+    "uraian": "Belanja Subsidi kepada Badan Usaha Milik Swasta"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 4,
+    "objek": 3,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.04.03.001",
+    "uraian": "Belanja Subsidi kepada Badan Usaha Milik Swasta"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 4,
+    "objek": 4,
+    "rincian_objek": null,
+    "kode_rek": "5.1.04.04",
+    "uraian": "Belanja Subsidi kepada Koperasi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 4,
+    "objek": 4,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.04.04.001",
+    "uraian": "Belanja Subsidi kepada Koperasi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "5.1.05",
+    "uraian": "Belanja Hibah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 1,
+    "rincian_objek": null,
+    "kode_rek": "5.1.05.01",
+    "uraian": "Belanja Hibah kepada Pemerintah Pusat"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 1,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.05.01.001",
+    "uraian": "Belanja Hibah Uang kepada Pemerintah Pusat"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 1,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.05.01.002",
+    "uraian": "Belanja Hibah Barang kepada Pemerintah Pusat"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 1,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.05.01.003",
+    "uraian": "Belanja Hibah Jasa kepada Pemerintah Pusat"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 2,
+    "rincian_objek": null,
+    "kode_rek": "5.1.05.02",
+    "uraian": "Belanja Hibah kepada Pemerintah Daerah Lainnya"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 2,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.05.02.001",
+    "uraian": "Belanja Hibah Uang kepada Pemerintah Daerah Lainnya"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 2,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.05.02.002",
+    "uraian": "Belanja Hibah Barang kepada Pemerintah Daerah Lainnya"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 2,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.05.02.003",
+    "uraian": "Belanja Hibah Jasa kepada Pemerintah Daerah Lainnya"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 3,
+    "rincian_objek": null,
+    "kode_rek": "5.1.05.03",
+    "uraian": "Belanja Hibah kepada BUMN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 3,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.05.03.001",
+    "uraian": "Belanja Hibah Uang kepada BUMN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 3,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.05.03.002",
+    "uraian": "Belanja Hibah Barang kepada BUMN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 3,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.05.03.003",
+    "uraian": "Belanja Hibah Jasa kepada BUMN"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 4,
+    "rincian_objek": null,
+    "kode_rek": "5.1.05.04",
+    "uraian": "Belanja Hibah kepada BUMD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 4,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.05.04.001",
+    "uraian": "Belanja Hibah Uang kepada BUMD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 4,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.05.04.002",
+    "uraian": "Belanja Hibah Barang kepada BUMD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 4,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.05.04.003",
+    "uraian": "Belanja Hibah Jasa kepada BUMD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 5,
+    "rincian_objek": null,
+    "kode_rek": "5.1.05.05",
+    "uraian": "Belanja Hibah kepada Badan, Lembaga, Organisasi Kemasyarakatan yang Berbadan Hukum Indonesia"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 5,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.05.05.001",
+    "uraian": "Belanja Hibah kepada Badan dan Lembaga yang Bersifat Nirlaba, Sukarela dan Sosial yang Dibentuk Berdasarkan Peraturan Perundang-Undangan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 5,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.05.05.002",
+    "uraian": "Belanja Hibah kepada Badan dan Lembaga Nirlaba, Sukarela dan Sosial yang Telah Memiliki Surat Keterangan Terdaftar"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 5,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.05.05.003",
+    "uraian": "Belanja Hibah kepada Badan dan Lembaga Nirlaba, Sukarela Bersifat Sosial Kemasyarakatan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 5,
+    "rincian_objek": 4,
+    "kode_rek": "5.1.05.05.004",
+    "uraian": "Belanja Hibah kepada Koperasi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 5,
+    "rincian_objek": 5,
+    "kode_rek": "5.1.05.05.005",
+    "uraian": "Belanja Hibah kepada Usaha Mikro dan Usaha Kecil"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 5,
+    "rincian_objek": 6,
+    "kode_rek": "5.1.05.05.006",
+    "uraian": "Belanja Hibah kepada Organisasi Kemasyarakatan yang Berbadan Hukum Indonesia"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 6,
+    "rincian_objek": null,
+    "kode_rek": "5.1.05.06",
+    "uraian": "Belanja Hibah Dana BOS"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 6,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.05.06.001",
+    "uraian": "Belanja Hibah Uang Dana BOS yang Diterima oleh Satdikdas Negeri"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 6,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.05.06.002",
+    "uraian": "Belanja Hibah Uang Dana BOS yang Diterima oleh Satdikdas Swasta"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 6,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.05.06.003",
+    "uraian": "Belanja Hibah Uang Dana BOS yang Diterima oleh Satdikmen Swasta"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 6,
+    "rincian_objek": 4,
+    "kode_rek": "5.1.05.06.004",
+    "uraian": "Belanja Hibah Uang Dana BOS yang Diterima oleh Satdiksus Swasta"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 7,
+    "rincian_objek": null,
+    "kode_rek": "5.1.05.07",
+    "uraian": "Belanja Hibah Bantuan Keuangan kepada Partai Politik"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 7,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.05.07.001",
+    "uraian": "Belanja Hibah Bantuan Keuangan kepada Partai Politik"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 8,
+    "rincian_objek": null,
+    "kode_rek": "5.1.05.08",
+    "uraian": "Belanja Hibah Dana BOSP"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 8,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.05.08.001",
+    "uraian": "Belanja Hibah Dana BOSP-BOS"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 8,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.05.08.002",
+    "uraian": "Belanja Hibah Dana BOSP-BOP PAUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 8,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.05.08.003",
+    "uraian": "Belanja Hibah Dana BOSP-BOP Kesetaraan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 9,
+    "rincian_objek": null,
+    "kode_rek": "5.1.05.09",
+    "uraian": "Belanja Hibah kepada BUMDesa"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 9,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.05.09.001",
+    "uraian": "Belanja Hibah Uang kepada BUMDesa"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 9,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.05.09.002",
+    "uraian": "Belanja Hibah Barang kepada BUMDesa"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 9,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.05.09.003",
+    "uraian": "Belanja Hibah Jasa kepada BUMDesa"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 10,
+    "rincian_objek": null,
+    "kode_rek": "5.1.05.10",
+    "uraian": "Belanja Hibah kepada Koperasi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 10,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.05.10.001",
+    "uraian": "Belanja Hibah Uang kepada Koperasi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 10,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.05.10.002",
+    "uraian": "Belanja Hibah Barang kepada Koperasi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 5,
+    "objek": 10,
+    "rincian_objek": 3,
+    "kode_rek": "5.1.05.10.003",
+    "uraian": "Belanja Hibah Jasa kepada Koperasi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 6,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "5.1.06",
+    "uraian": "Belanja Bantuan Sosial"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 6,
+    "objek": 1,
+    "rincian_objek": null,
+    "kode_rek": "5.1.06.01",
+    "uraian": "Belanja Bantuan Sosial kepada Individu"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 6,
+    "objek": 1,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.06.01.001",
+    "uraian": "Belanja Bantuan Sosial Uang yang direncanakan kepada Individu"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 6,
+    "objek": 1,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.06.01.002",
+    "uraian": "Belanja Bantuan Sosial Barang yang Direncanakan kepada Individu"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 6,
+    "objek": 2,
+    "rincian_objek": null,
+    "kode_rek": "5.1.06.02",
+    "uraian": "Belanja Bantuan Sosial kepada Keluarga"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 6,
+    "objek": 2,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.06.02.001",
+    "uraian": "Belanja Bantuan Sosial Uang yang direncanakan kepada Keluarga"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 6,
+    "objek": 2,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.06.02.002",
+    "uraian": "Belanja Bantuan Sosial Barang yang Direncanakan kepada Keluarga"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 6,
+    "objek": 3,
+    "rincian_objek": null,
+    "kode_rek": "5.1.06.03",
+    "uraian": "Belanja Bantuan Sosial kepada Kelompok Masyarakat"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 6,
+    "objek": 3,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.06.03.001",
+    "uraian": "Belanja Bantuan Sosial Uang yang direncanakan kepada Kelompok Masyarakat"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 6,
+    "objek": 3,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.06.03.002",
+    "uraian": "Belanja Bantuan Sosial Barang yang Direncanakan kepada Kelompok Masyarakat"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 6,
+    "objek": 4,
+    "rincian_objek": null,
+    "kode_rek": "5.1.06.04",
+    "uraian": "Belanja Bantuan Sosial kepada Lembaga Non Pemerintahan (Bidang Pendidikan, Keagamaan dan Bidang Lainnya)"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 6,
+    "objek": 4,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.06.04.001",
+    "uraian": "Belanja Bantuan Sosial Uang yang direncanakan kepada Lembaga Non Pemerintahan (Bidang Pendidikan, Keagamaan dan Bidang Lainnya)"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 6,
+    "objek": 4,
+    "rincian_objek": 2,
+    "kode_rek": "5.1.06.04.002",
+    "uraian": "Belanja Bantuan Sosial Barang yang Direncanakan kepada Lembaga Non Pemerintahan Bidang (Pendidikan, Keagamaan dan Bidang Lainnya)"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 7,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "5.1.07",
+    "uraian": "Belanja Imbalan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 7,
+    "objek": 1,
+    "rincian_objek": null,
+    "kode_rek": "5.1.07.01",
+    "uraian": "Belanja Imbalan Sukuk Daerah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 1,
+    "jenis": 7,
+    "objek": 1,
+    "rincian_objek": 1,
+    "kode_rek": "5.1.07.01.001",
+    "uraian": "Belanja Imbalan Sukuk Daerah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 1,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "5.2.01",
+    "uraian": "Belanja Modal Tanah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": null,
+    "kode_rek": "5.2.01.01",
+    "uraian": "Belanja Modal Tanah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.01.01.001",
+    "uraian": "Belanja Modal Tanah Persil"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.01.01.002",
+    "uraian": "Belanja Modal Tanah Non Persil"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 3,
+    "kode_rek": "5.2.01.01.003",
+    "uraian": "Belanja Modal Lapangan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 1,
+    "objek": 99,
+    "rincian_objek": null,
+    "kode_rek": "5.2.01.99",
+    "uraian": "Belanja Modal Tanah BLUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 1,
+    "objek": 99,
+    "rincian_objek": 99,
+    "kode_rek": "5.2.01.99.099",
+    "uraian": "Belanja Modal Tanah BLUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02",
+    "uraian": "Belanja Modal Peralatan dan Mesin"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 1,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02.01",
+    "uraian": "Belanja Modal Alat Besar"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 1,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.02.01.001",
+    "uraian": "Belanja Modal Alat Besar Darat"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 1,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.02.01.002",
+    "uraian": "Belanja Modal Alat Besar Apung"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 1,
+    "rincian_objek": 3,
+    "kode_rek": "5.2.02.01.003",
+    "uraian": "Belanja Modal Alat Bantu"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02.02",
+    "uraian": "Belanja Modal Alat Angkutan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.02.02.001",
+    "uraian": "Belanja Modal Alat Angkutan Darat Bermotor"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.02.02.002",
+    "uraian": "Belanja Modal Alat Angkutan Darat Tak Bermotor"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 3,
+    "kode_rek": "5.2.02.02.003",
+    "uraian": "Belanja Modal Alat Angkutan Apung Bermotor"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 4,
+    "kode_rek": "5.2.02.02.004",
+    "uraian": "Belanja Modal Alat Angkutan Apung Tak Bermotor"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 5,
+    "kode_rek": "5.2.02.02.005",
+    "uraian": "Belanja Modal Alat Angkutan Bermotor Udara"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 3,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02.03",
+    "uraian": "Belanja Modal Alat Bengkel dan Alat Ukur"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 3,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.02.03.001",
+    "uraian": "Belanja Modal Alat Bengkel Bermesin"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 3,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.02.03.002",
+    "uraian": "Belanja Modal Alat Bengkel Tak Bermesin"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 3,
+    "rincian_objek": 3,
+    "kode_rek": "5.2.02.03.003",
+    "uraian": "Belanja Modal Alat Ukur"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 4,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02.04",
+    "uraian": "Belanja Modal Alat Pertanian"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 4,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.02.04.001",
+    "uraian": "Belanja Modal Alat Pengolahan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 5,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02.05",
+    "uraian": "Belanja Modal Alat Kantor dan Rumah Tangga"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 5,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.02.05.001",
+    "uraian": "Belanja Modal Alat Kantor"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 5,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.02.05.002",
+    "uraian": "Belanja Modal Alat Rumah Tangga"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 5,
+    "rincian_objek": 3,
+    "kode_rek": "5.2.02.05.003",
+    "uraian": "Belanja Modal Meja dan Kursi Kerja/Rapat Pejabat"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 6,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02.06",
+    "uraian": "Belanja Modal Alat Studio, Komunikasi, dan Pemancar"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 6,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.02.06.001",
+    "uraian": "Belanja Modal Alat Studio"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 6,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.02.06.002",
+    "uraian": "Belanja Modal Alat Komunikasi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 6,
+    "rincian_objek": 3,
+    "kode_rek": "5.2.02.06.003",
+    "uraian": "Belanja Modal Peralatan Pemancar"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 6,
+    "rincian_objek": 4,
+    "kode_rek": "5.2.02.06.004",
+    "uraian": "Belanja Modal Peralatan Komunikasi Navigasi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 7,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02.07",
+    "uraian": "Belanja Modal Alat Kedokteran dan Kesehatan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 7,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.02.07.001",
+    "uraian": "Belanja Modal Alat Kedokteran"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 7,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.02.07.002",
+    "uraian": "Belanja Modal Alat Kesehatan Umum"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 8,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02.08",
+    "uraian": "Belanja Modal Alat Laboratorium"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 8,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.02.08.001",
+    "uraian": "Belanja Modal Unit Alat Laboratorium"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 8,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.02.08.002",
+    "uraian": "Belanja Modal Unit Alat Laboratorium Kimia Nuklir"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 8,
+    "rincian_objek": 3,
+    "kode_rek": "5.2.02.08.003",
+    "uraian": "Belanja Modal Alat Peraga Praktek Sekolah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 8,
+    "rincian_objek": 4,
+    "kode_rek": "5.2.02.08.004",
+    "uraian": "Belanja Modal Alat Laboratorium Fisika Nuklir/Elektronika"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 8,
+    "rincian_objek": 5,
+    "kode_rek": "5.2.02.08.005",
+    "uraian": "Belanja Modal Alat Proteksi Radiasi/Proteksi Lingkungan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 8,
+    "rincian_objek": 6,
+    "kode_rek": "5.2.02.08.006",
+    "uraian": "Belanja Modal Radiation Application and Non Destructive Testing Laboratory Lainnya"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 8,
+    "rincian_objek": 7,
+    "kode_rek": "5.2.02.08.007",
+    "uraian": "Belanja Modal Alat Laboratorium Lingkungan Hidup"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 8,
+    "rincian_objek": 8,
+    "kode_rek": "5.2.02.08.008",
+    "uraian": "Belanja Modal Peralatan Laboratorium Hydrodinamica"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 8,
+    "rincian_objek": 9,
+    "kode_rek": "5.2.02.08.009",
+    "uraian": "Belanja Modal Alat Laboratorium Standarisasi Kalibrasi dan Instrumentasi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 10,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02.10",
+    "uraian": "Belanja Modal Komputer"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 10,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.02.10.001",
+    "uraian": "Belanja Modal Komputer Unit"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 10,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.02.10.002",
+    "uraian": "Belanja Modal Peralatan Komputer"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 11,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02.11",
+    "uraian": "Belanja Modal Alat Eksplorasi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 11,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.02.11.001",
+    "uraian": "Belanja Modal Alat Eksplorasi Topografi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 11,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.02.11.002",
+    "uraian": "Belanja Modal Alat Eksplorasi Geofisika"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 12,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02.12",
+    "uraian": "Belanja Modal Alat Pengeboran"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 12,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.02.12.001",
+    "uraian": "Belanja Modal Alat Pengeboran Mesin"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 12,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.02.12.002",
+    "uraian": "Belanja Modal Alat Pengeboran Non Mesin"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 13,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02.13",
+    "uraian": "Belanja Modal Alat Produksi, Pengolahan, dan Pemurnian"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 13,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.02.13.001",
+    "uraian": "Belanja Modal Sumur"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 13,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.02.13.002",
+    "uraian": "Belanja Modal Produksi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 13,
+    "rincian_objek": 3,
+    "kode_rek": "5.2.02.13.003",
+    "uraian": "Belanja Modal Pengolahan dan Pemurnian"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 14,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02.14",
+    "uraian": "Belanja Modal Alat Bantu Eksplorasi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 14,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.02.14.001",
+    "uraian": "Belanja Modal Alat Bantu Eksplorasi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 14,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.02.14.002",
+    "uraian": "Belanja Modal Alat Bantu Produksi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 15,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02.15",
+    "uraian": "Belanja Modal Alat Keselamatan Kerja"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 15,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.02.15.001",
+    "uraian": "Belanja Modal Alat Deteksi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 15,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.02.15.002",
+    "uraian": "Belanja Modal Alat Pelindung"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 15,
+    "rincian_objek": 3,
+    "kode_rek": "5.2.02.15.003",
+    "uraian": "Belanja Modal Alat SAR"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 15,
+    "rincian_objek": 4,
+    "kode_rek": "5.2.02.15.004",
+    "uraian": "Belanja Modal Alat Kerja Penerbangan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 16,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02.16",
+    "uraian": "Belanja Modal Alat Peraga"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 16,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.02.16.001",
+    "uraian": "Belanja Modal Alat Peraga Pelatihan dan Percontohan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 17,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02.17",
+    "uraian": "Belanja Modal Peralatan Proses/Produksi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 17,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.02.17.001",
+    "uraian": "Belanja Modal Unit Peralatan Proses/Produksi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 18,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02.18",
+    "uraian": "Belanja Modal Rambu-Rambu"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 18,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.02.18.001",
+    "uraian": "Belanja Modal Rambu-Rambu Lalu Lintas Darat"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 18,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.02.18.002",
+    "uraian": "Belanja Modal Rambu-Rambu Lalu Lintas Udara"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 18,
+    "rincian_objek": 3,
+    "kode_rek": "5.2.02.18.003",
+    "uraian": "Belanja Modal Rambu-Rambu Lalu Lintas Laut"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 19,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02.19",
+    "uraian": "Belanja Modal Peralatan Olahraga"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 19,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.02.19.001",
+    "uraian": "Belanja Modal Peralatan Olahraga"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 88,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02.88",
+    "uraian": "Belanja Modal Peralatan dan Mesin BOS"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 88,
+    "rincian_objek": 88,
+    "kode_rek": "5.2.02.88.088",
+    "uraian": "Belanja Modal Peralatan dan Mesin BOS"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 89,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02.89",
+    "uraian": "Belanja Modal Peralatan dan Mesin BOSP"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 89,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.02.89.001",
+    "uraian": "Belanja Modal Peralatan dan Mesin BOSP-BOS"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 89,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.02.89.002",
+    "uraian": "Belanja Modal Peralatan dan Mesin BOSP-BOP PAUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 89,
+    "rincian_objek": 3,
+    "kode_rek": "5.2.02.89.003",
+    "uraian": "Belanja Modal Peralatan dan Mesin BOSP-BOP Kesetaraan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 99,
+    "rincian_objek": null,
+    "kode_rek": "5.2.02.99",
+    "uraian": "Belanja Modal Peralatan dan Mesin BLUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 2,
+    "objek": 99,
+    "rincian_objek": 99,
+    "kode_rek": "5.2.02.99.099",
+    "uraian": "Belanja Modal Peralatan dan Mesin BLUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 3,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "5.2.03",
+    "uraian": "Belanja Modal Gedung dan Bangunan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 3,
+    "objek": 1,
+    "rincian_objek": null,
+    "kode_rek": "5.2.03.01",
+    "uraian": "Belanja Modal Bangunan Gedung"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 3,
+    "objek": 1,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.03.01.001",
+    "uraian": "Belanja Modal Bangunan Gedung Tempat Kerja"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 3,
+    "objek": 1,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.03.01.002",
+    "uraian": "Belanja Modal Bangunan Gedung Tempat Tinggal"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 3,
+    "objek": 2,
+    "rincian_objek": null,
+    "kode_rek": "5.2.03.02",
+    "uraian": "Belanja Modal Monumen"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 3,
+    "objek": 2,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.03.02.001",
+    "uraian": "Belanja Modal Candi/Tugu Peringatan/Prasasti"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 3,
+    "objek": 3,
+    "rincian_objek": null,
+    "kode_rek": "5.2.03.03",
+    "uraian": "Belanja Modal Bangunan Menara"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 3,
+    "objek": 3,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.03.03.001",
+    "uraian": "Belanja Modal Bangunan Menara Perambuan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 3,
+    "objek": 4,
+    "rincian_objek": null,
+    "kode_rek": "5.2.03.04",
+    "uraian": "Belanja Modal Tugu Titik Kontrol/Pasti"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 3,
+    "objek": 4,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.03.04.001",
+    "uraian": "Belanja Modal Tugu/Tanda Batas"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 3,
+    "objek": 99,
+    "rincian_objek": null,
+    "kode_rek": "5.2.03.99",
+    "uraian": "Belanja Modal Gedung dan Bangunan BLUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 3,
+    "objek": 99,
+    "rincian_objek": 99,
+    "kode_rek": "5.2.03.99.099",
+    "uraian": "Belanja Modal Gedung dan Bangunan BLUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "5.2.04",
+    "uraian": "Belanja Modal Jalan, Jaringan, dan Irigasi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 1,
+    "rincian_objek": null,
+    "kode_rek": "5.2.04.01",
+    "uraian": "Belanja Modal Jalan dan Jembatan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 1,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.04.01.001",
+    "uraian": "Belanja Modal Jalan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 1,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.04.01.002",
+    "uraian": "Belanja Modal Jembatan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 2,
+    "rincian_objek": null,
+    "kode_rek": "5.2.04.02",
+    "uraian": "Belanja Modal Bangunan Air"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 2,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.04.02.001",
+    "uraian": "Belanja Modal Bangunan Air Irigasi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 2,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.04.02.002",
+    "uraian": "Belanja Modal Bangunan Pengairan Pasang Surut"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 2,
+    "rincian_objek": 3,
+    "kode_rek": "5.2.04.02.003",
+    "uraian": "Belanja Modal Bangunan Pengembangan Rawa dan Polder"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 2,
+    "rincian_objek": 4,
+    "kode_rek": "5.2.04.02.004",
+    "uraian": "Belanja Modal Bangunan Pengaman Sungai/Pantai dan Penanggulangan Bencana Alam"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 2,
+    "rincian_objek": 5,
+    "kode_rek": "5.2.04.02.005",
+    "uraian": "Belanja Modal Bangunan Pengembangan Sumber Air dan Air Tanah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 2,
+    "rincian_objek": 6,
+    "kode_rek": "5.2.04.02.006",
+    "uraian": "Belanja Modal Bangunan Air Bersih/Air Baku"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 2,
+    "rincian_objek": 7,
+    "kode_rek": "5.2.04.02.007",
+    "uraian": "Belanja Modal Bangunan Air Kotor"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 3,
+    "rincian_objek": null,
+    "kode_rek": "5.2.04.03",
+    "uraian": "Belanja Modal Instalasi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 3,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.04.03.001",
+    "uraian": "Belanja Modal Instalasi Air Bersih/Air Baku"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 3,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.04.03.002",
+    "uraian": "Belanja Modal Instalasi Air Kotor"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 3,
+    "rincian_objek": 3,
+    "kode_rek": "5.2.04.03.003",
+    "uraian": "Belanja Modal Instalasi Pengolahan Sampah"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 3,
+    "rincian_objek": 4,
+    "kode_rek": "5.2.04.03.004",
+    "uraian": "Belanja Modal Instalasi Pengolahan Bahan Bangunan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 3,
+    "rincian_objek": 5,
+    "kode_rek": "5.2.04.03.005",
+    "uraian": "Belanja Modal Instalasi Pembangkit Listrik"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 3,
+    "rincian_objek": 6,
+    "kode_rek": "5.2.04.03.006",
+    "uraian": "Belanja Modal Instalasi Gardu Listrik"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 3,
+    "rincian_objek": 7,
+    "kode_rek": "5.2.04.03.007",
+    "uraian": "Belanja Modal Instalasi Pertahanan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 3,
+    "rincian_objek": 8,
+    "kode_rek": "5.2.04.03.008",
+    "uraian": "Belanja Modal Instalasi Gas"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 3,
+    "rincian_objek": 9,
+    "kode_rek": "5.2.04.03.009",
+    "uraian": "Belanja Modal Instalasi Pengaman"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 3,
+    "rincian_objek": 10,
+    "kode_rek": "5.2.04.03.010",
+    "uraian": "Belanja Modal Instalasi Lain"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 4,
+    "rincian_objek": null,
+    "kode_rek": "5.2.04.04",
+    "uraian": "Belanja Modal Jaringan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 4,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.04.04.001",
+    "uraian": "Belanja Modal Jaringan Air Minum"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 4,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.04.04.002",
+    "uraian": "Belanja Modal Jaringan Listrik"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 4,
+    "rincian_objek": 3,
+    "kode_rek": "5.2.04.04.003",
+    "uraian": "Belanja Modal Jaringan Telepon"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 4,
+    "rincian_objek": 4,
+    "kode_rek": "5.2.04.04.004",
+    "uraian": "Belanja Modal Jaringan Gas"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 99,
+    "rincian_objek": null,
+    "kode_rek": "5.2.04.99",
+    "uraian": "Belanja Modal Jalan, Jaringan, dan Irigasi BLUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 4,
+    "objek": 99,
+    "rincian_objek": 99,
+    "kode_rek": "5.2.04.99.099",
+    "uraian": "Belanja Modal Jalan, Jaringan, dan Irigasi BLUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "5.2.05",
+    "uraian": "Belanja Modal Aset Tetap Lainnya"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 1,
+    "rincian_objek": null,
+    "kode_rek": "5.2.05.01",
+    "uraian": "Belanja Modal Bahan Perpustakaan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 1,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.05.01.001",
+    "uraian": "Belanja Modal Bahan Perpustakaan Tercetak"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 1,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.05.01.002",
+    "uraian": "Belanja Modal Bahan Perpustakaan Terekam dan Bentuk Mikro"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 1,
+    "rincian_objek": 3,
+    "kode_rek": "5.2.05.01.003",
+    "uraian": "Belanja Modal Kartografi, Naskah, dan Lukisan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 1,
+    "rincian_objek": 4,
+    "kode_rek": "5.2.05.01.004",
+    "uraian": "Belanja Modal Musik"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 1,
+    "rincian_objek": 5,
+    "kode_rek": "5.2.05.01.005",
+    "uraian": "Belanja Modal Karya Grafika (Graphic Material )"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 1,
+    "rincian_objek": 6,
+    "kode_rek": "5.2.05.01.006",
+    "uraian": "Belanja Modal Three Dimensional Artifacts and Realita"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 1,
+    "rincian_objek": 7,
+    "kode_rek": "5.2.05.01.007",
+    "uraian": "Belanja Modal Tarscalt"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 2,
+    "rincian_objek": null,
+    "kode_rek": "5.2.05.02",
+    "uraian": "Belanja Modal Barang Bercorak Kesenian/Kebudayaan/Olahraga"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 2,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.05.02.001",
+    "uraian": "Belanja Modal Barang Bercorak Kesenian"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 2,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.05.02.002",
+    "uraian": "Belanja Modal Alat Bercorak Kebudayaan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 2,
+    "rincian_objek": 3,
+    "kode_rek": "5.2.05.02.003",
+    "uraian": "Belanja Modal Tanda Penghargaan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 3,
+    "rincian_objek": null,
+    "kode_rek": "5.2.05.03",
+    "uraian": "Belanja Modal Hewan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 3,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.05.03.001",
+    "uraian": "Belanja Modal Hewan Piaraan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 3,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.05.03.002",
+    "uraian": "Belanja Modal Ternak"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 3,
+    "rincian_objek": 3,
+    "kode_rek": "5.2.05.03.003",
+    "uraian": "Belanja Modal Hewan Lainnya"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 4,
+    "rincian_objek": null,
+    "kode_rek": "5.2.05.04",
+    "uraian": "Belanja Modal Biota Perairan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 4,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.05.04.001",
+    "uraian": "Belanja Modal Ikan Bersirip (Pisces /Ikan Bersirip)"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 4,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.05.04.002",
+    "uraian": "Belanja Modal Crustacea (Udang, Rajungan, Kepiting, dan Sebangsanya)"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 4,
+    "rincian_objek": 3,
+    "kode_rek": "5.2.05.04.003",
+    "uraian": "Belanja Modal Mollusca (Kerang, Tiram, Cumi-cumi, Gurita, Siput, dan Sebangsanya)"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 4,
+    "rincian_objek": 4,
+    "kode_rek": "5.2.05.04.004",
+    "uraian": "Belanja Modal Coelenterata (Ubur-ubur dan Sebangsanya)"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 4,
+    "rincian_objek": 5,
+    "kode_rek": "5.2.05.04.005",
+    "uraian": "Belanja Modal Echinodermata (Tripang, Bulu Babi, dan Sebangsanya)"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 4,
+    "rincian_objek": 6,
+    "kode_rek": "5.2.05.04.006",
+    "uraian": "Belanja Modal Amphibia (Kodok dan Sebangsanya)"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 4,
+    "rincian_objek": 7,
+    "kode_rek": "5.2.05.04.007",
+    "uraian": "Belanja Modal Reptilia (Buaya, Penyu, Kura-kura, Biawak, Ular Air, dan Sebangsanya)"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 4,
+    "rincian_objek": 8,
+    "kode_rek": "5.2.05.04.008",
+    "uraian": "Belanja Modal Mammalia (Paus, Lumba-lumba, Pesut, Duyung, dan Sebangsanya)"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 4,
+    "rincian_objek": 9,
+    "kode_rek": "5.2.05.04.009",
+    "uraian": "Belanja Modal Algae (Rumput Laut dan Tumbuh-Tumbuhan Lain yang Hidup di Dalam Air)"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 4,
+    "rincian_objek": 10,
+    "kode_rek": "5.2.05.04.010",
+    "uraian": "Belanja Modal Biota Perairan Lainnya"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 5,
+    "rincian_objek": null,
+    "kode_rek": "5.2.05.05",
+    "uraian": "Belanja Modal Tanaman"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 5,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.05.05.001",
+    "uraian": "Belanja Modal Tanaman"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 6,
+    "rincian_objek": null,
+    "kode_rek": "5.2.05.06",
+    "uraian": "Belanja Modal Barang Koleksi Non Budaya"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 6,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.05.06.001",
+    "uraian": "Belanja Modal Barang Koleksi Non Budaya"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 7,
+    "rincian_objek": null,
+    "kode_rek": "5.2.05.07",
+    "uraian": "Belanja Modal Aset Tetap Dalam Renovasi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 7,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.05.07.001",
+    "uraian": "Belanja Modal Aset Tetap Dalam Renovasi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 8,
+    "rincian_objek": null,
+    "kode_rek": "5.2.05.08",
+    "uraian": "Belanja Modal Aset Tidak Berwujud"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 8,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.05.08.001",
+    "uraian": "Belanja Modal Aset Tidak Berwujud"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 88,
+    "rincian_objek": null,
+    "kode_rek": "5.2.05.88",
+    "uraian": "Belanja Modal Aset Tetap Lainnya BOS"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 88,
+    "rincian_objek": 88,
+    "kode_rek": "5.2.05.88.088",
+    "uraian": "Belanja Modal Aset Tetap Lainnya BOS"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 89,
+    "rincian_objek": null,
+    "kode_rek": "5.2.05.89",
+    "uraian": "Belanja Modal Aset Tetap Lainnya BOSP"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 89,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.05.89.001",
+    "uraian": "Belanja Modal Aset Tetap Lainnya BOSP-BOS"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 89,
+    "rincian_objek": 2,
+    "kode_rek": "5.2.05.89.002",
+    "uraian": "Belanja Modal Aset Tetap Lainnya BOSP-BOP PAUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 89,
+    "rincian_objek": 3,
+    "kode_rek": "5.2.05.89.003",
+    "uraian": "Belanja Modal Aset Tetap Lainnya BOSP-BOP Kesetaraan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 99,
+    "rincian_objek": null,
+    "kode_rek": "5.2.05.99",
+    "uraian": "Belanja Modal Aset Tetap Lainnya BLUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 5,
+    "objek": 99,
+    "rincian_objek": 99,
+    "kode_rek": "5.2.05.99.099",
+    "uraian": "Belanja Modal Aset Tetap Lainnya BLUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 6,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "5.2.06",
+    "uraian": "Belanja Modal Aset Lainnya"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 6,
+    "objek": 1,
+    "rincian_objek": null,
+    "kode_rek": "5.2.06.01",
+    "uraian": "Belanja Modal Aset Lainnya-Aset Tidak Berwujud"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 6,
+    "objek": 1,
+    "rincian_objek": 1,
+    "kode_rek": "5.2.06.01.001",
+    "uraian": "Belanja Modal Aset Tidak Berwujud"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 6,
+    "objek": 99,
+    "rincian_objek": null,
+    "kode_rek": "5.2.06.99",
+    "uraian": "Belanja Modal Aset Lainnya BLUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 2,
+    "jenis": 6,
+    "objek": 99,
+    "rincian_objek": 99,
+    "kode_rek": "5.2.06.99.099",
+    "uraian": "Belanja Modal Aset Lainnya BLUD"
+  },
+  {
+    "akun": 5,
+    "kelompok": 3,
+    "jenis": 1,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "5.3.01",
+    "uraian": "Belanja Tidak Terduga"
+  },
+  {
+    "akun": 5,
+    "kelompok": 3,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": null,
+    "kode_rek": "5.3.01.01",
+    "uraian": "Belanja Tidak Terduga"
+  },
+  {
+    "akun": 5,
+    "kelompok": 3,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 1,
+    "kode_rek": "5.3.01.01.001",
+    "uraian": "Belanja Tidak Terduga"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 1,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "5.4.01",
+    "uraian": "Belanja Bagi Hasil"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": null,
+    "kode_rek": "5.4.01.01",
+    "uraian": "Belanja Bagi Hasil Pajak Daerah Kepada Pemerintahan Kabupaten/Kota dan Desa"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 1,
+    "kode_rek": "5.4.01.01.001",
+    "uraian": "Belanja Bagi Hasil Pajak Daerah Kepada Pemerintahan Kabupaten"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 2,
+    "kode_rek": "5.4.01.01.002",
+    "uraian": "Belanja Bagi Hasil Pajak Daerah Kepada Pemerintahan Kota"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 3,
+    "kode_rek": "5.4.01.01.003",
+    "uraian": "Belanja Bagi Hasil Pajak Daerah Kepada Pemerintahan Desa"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 1,
+    "objek": 2,
+    "rincian_objek": null,
+    "kode_rek": "5.4.01.02",
+    "uraian": "Belanja Bagi Hasil Retribusi Daerah Kabupaten/Kota Kepada Pemerintah Desa"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 1,
+    "objek": 2,
+    "rincian_objek": 1,
+    "kode_rek": "5.4.01.02.001",
+    "uraian": "Belanja Bagi Hasil Retribusi Daerah Kabupaten/Kota Kepada Pemerintah Desa"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 2,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "5.4.02",
+    "uraian": "Belanja Bantuan Keuangan"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 2,
+    "objek": 1,
+    "rincian_objek": null,
+    "kode_rek": "5.4.02.01",
+    "uraian": "Belanja Bantuan Keuangan antar Daerah Provinsi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 2,
+    "objek": 1,
+    "rincian_objek": 1,
+    "kode_rek": "5.4.02.01.001",
+    "uraian": "Belanja Bantuan Keuangan Umum antar Daerah Provinsi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 2,
+    "objek": 1,
+    "rincian_objek": 2,
+    "kode_rek": "5.4.02.01.002",
+    "uraian": "Belanja Bantuan Keuangan Khusus antar Daerah Provinsi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": null,
+    "kode_rek": "5.4.02.02",
+    "uraian": "Belanja Bantuan Keuangan antar Daerah Kabupaten/Kota"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 1,
+    "kode_rek": "5.4.02.02.001",
+    "uraian": "Belanja Bantuan Keuangan Umum antar Daerah Kabupaten/Kota"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 2,
+    "objek": 2,
+    "rincian_objek": 2,
+    "kode_rek": "5.4.02.02.002",
+    "uraian": "Belanja Bantuan Keuangan Khusus kepada Pemerintah Kabupaten/Kota"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 2,
+    "objek": 3,
+    "rincian_objek": null,
+    "kode_rek": "5.4.02.03",
+    "uraian": "Belanja Bantuan Keuangan Daerah Provinsi ke Kabupaten/Kota"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 2,
+    "objek": 3,
+    "rincian_objek": 1,
+    "kode_rek": "5.4.02.03.001",
+    "uraian": "Belanja Bantuan Keuangan Umum Daerah Provinsi ke Kabupaten/Kota"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 2,
+    "objek": 3,
+    "rincian_objek": 2,
+    "kode_rek": "5.4.02.03.002",
+    "uraian": "Belanja Bantuan Keuangan Khusus Daerah Provinsi ke Kabupaten/Kota"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 2,
+    "objek": 4,
+    "rincian_objek": null,
+    "kode_rek": "5.4.02.04",
+    "uraian": "Belanja Bantuan Keuangan Kabupaten/Kota ke Daerah Provinsi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 2,
+    "objek": 4,
+    "rincian_objek": 1,
+    "kode_rek": "5.4.02.04.001",
+    "uraian": "Belanja Bantuan Keuangan Umum Daerah Kabupaten/Kota ke Provinsi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 2,
+    "objek": 4,
+    "rincian_objek": 2,
+    "kode_rek": "5.4.02.04.002",
+    "uraian": "Belanja Bantuan Keuangan Khusus Daerah Kabupaten/Kota ke Provinsi"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 2,
+    "objek": 5,
+    "rincian_objek": null,
+    "kode_rek": "5.4.02.05",
+    "uraian": "Belanja Bantuan Keuangan Daerah Provinsi atau Kabupaten/Kota kepada Desa"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 2,
+    "objek": 5,
+    "rincian_objek": 1,
+    "kode_rek": "5.4.02.05.001",
+    "uraian": "Belanja Bantuan Keuangan Umum Daerah Provinsi atau Kabupaten/Kota kepada Desa"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 2,
+    "objek": 5,
+    "rincian_objek": 2,
+    "kode_rek": "5.4.02.05.002",
+    "uraian": "Belanja Bantuan Keuangan Khusus Daerah Provinsi atau Kabupaten/Kota kepada Desa"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 2,
+    "objek": 6,
+    "rincian_objek": null,
+    "kode_rek": "5.4.02.06",
+    "uraian": "Belanja Transfer Dana Otonomi Khusus Provinsi kepada Kabupaten/Kota"
+  },
+  {
+    "akun": 5,
+    "kelompok": 4,
+    "jenis": 2,
+    "objek": 6,
+    "rincian_objek": 1,
+    "kode_rek": "5.4.02.06.001",
+    "uraian": "Belanja Transfer Dana Otonomi Khusus Provinsi kepada Kabupaten/Kota"
+  },
+  {
+    "akun": 6,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": null,
+    "rincian_objek": null,
+    "kode_rek": "6.1.01",
+    "uraian": "Sisa Lebih Perhitungan Anggaran Tahun Sebelumnya"
+  },
+  {
+    "akun": 6,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": null,
+    "kode_rek": "6.1.01.01",
+    "uraian": "Pelampauan Penerimaan PAD"
+  },
+  {
+    "akun": 6,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 1,
+    "rincian_objek": 4,
+    "kode_rek": "6.1.01.01.004",
+    "uraian": "Pelampauan Penerimaan PAD-Lain-lain PAD yang Sah"
+  },
+  {
+    "akun": 6,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 2,
+    "rincian_objek": null,
+    "kode_rek": "6.1.01.02",
+    "uraian": "Pelampauan Penerimaan Pendapatan Transfer"
+  },
+  {
+    "akun": 6,
+    "kelompok": 1,
+    "jenis": 1,
+    "objek": 2,
+    "rincian_objek": 1,
+    "kode_rek": "6.1.01.02.001",
+    "uraian": "Pelampauan Penerimaan Pendapatan Transfer-Transfer Pemerintah Pusat"
+  }
+]

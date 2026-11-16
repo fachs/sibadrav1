@@ -1,0 +1,8 @@
+.global-budget-year { display: flex; align-items: center; gap: .65rem; }
+.global-budget-year label { white-space: nowrap; font-size: .875rem; }
+.global-budget-year select { width: 92px; }
+@media (max-width: 575.98px) {
+    .global-budget-year { gap: .35rem; }
+    .global-budget-year label { display: none; }
+    .global-budget-year select { width: 78px; }
+}

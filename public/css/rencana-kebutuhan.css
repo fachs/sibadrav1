@@ -1,0 +1,102 @@
+/* Original page appearance outside the RBA-styled table. */
+.page-title-box { padding-bottom: 20px; }
+
+.premium-card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .05);
+    overflow: hidden;
+}
+
+.premium-card .card-body { padding: 24px; }
+
+.modal-content {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .1);
+}
+
+.modal-header {
+    border-bottom: 1px solid #f1f5f9;
+    padding: 20px 24px;
+    background-color: #f8fafc;
+    border-radius: 16px 16px 0 0;
+}
+
+.modal-title { font-weight: 600; color: #1e293b; }
+.modal-body { padding: 24px; }
+
+.form-control, .form-select {
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    padding: 10px 14px;
+    transition: all .2s;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, .1);
+    outline: none;
+}
+
+.form-label { font-weight: 500; color: #475569; margin-bottom: 8px; }
+
+/* Keep the shared RBA styling confined to the table. */
+.rba-budget.renbut-budget { border: 0; border-radius: 0; }
+.renbut-budget .rba-table { min-width: 1300px; }
+.renbut-budget .renbut-col-blud { width: 180px; }
+.renbut-budget .renbut-col-description { width: 230px; }
+.renbut-budget .renbut-col-funding { width: 110px; }
+.renbut-budget .renbut-col-account { width: 300px; }
+.renbut-budget .renbut-col-unit { width: 150px; }
+.renbut-budget .renbut-col-specification { width: 92px; }
+.renbut-budget .renbut-col-quantity { width: 80px; }
+.renbut-budget .renbut-col-price { width: 130px; }
+.renbut-budget .renbut-col-unit-price { width: 110px; }
+
+.renbut-budget :is(.text-akun, .text-sumber-dana) {
+    display: inline-block;
+    max-width: 100%;
+    cursor: pointer;
+    white-space: normal;
+    vertical-align: middle;
+}
+
+.renbut-budget :is(.select-akun, .select-sumber-dana) + .select2-container {
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.renbut-budget .akun-search-panel {
+    position: absolute;
+    z-index: 1050;
+    width: min(420px, calc(100vw - 32px));
+    padding: 8px;
+    border: 1px solid var(--rba-border);
+    border-radius: 8px;
+    background: var(--rba-surface);
+    box-shadow: var(--bs-box-shadow);
+}
+
+.renbut-budget .akun-search-list {
+    max-height: 260px;
+    overflow-y: auto;
+    margin-top: 8px;
+}
+
+.renbut-budget :is(.akun-search-item, .akun-search-empty) {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--bs-body-color);
+    text-align: left;
+}
+
+.renbut-budget .akun-search-item:is(:hover, :focus-visible) {
+    background: var(--bs-primary-bg-subtle);
+    color: var(--bs-primary-text-emphasis);
+}
+

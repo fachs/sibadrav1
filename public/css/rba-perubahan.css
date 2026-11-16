@@ -1,0 +1,106 @@
+.rba-change .rba-table--comparison { min-width: 1700px; }
+.rba-change .rba-table--comparison .rba-col-amount { width: 190px; }
+.rba-change .rba-col-status { width: 180px; }
+.rba-change .rba-table--summary-change { min-width: 1080px; }
+.rba-change .rba-table--summary-change .rba-col-code { width: 150px; }
+.rba-change .rba-table--summary-change .rba-col-amount { width: 200px; }
+.rba-change .rba-detail-table--comparison { min-width: 1900px; }
+.rba-change .rba-table > thead > tr > .rba-after,
+.rba-change .rba-detail-table > thead > tr > .rba-after {
+    --bs-table-bg: var(--bs-primary-bg-subtle);
+    color: var(--bs-primary-text-emphasis);
+}
+.rba-change .rba-after-cell { border-left: 2px solid var(--bs-primary-border-subtle); }
+.rba-change .rba-table--comparison > thead > tr:nth-child(2) > th:nth-child(n+3) { --bs-table-bg: var(--bs-primary-bg-subtle); color: var(--bs-primary-text-emphasis); }
+.rba-change .rba-toolbar-actions > form { margin: 0; }
+.rba-change .rba-filter .btn { flex-shrink: 0; }
+.rba-change .rba-delta-positive { color: var(--bs-success-text-emphasis); }
+.rba-change .rba-delta-negative { color: var(--bs-danger-text-emphasis); }
+.rba-change .rba-emphasis-primary { color: var(--bs-primary-text-emphasis); }
+.rba-change .rba-detail-table--comparison > tbody > tr > td:nth-child(13) { min-width: 150px; }
+.rba-change .rba-detail-table--comparison > tbody > tr > td:nth-child(14) { min-width: 160px; }
+.rba-change .rba-detail-table--comparison > tbody > tr > td:last-child { min-width: 180px; }
+.rba-change .rba-status {
+    display: inline-block;
+    max-width: 100%;
+    padding: 6px 9px;
+    border-radius: 6px;
+    background: var(--bs-secondary-bg-subtle);
+    color: var(--bs-secondary-text-emphasis);
+    font-size: .75rem;
+    font-weight: 500;
+    line-height: 1.5;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+.rba-change .rba-status--pending { background: var(--bs-warning-bg-subtle); color: var(--bs-warning-text-emphasis); }
+.rba-change .rba-status--verified { background: var(--bs-success-bg-subtle); color: var(--bs-success-text-emphasis); }
+.rba-change .rba-status--rejected { background: var(--bs-danger-bg-subtle); color: var(--bs-danger-text-emphasis); }
+.rba-change .rba-status--info { background: var(--bs-info-bg-subtle); color: var(--bs-info-text-emphasis); }
+.rba-change .rba-detail-table .rba-status { font-size: inherit; }
+.rba-change .rba-details .table-responsive { border: 1px solid var(--rba-border); border-radius: 6px; }
+.rba-change .rba-details .table,
+.rba-change-form .table-responsive .table {
+    --bs-table-bg: var(--rba-surface);
+    --bs-table-color: var(--bs-body-color);
+    --bs-table-border-color: var(--rba-border);
+    min-width: 640px;
+    font-size: .875rem;
+}
+.rba-change .rba-details .table > thead,
+.rba-change-form .table-responsive .table > thead {
+    --bs-table-bg: var(--rba-soft);
+    --bs-table-color: var(--bs-emphasis-color);
+    --bs-table-border-color: var(--rba-border);
+}
+.rba-change .rba-details .table > :not(caption) > * > *,
+.rba-change-form .table-responsive .table > :not(caption) > * > * { padding: 10px 12px; }
+.rba-change .rba-service-list { display: grid; gap: 12px; }
+.rba-change .rba-service-card { border: 1px solid var(--rba-border); border-radius: 6px; overflow: hidden; }
+.rba-change .rba-details .table.rba-service-vertical {
+    width: 100%;
+    min-width: 0;
+    table-layout: fixed;
+    margin-bottom: 0;
+}
+.rba-change .rba-service-vertical caption {
+    caption-side: top;
+    padding: 10px 12px;
+    background: var(--rba-soft);
+    color: var(--bs-emphasis-color);
+    font-size: .875rem;
+    font-weight: 600;
+}
+.rba-change .rba-service-label { width: 42%; }
+.rba-change .rba-service-vertical th { background: var(--rba-soft); color: var(--bs-secondary-color); font-weight: 500; }
+.rba-change .rba-service-vertical :is(th, td) { white-space: normal; overflow-wrap: anywhere; vertical-align: top; }
+.rba-change .rba-service-vertical tr:last-child > * { border-bottom: 0; }
+.rba-change .rba-service-value { text-align: right; font-variant-numeric: tabular-nums; }
+.rba-change .rba-metric-before { color: var(--bs-secondary-color); font-size: .75rem; margin-top: 10px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.rba-change .rba-metric-before > span { display: block; margin-bottom: 3px; }
+.rba-change .rba-kinerja-table { min-width: 980px; }
+.rba-change .rba-kinerja-table th { min-width: 150px; }
+.rba-change-form .rba-form-panel { padding: 20px; border: 1px solid var(--rba-border); border-radius: 10px; background: var(--rba-soft); height: 100%; }
+.rba-change-form .rba-form-total { border: 1px solid var(--bs-primary-border-subtle); border-radius: 8px; padding: 16px; background: var(--bs-primary-bg-subtle); color: var(--bs-primary-text-emphasis); }
+.rba-change-form.rba-belanja-shift .select2-container { width: 100%; margin-bottom: 16px; }
+.rba-change-form.rba-belanja-shift .select2-selection { min-height: calc(1.5em + .75rem + 2px); }
+.rba-change-form .select2-container--bootstrap-5 .select2-selection,
+.rba-change-form .select2-container--bootstrap-5 .select2-search__field,
+.rba-change-form .select2-container--bootstrap-5 .select2-dropdown {
+    background-color: var(--bs-body-bg);
+    border-color: var(--bs-border-color);
+    color: var(--bs-body-color);
+}
+.rba-change-form .select2-container--bootstrap-5 .select2-selection__rendered,
+.rba-change-form .select2-container--bootstrap-5 .select2-selection__placeholder { color: var(--bs-body-color); }
+.rba-change-form .select2-container--bootstrap-5 .select2-results__option--selected { background-color: var(--bs-primary-bg-subtle); color: var(--bs-primary-text-emphasis); }
+.rba-change-form .select2-container--bootstrap-5 .select2-results__option--highlighted { background-color: var(--bs-primary); color: var(--bs-white); }
+@media (max-width: 767.98px) {
+    .rba-change .rba-toolbar-actions > form { flex: 1 1 100%; }
+    .rba-change .rba-toolbar-actions > form > .btn { width: 100%; }
+    .rba-change .rba-toolbar-actions > .rba-review-actions { flex: 1 1 100%; flex-wrap: wrap; }
+    .rba-change .rba-review-actions > form { flex: 1 1 100%; }
+    .rba-change .rba-review-actions .btn { width: 100%; }
+    .rba-change-form .rba-form-panel { padding: 16px; }
+    .rba-change-form .form-actions { flex-wrap: wrap; }
+}

@@ -1,0 +1,290 @@
+[
+    {
+        "code": "4",
+        "label": "PENDAPATAN DAERAH"
+    },
+    {
+        "code": "4.1",
+        "label": "PENDAPATAN ASLI DAERAH (PAD)"
+    },
+    {
+        "code": "4.1.02",
+        "label": "Retribusi Daerah"
+    },
+    {
+        "code": "4.1.02.01",
+        "label": "Retribusi Jasa Umum"
+    },
+    {
+        "code": "4.1.02.01.001",
+        "label": "Retribusi Pelayanan Kesehatan"
+    },
+    {
+        "code": "4.1.02.01.001.00001",
+        "label": "Retribusi Pelayanan Kesehatan di Puskesmas"
+    },
+    {
+        "code": "4.1.04",
+        "label": "Lain-lain PAD yang Sah"
+    },
+    {
+        "code": "4.1.04.03",
+        "label": "Hasil Pemanfaatan BMD yang Tidak Dipisahkan"
+    },
+    {
+        "code": "4.1.04.03.001",
+        "label": "Hasil Sewa BMD"
+    },
+    {
+        "code": "4.1.04.03.001.00001",
+        "label": "Hasil Sewa BMD"
+    },
+    {
+        "code": "4.1.04.03.002",
+        "label": "Hasil Kerja Sama Pemanfaatan BMD"
+    },
+    {
+        "code": "4.1.04.03.002.00001",
+        "label": "Hasil Kerja Sama Pemanfaatan BMD"
+    },
+    {
+        "code": "4.1.04.03.003",
+        "label": "Hasil dari Bangun Guna Serah"
+    },
+    {
+        "code": "4.1.04.03.003.00001",
+        "label": "Hasil dari Bangun Guna Serah"
+    },
+    {
+        "code": "4.1.04.03.004",
+        "label": "Hasil dari Bangun Serah Guna"
+    },
+    {
+        "code": "4.1.04.03.004.00001",
+        "label": "Hasil dari Bangun Serah Guna"
+    },
+    {
+        "code": "4.1.04.03.005",
+        "label": "Hasil dari Kerja Sama Penyediaan Infrastruktur"
+    },
+    {
+        "code": "4.1.04.03.005.00001",
+        "label": "Hasil dari Kerja Sama Penyediaan Infrastruktur"
+    },
+    {
+        "code": "4.1.04.16",
+        "label": "Pendapatan BLUD"
+    },
+    {
+        "code": "4.1.04.16.002",
+        "label": "Pendapatan BLUD dari Jasa Layanan"
+    },
+    {
+        "code": "4.1.04.16.002.00001",
+        "label": "Pendapatan BLUD dari Jasa Layanan"
+    },
+    {
+        "code": "4.1.04.16.006",
+        "label": "Pendapatan BLUD dari Lain-Lain Pendapatan BLUD yang Sah"
+    },
+    {
+        "code": "4.1.04.16.006.00001",
+        "label": "Pendapatan BLUD dari Jasa Giro"
+    },
+    {
+        "code": "4.1.04.16.006.00002",
+        "label": "Pendapatan BLUD dari Pendapatan Bunga"
+    },
+    {
+        "code": "4.1.04.16.006.00003",
+        "label": "Pendapatan BLUD dari Keuntungan Selisih Nilai Tukar Rupiah Terhadap Mata Uang Asing"
+    },
+    {
+        "code": "4.1.04.16.006.00004",
+        "label": "Pendapatan BLUD dari Komisi, Potongan ataupun Bentuk Lain sebagai Akibat dari Penjualan dan/atau Pengadaan Barang dan/atau Jasa oleh BLUD"
+    },
+    {
+        "code": "4.1.04.16.006.00005",
+        "label": "Pendapatan BLUD dari Investasi"
+    },
+    {
+        "code": "4.1.04.16.006.00006",
+        "label": "Pendapatan BLUD dari Pengembangan Usaha"
+    },
+    {
+        "code": "4.3.01",
+        "label": "Pendapatan Hibah"
+    },
+    {
+        "code": "4.3.01.01",
+        "label": "Pendapatan Hibah dari Pemerintah Pusat"
+    },
+    {
+        "code": "4.3.01.01.001",
+        "label": "Pendapatan Hibah dari Pemerintah Pusat"
+    },
+    {
+        "code": "4.3.01.01.001.00001",
+        "label": "Pendapatan Hibah dari Pemerintah Pusat"
+    },
+    {
+        "code": "4.3.01.03",
+        "label": "Pendapatan Hibah dari Kelompok Masyarakat/Perorangan Dalam Negeri"
+    },
+    {
+        "code": "4.3.01.03.001",
+        "label": "Pendapatan Hibah dari Kelompok Masyarakat/Perorangan Dalam Negeri"
+    },
+    {
+        "code": "4.3.01.03.001.00001",
+        "label": "Pendapatan Hibah dari Kelompok Masyarakat Dalam Negeri/Perorangan dalam Negeri"
+    },
+    {
+        "code": "4.3.01.04",
+        "label": "Pendapatan Hibah dari Badan/Lembaga/ Organisasi Dalam Negeri/Luar Negeri"
+    },
+    {
+        "code": "4.3.01.04.001",
+        "label": "Pendapatan Hibah dari Badan/Lembaga/ Organisasi Dalam Negeri"
+    },
+    {
+        "code": "4.3.01.04.001.00001",
+        "label": "Pendapatan Hibah dari Badan/Lembaga/ Organisasi Dalam Negeri"
+    },
+    {
+        "code": "4.3.01.04.002",
+        "label": "Pendapatan Hibah dari Badan/Lembaga/ Organisasi Luar Negeri"
+    },
+    {
+        "code": "4.3.01.04.002.00001",
+        "label": "Pendapatan Hibah dari Badan/Lembaga/ Organisasi Luar Negeri"
+    },
+    {
+        "code": "4.3.01.04.003",
+        "label": "Pendapatan Hibah dari Lembaga/Organisasi Swasta Dalam Negeri"
+    },
+    {
+        "code": "4.3.01.04.003.00001",
+        "label": "Pendapatan Hibah dari Lembaga/Organisasi Swasta Dalam Negeri"
+    },
+    {
+        "code": "4.3.01.04.004",
+        "label": "Pendapatan Hibah dari Lembaga/Organisasi Swasta Luar Negeri"
+    },
+    {
+        "code": "4.3.01.04.004.00001",
+        "label": "Pendapatan Hibah dari Lembaga/Organisasi Swasta Luar Negeri"
+    },
+    {
+        "code": "4.3.01.05",
+        "label": "Sumbangan Pihak Ketiga/Sejenis"
+    },
+    {
+        "code": "4.3.01.05.001",
+        "label": "Sumbangan Pihak Ketiga/Sejenis"
+    },
+    {
+        "code": "4.3.01.05.001.00001",
+        "label": "Sumbangan Pihak Ketiga/Sejenis"
+    },
+    {
+        "code": "",
+        "label": "JUMLAH PENDAPATAN ASLI DAERAH"
+    },
+    {
+        "code": "",
+        "label": "JUMLAH PENDAPATAN"
+    },
+    {
+        "code": "5",
+        "label": "BELANJA DAERAH"
+    },
+    {
+        "code": "5.1",
+        "label": "BELANJA OPERASI"
+    },
+    {
+        "code": "5.1.01",
+        "label": "Belanja Pegawai"
+    },
+    {
+        "code": "5.1.01.99",
+        "label": "Belanja Pegawai BLUD"
+    },
+    {
+        "code": "5.1.01.99.099",
+        "label": "Belanja Pegawai BLUD"
+    },
+    {
+        "code": "5.1.01.99.099.09999",
+        "label": "Belanja Pegawai BLUD"
+    },
+    {
+        "code": "5.1.02",
+        "label": "Belanja Barang dan Jasa"
+    },
+    {
+        "code": "5.1.02.90",
+        "label": "Belanja Barang dan Jasa BOK Puskesmas"
+    },
+    {
+        "code": "5.1.02.90.001",
+        "label": "Belanja Barang dan Jasa BOK Puskesmas"
+    },
+    {
+        "code": "5.1.02.90.001.00001",
+        "label": "Belanja Barang dan Jasa BOK Puskesmas"
+    },
+    {
+        "code": "5.1.02.99",
+        "label": "Belanja Barang dan Jasa BLUD"
+    },
+    {
+        "code": "5.1.02.99.099",
+        "label": "Belanja Barang dan Jasa BLUD"
+    },
+    {
+        "code": "5.1.02.99.099.09999",
+        "label": "Belanja Barang dan Jasa BLUD"
+    },
+    {
+        "code": "",
+        "label": "JUMLAH BELANJA OPERASI"
+    },
+    {
+        "code": "5.2",
+        "label": "BELANJA MODAL"
+    },
+    {
+        "code": "5.2.02",
+        "label": "Belanja Modal Peralatan dan Mesin"
+    },
+    {
+        "code": "5.2.02.99",
+        "label": "Belanja Modal Peralatan dan Mesin BLUD"
+    },
+    {
+        "code": "5.2.02.99.099",
+        "label": "Belanja Modal Peralatan dan Mesin BLUD"
+    },
+    {
+        "code": "5.2.02.99.099.09999",
+        "label": "Belanja Modal Peralatan dan Mesin BLUD"
+    },
+    {
+        "code": "",
+        "label": "JUMLAH BELANJA MODAL"
+    },
+    {
+        "code": "",
+        "label": "JUMLAH BELANJA"
+    },
+    {
+        "code": "",
+        "label": "SURPLUS/DEFISIT"
+    },
+    {
+        "code": "",
+        "label": "SISA LEBIH PEMBIAYAAN ANGGARAN"
+    }
+]
