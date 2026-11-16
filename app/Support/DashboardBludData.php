@@ -134,7 +134,7 @@ class DashboardBludData
             ->where('t.tanggal', '>=', $start)->where('t.tanggal', '<', $end)
             ->when($blud !== null, fn ($query) => $unitId ? $query->where('p.unit_blud_id', $unitId) : $query->whereRaw('1 = 0'))
             ->selectRaw('t.tanggal, '.$codeExpression.' AS code, MAX(a.uraian) AS label, SUM(t.total_biaya) AS amount')
-            ->groupBy('t.tanggal')->groupByRaw($codeExpression)->get();
+            ->groupBy('t.tanggal', 'p.kode_rekening', 'a.kode_rek')->get();
         foreach ($receipts as $receipt) {
             $code = $receipt->code;
             $label = $references->get($code) ?? $receipt->label ?? 'Pendapatan Belum Diklasifikasikan';

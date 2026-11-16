@@ -40,7 +40,10 @@ class RoutingController extends BaseController
      */
     public function root(Request $request, $first)
     {
-        return view($first);
+        if (view()->exists($first)) {
+            return view($first);
+        }
+        abort(404);
     }
 
     /**
@@ -48,7 +51,11 @@ class RoutingController extends BaseController
      */
     public function secondLevel(Request $request, $first, $second)
     {
-        return view($first . '.' . $second);
+        $view = $first . '.' . $second;
+        if (view()->exists($view)) {
+            return view($view);
+        }
+        abort(404);
     }
 
     /**
@@ -56,6 +63,10 @@ class RoutingController extends BaseController
      */
     public function thirdLevel(Request $request, $first, $second, $third)
     {
-        return view($first . '.' . $second . '.' . $third);
+        $view = $first . '.' . $second . '.' . $third;
+        if (view()->exists($view)) {
+            return view($view);
+        }
+        abort(404);
     }
 }

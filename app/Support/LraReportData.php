@@ -160,7 +160,7 @@ class LraReportData
             ->where('p.tahun_anggaran', (string) $year)->whereBetween('t.tanggal', [$startDate, $endDate])
             ->when($unit !== null, fn ($query) => $unitId === null ? $query->whereRaw('1 = 0') : $query->where('p.unit_blud_id', $unitId))
             ->selectRaw($code.' AS code, SUM(t.total_biaya) AS amount')
-            ->groupByRaw($code)->get();
+            ->groupBy('p.kode_rekening', 'a.kode_rek')->get();
         foreach ($receipts as $receipt) {
             $accountCode = trim((string) $receipt->code);
             if (! isset($plannedCodes[$accountCode])) continue;
