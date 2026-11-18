@@ -2,17 +2,40 @@
 
 namespace App\Services;
 
-use Symfony\Component\Process\Process;
+use RuntimeException;
+use ZipArchive;
 
 class RbaDocumentFieldUpdater
 {
+    /**
+     * Update Word document fields purely in PHP.
+     * Injects <w:updateFields w:val="true"/> into word/settings.xml so that
+     * Microsoft Word or LibreOffice automatically updates all dynamic fields
+     * (Table of Contents, page numbers) when the document is opened.
+     */
     public function update(string $word): void
     {
-        $environment = PHP_OS_FAMILY === 'Windows' ? getenv() : null;
-        $process = new Process([
-            config('dokumen-rba.powershell'), '-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass',
-            '-File', base_path('scripts/update-rba-fields.ps1'), '-InputPath', $word,
-        ], base_path(), $environment, null, 120);
-        $process->mustRun();
+        $zip = new ZipArchive;
+        if ($zip->open($word) !== true) {
+            throw new RuntimeException('Berkas Word RBA tidak dapat dibuka untuk pembaruan field.');
+        }
+
+        try {
+            $settings = $zip->getFromName('word/settings.xml');
+            if ($settings !== false) {
+                if (! str_contains($settings, '<w:updateFields')) {
+                    $settings = preg_replace(
+                        '/<w:settings([^>]*)>/i',
+                        '<w:settings$1><w:updateFields w:val="true"/>',
+                        $settings,
+                        1
+                    );
+                    $zip->addFromString('word/settings.xml', $settings);
+                }
+            }
+        } finally {
+            $zip->close();
+        }
     }
 }
+
