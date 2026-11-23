@@ -7,6 +7,19 @@ use Symfony\Component\Process\Process;
 
 class RbaDocumentPdfConverter
 {
+    public function isAvailable(): bool
+    {
+        if (app()->environment('testing')) {
+            return true;
+        }
+
+        if (PHP_OS_FAMILY !== 'Windows') {
+            return $this->findLibreOffice() !== null;
+        }
+
+        return is_file(base_path('scripts/export-rba-template.ps1'));
+    }
+
     public function convert(string $word, string $pdf): void
     {
         $outDir = dirname($pdf);
@@ -46,16 +59,39 @@ class RbaDocumentPdfConverter
             }
         }
 
-        throw new RuntimeException('Konversi PDF tidak tersedia di server ini. Silakan unduh dokumen dalam format Word (.docx).');
+        throw new RuntimeException('Konversi PDF tidak tersedia di server ini (membutuhkan LibreOffice pada Linux). Silakan unduh dokumen dalam format Word (.docx).');
     }
 
     private function findLibreOffice(): ?string
     {
-        foreach (['libreoffice', 'soffice', '/usr/bin/libreoffice', '/usr/bin/soffice'] as $binary) {
+        $configured = config('dokumen-rba.libreoffice_path', env('LIBREOFFICE_PATH'));
+        if ($configured && (is_executable($configured) || is_file($configured))) {
+            return $configured;
+        }
+
+        $commonPaths = [
+            '/usr/bin/libreoffice',
+            '/usr/bin/soffice',
+            '/usr/local/bin/libreoffice',
+            '/usr/local/bin/soffice',
+            '/opt/libreoffice/program/soffice',
+            '/snap/bin/libreoffice',
+        ];
+
+        foreach ($commonPaths as $path) {
+            if (is_file($path) && is_executable($path)) {
+                return $path;
+            }
+        }
+
+        foreach (['libreoffice', 'soffice'] as $binary) {
             $process = new Process(['which', $binary]);
             $process->run();
             if ($process->isSuccessful() && trim($process->getOutput()) !== '') {
-                return trim($process->getOutput());
+                $found = trim($process->getOutput());
+                if (is_file($found) && is_executable($found)) {
+                    return $found;
+                }
             }
         }
 

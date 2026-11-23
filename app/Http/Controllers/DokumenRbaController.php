@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\RbaDocumentGenerator;
-use App\Support\TahunRba;
 use App\Models\SpmTarget;
+use App\Services\RbaDocumentGenerator;
+use App\Services\RbaDocumentPdfConverter;
+use App\Support\TahunRba;
 use Illuminate\Http\Request;
 
 class DokumenRbaController extends Controller
@@ -26,11 +27,14 @@ class DokumenRbaController extends Controller
             ]];
         });
 
+        $pdfConverterAvailable = app(RbaDocumentPdfConverter::class)->isAvailable();
+
         return view('dokumen-rba', [
             'jenis' => $jenis,
             'label' => $template['label'],
             'wordAvailable' => is_file($template['word']),
-            'pdfAvailable' => is_file($template['word']),
+            'pdfAvailable' => is_file($template['word']) && $pdfConverterAvailable,
+            'pdfConverterAvailable' => $pdfConverterAvailable,
             'tahun' => $tahun,
             'spmIndicators' => $spmIndicators,
         ]);
@@ -101,6 +105,10 @@ class DokumenRbaController extends Controller
         $tahun = TahunRba::selected($request);
         $spm = SpmTarget::where('nama_blud', $upt)->where('tahun_anggaran', $tahun)
             ->orderBy('nomor')->get();
+        if ($format === 'pdf' && ! app(RbaDocumentPdfConverter::class)->isAvailable()) {
+            abort(503, 'Konversi PDF tidak tersedia di server ini (membutuhkan LibreOffice pada Linux). Silakan unduh dokumen dalam format Word (.docx).');
+        }
+
         try {
             return app(RbaDocumentGenerator::class)->generate($template['word'], $upt, $tahun, $format, $spm->all());
         } catch (\Throwable $exception) {

@@ -32,7 +32,9 @@
                             <i class="ri-file-pdf-2-line me-1" aria-hidden="true"></i> Unduh PDF
                         </a>
                     @else
-                        <button class="btn btn-success" type="button" disabled>Unduh PDF</button>
+                        <button class="btn btn-outline-secondary" type="button" disabled title="Konversi PDF membutuhkan LibreOffice di server hosting">
+                            <i class="ri-file-pdf-2-line me-1" aria-hidden="true"></i> Unduh PDF
+                        </button>
                     @endif
                 </div>
             </div>
@@ -89,8 +91,22 @@
                     src="{{ route('dokumen-rba.preview', ['jenis' => $jenis]) }}#view=FitH">
                 </iframe>
                 <p class="small text-muted px-3 py-2 mb-0">Jika preview tidak tampil, pilih Buka Preview atau Unduh PDF.</p>
-            @else
+            @elseif (! $wordAvailable)
                 <div class="text-center text-muted p-5">Template PDF belum tersedia. Preview akan ditampilkan setelah template tersedia.</div>
+            @else
+                <div class="text-center p-5">
+                    <div class="avatar-lg bg-light rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center">
+                        <i class="ri-file-word-2-line text-primary fs-24"></i>
+                    </div>
+                    <h5 class="text-dark mb-2">Preview & Unduh PDF Memerlukan LibreOffice di Server</h5>
+                    <p class="text-muted mx-auto mb-4" style="max-width: 650px;">
+                        Server hosting belum memiliki library <code>libreoffice</code> untuk konversi dokumen RBA ke format PDF. 
+                        Seluruh isi Dokumen RBA (Kata Pengantar, Ringkasan Eksekutif, Bab I - IV, dan Lampiran 1 - 21) dapat langsung diunduh dan dicetak secara lengkap melalui file <strong>Word (.docx)</strong>.
+                    </p>
+                    <a class="btn btn-info px-4 py-2" href="{{ route('dokumen-rba.download', ['jenis' => $jenis, 'format' => 'word']) }}">
+                        <i class="ri-file-word-2-line me-1" aria-hidden="true"></i> Unduh Dokumen Word (.docx)
+                    </a>
+                </div>
             @endif
         </div>
     </div>
