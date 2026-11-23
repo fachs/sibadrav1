@@ -2,6 +2,7 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/rba-tables.css') }}">
+    @include('partials.rba-agregat-styles')
 @endsection
 
 @section('content')

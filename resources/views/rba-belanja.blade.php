@@ -1,6 +1,7 @@
 @extends('layouts.vertical', ['title' => 'RBA Belanja','subTitle' => 'RBA'])
     @section('css')
         <link rel="stylesheet" href="{{ asset('css/rba-tables.css') }}">
+        @include('partials.rba-agregat-styles')
 
         <style>
             
