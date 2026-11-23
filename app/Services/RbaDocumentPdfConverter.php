@@ -2,14 +2,20 @@
 
 namespace App\Services;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use RuntimeException;
 use Symfony\Component\Process\Process;
+use ZipArchive;
 
 class RbaDocumentPdfConverter
 {
     public function isAvailable(): bool
     {
         if (app()->environment('testing')) {
+            return true;
+        }
+
+        if ($this->canUsePurePhpDomPdf()) {
             return true;
         }
 
@@ -24,7 +30,7 @@ class RbaDocumentPdfConverter
     {
         $outDir = dirname($pdf);
 
-        // 1. On Linux, check for LibreOffice / soffice
+        // 1. On Linux, check for LibreOffice / soffice (highest layout fidelity if installed)
         if (PHP_OS_FAMILY !== 'Windows') {
             $libreOffice = $this->findLibreOffice();
             if ($libreOffice) {
@@ -46,7 +52,7 @@ class RbaDocumentPdfConverter
         }
 
         // 2. On Windows, use PowerShell & Word COM if available
-        if (PHP_OS_FAMILY === 'Windows') {
+        if (PHP_OS_FAMILY === 'Windows' && is_file(base_path('scripts/export-rba-template.ps1'))) {
             $environment = getenv() ?: null;
             $process = new Process([
                 config('dokumen-rba.powershell', 'powershell.exe'), '-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass',
@@ -59,7 +65,41 @@ class RbaDocumentPdfConverter
             }
         }
 
-        throw new RuntimeException('Konversi PDF tidak tersedia di server ini (membutuhkan LibreOffice pada Linux). Silakan unduh dokumen dalam format Word (.docx).');
+        // 3. Pure PHP fallback using DocxToHtmlConverter + DomPDF (works on cPanel shared hosting without LibreOffice)
+        if ($this->canUsePurePhpDomPdf()) {
+            $this->convertWithDomPdf($word, $pdf);
+
+            return;
+        }
+
+        throw new RuntimeException('Konversi PDF tidak tersedia di server ini. Silakan unduh dokumen dalam format Word (.docx).');
+    }
+
+    public function convertWithDomPdf(string $word, string $pdf): void
+    {
+        if (function_exists('set_time_limit')) {
+            @set_time_limit(180);
+        }
+
+        $html = app(DocxToHtmlConverter::class)->convertToHtml($word);
+
+        $dompdf = Pdf::loadHTML($html);
+        $dompdf->setOption('isHtml5ParserEnabled', true);
+        $dompdf->setOption('isRemoteEnabled', false);
+
+        $output = $dompdf->output();
+        if (! is_string($output) || ! str_starts_with($output, '%PDF-')) {
+            throw new RuntimeException('DomPDF gagal menghasilkan berkas PDF yang valid.');
+        }
+
+        if (file_put_contents($pdf, $output) === false) {
+            throw new RuntimeException("Gagal menyimpan berkas PDF ke: {$pdf}");
+        }
+    }
+
+    private function canUsePurePhpDomPdf(): bool
+    {
+        return class_exists(Pdf::class) && class_exists(ZipArchive::class);
     }
 
     private function findLibreOffice(): ?string
