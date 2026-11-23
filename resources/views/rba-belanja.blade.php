@@ -20,24 +20,33 @@
                         
                         <div class="card-body">
                             @include('partials.rba-tahun-filter')
+                            @php
+                                $user = auth()->user();
+                                $isPerencanaanOrSuperuser = $isPerencanaanOrSuperuser ?? ($user->hasAnyRole(['Superuser', 'Perencanaan', 'Dinas', 'Dinas Kesehatan']) || $user->isDinasKesehatan());
+                                $isAllBlud = $isAllBlud ?? ($isPerencanaanOrSuperuser && (!request()->has('puskesmas') || request('puskesmas') == ''));
+                                $canDeleteRenbut = $user->hasAnyRole(['kepala puskesmas', 'klaster 1', 'kasubbag tu', 'kepala labkes']);
+                            @endphp
                             <div class="rba-toolbar">
                                 <div class="rba-toolbar-main">
-                                    @if(Auth::user()->hasRole('Superuser'))
-                                    <form method="GET" action="{{ route('rba.belanja') }}" class="rba-filter">
+                                    @if($isPerencanaanOrSuperuser)
+                                    <form method="GET" action="{{ route('rba.belanja') }}" class="rba-filter d-flex align-items-center gap-2">
                                         @include('partials.rba-tahun-input')
-                                        <label for="puskesmasFilter" class="form-label mb-0">Unit BLUD</label>
-                                        <select name="puskesmas" id="puskesmasFilter" class="form-select" onchange="this.form.submit()">
-                                            <option value="">-- Semua Puskesmas --</option>
+                                        <label for="puskesmasFilter" class="form-label mb-0 fw-semibold">Pilih BLUD:</label>
+                                        <select name="puskesmas" id="puskesmasFilter" class="form-select form-select-sm" style="min-width: 220px;" onchange="this.form.submit()">
+                                            <option value="">Semua Unit BLUD (Tampilan Agregat)</option>
                                             @foreach($puskesmasList as $p)
                                                 <option value="{{ $p->nama }}" {{ request('puskesmas') == $p->nama ? 'selected' : '' }}>{{ $p->nama }}</option>
                                             @endforeach
                                         </select>
+                                        @if(request()->filled('puskesmas'))
+                                            <a href="{{ route('rba.belanja', ['tahun' => request('tahun')]) }}" class="btn btn-sm btn-outline-secondary" title="Kembali ke tampilan agregat seluruh BLUD">Reset</a>
+                                        @endif
                                         <noscript><button type="submit" class="btn btn-outline-primary">Tampilkan</button></noscript>
                                     </form>
                                     @endif
                                 </div>
                                 <div class="rba-toolbar-actions">
-                                    @if(!Auth::user()->hasRole('Superuser'))
+                                    @if(!$isPerencanaanOrSuperuser)
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalKinerjaKegiatan">
                                         <i class="ri-list-check-3" aria-hidden="true"></i> Kinerja Kegiatan
                                     </button>
@@ -47,9 +56,89 @@
                                     </a>
                                 </div>
                             </div>
-                            @php
-                                $canDeleteRenbut = auth()->user()->hasAnyRole(['kepala puskesmas', 'klaster 1', 'kasubbag tu', 'kepala labkes']);
-                            @endphp
+
+                            @if($isAllBlud)
+                                <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mt-3 mb-3">
+                                    <div>
+                                        <h5 class="card-title mb-1">Rekapitulasi Agregat Belanja BLUD</h5>
+                                        <p class="text-muted small mb-0">Tahun Anggaran {{ $tahunRba }} · Data agregat per jenis kode rekening seluruh Puskesmas / Unit BLUD</p>
+                                    </div>
+                                    <span class="badge bg-primary-subtle text-primary px-2 py-1 fs-12">
+                                        <i class="ri-hospital-line me-1"></i>{{ count($agregatPuskesmas ?? []) }} Unit BLUD
+                                    </span>
+                                </div>
+                                <div class="table-responsive rba-table-wrap" role="region" aria-label="Tabel Agregat Belanja Seluruh RBA" tabindex="0">
+                                    <table class="table table-bordered table-hover align-middle rba-table">
+                                        <thead class="table-light">
+                                            <tr class="text-center align-middle">
+                                                <th scope="col" style="width: 45px;">No</th>
+                                                <th scope="col" class="text-start">Nama Puskesmas / Unit BLUD</th>
+                                                <th scope="col" class="text-end" style="width: 13%;">5.1.01 - BELANJA PEGAWAI BLUD</th>
+                                                <th scope="col" class="text-end" style="width: 13%;">5.1.02 - BELANJA BARANG DAN JASA BLUD</th>
+                                                <th scope="col" class="text-end" style="width: 13%;">5.2.02 - BELANJA MODAL PERALATAN DAN MESIN BLUD</th>
+                                                <th scope="col" class="text-end" style="width: 13%;">5.2.03 - BELANJA MODAL GEDUNG DAN BANGUNAN BLUD</th>
+                                                <th scope="col" class="text-end" style="width: 13%;">5.2.04 - BELANJA MODAL JALAN, JARINGAN DAN IRIGASI BLUD</th>
+                                                <th scope="col" class="text-end" style="width: 14%;">TOTAL BELANJA</th>
+                                                <th scope="col" class="text-center" style="width: 85px;">Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @forelse($agregatPuskesmas ?? [] as $idx => $row)
+                                                <tr>
+                                                    <td class="text-center text-muted">{{ $idx + 1 }}</td>
+                                                    <td>
+                                                        <a href="{{ route('rba.belanja', ['puskesmas' => $row['nama'], 'tahun' => request('tahun')]) }}" class="fw-semibold text-primary text-decoration-none" title="Lihat rincian belanja {{ $row['nama'] }}">
+                                                            {{ $row['nama'] }}
+                                                        </a>
+                                                        @if(($row['count'] ?? 0) > 0)
+                                                            <span class="badge bg-light text-secondary ms-1">{{ $row['count'] }} item</span>
+                                                        @endif
+                                                    </td>
+                                                    <td class="text-end rba-amount">{{ number_format($row['belanja_pegawai'] ?? 0, 0, ',', '.') }}</td>
+                                                    <td class="text-end rba-amount">{{ number_format($row['belanja_barang_jasa'] ?? 0, 0, ',', '.') }}</td>
+                                                    <td class="text-end rba-amount">{{ number_format($row['belanja_modal_peralatan'] ?? 0, 0, ',', '.') }}</td>
+                                                    <td class="text-end rba-amount">{{ number_format($row['belanja_modal_gedung'] ?? 0, 0, ',', '.') }}</td>
+                                                    <td class="text-end rba-amount">{{ number_format($row['belanja_modal_jalan'] ?? 0, 0, ',', '.') }}</td>
+                                                    <td class="text-end rba-amount fw-bold {{ ($row['total'] ?? 0) > 0 ? 'text-success' : 'text-muted' }}">
+                                                        {{ number_format($row['total'] ?? 0, 0, ',', '.') }}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a href="{{ route('rba.belanja', ['puskesmas' => $row['nama'], 'tahun' => request('tahun')]) }}" class="btn btn-sm btn-outline-primary" title="Lihat rincian belanja {{ $row['nama'] }}">
+                                                            <i class="ri-eye-line me-1"></i>Rincian
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="9" class="text-center text-muted p-4">Belum ada data belanja untuk tahun anggaran {{ $tahunRba }}.</td>
+                                                </tr>
+                                            @endforelse
+                                        </tbody>
+                                        <tfoot class="table-light">
+                                            <tr class="fw-bold">
+                                                <th scope="row" colspan="2" class="text-center">TOTAL KESELURUHAN</th>
+                                                <td class="text-end text-primary rba-amount">{{ number_format($totalAgregat['belanja_pegawai'] ?? 0, 0, ',', '.') }}</td>
+                                                <td class="text-end text-primary rba-amount">{{ number_format($totalAgregat['belanja_barang_jasa'] ?? 0, 0, ',', '.') }}</td>
+                                                <td class="text-end text-primary rba-amount">{{ number_format($totalAgregat['belanja_modal_peralatan'] ?? 0, 0, ',', '.') }}</td>
+                                                <td class="text-end text-primary rba-amount">{{ number_format($totalAgregat['belanja_modal_gedung'] ?? 0, 0, ',', '.') }}</td>
+                                                <td class="text-end text-primary rba-amount">{{ number_format($totalAgregat['belanja_modal_jalan'] ?? 0, 0, ',', '.') }}</td>
+                                                <td class="text-end text-success rba-amount fs-5">{{ number_format($totalAgregat['total'] ?? 0, 0, ',', '.') }}</td>
+                                                <td></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            @else
+                                @if($isPerencanaanOrSuperuser)
+                                    <div class="alert alert-info d-flex flex-wrap align-items-center justify-content-between gap-2 mt-2 mb-3 py-2">
+                                        <div>
+                                            <i class="ri-information-line me-1"></i> Menampilkan rincian belanja untuk: <strong>{{ request('puskesmas') ?: auth()->user()->upt }}</strong>
+                                        </div>
+                                        <a href="{{ route('rba.belanja', ['tahun' => request('tahun')]) }}" class="btn btn-sm btn-outline-info">
+                                            <i class="ri-arrow-left-line me-1"></i> Kembali ke Tampilan Agregat
+                                        </a>
+                                    </div>
+                                @endif
                             <div class="table-responsive rba-table-wrap" role="region" aria-labelledby="belanja-table-title" tabindex="0">
                             <table class="table align-middle rba-table rba-table--belanja">
                                 <caption class="visually-hidden">Rencana belanja tahun anggaran {{ $tahunRba }}, dikelompokkan berdasarkan klasifikasi dan rekening.</caption>
@@ -189,6 +278,7 @@
                                 </tfoot>
                             </table>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
