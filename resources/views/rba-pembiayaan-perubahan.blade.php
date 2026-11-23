@@ -14,50 +14,118 @@
     $isAllBlud = $isAllBlud ?? ($isPerencanaanOrSuperuser && (!request()->has('puskesmas') || request('puskesmas') == ''));
     $canReview = $user->hasAnyRole(['superuser', 'perencanaan', 'dinas', 'dinas kesehatan']) || $user->isDinasKesehatan();
     $grandTotalAwal = $grouped->flatten()->sum('jumlah');
+    $filledUnitCount = collect($agregatPuskesmas ?? [])->filter(fn ($r) => ($r['total'] ?? 0) > 0 || ($r['count'] ?? 0) > 0)->count();
 @endphp
 <div class="card rba-budget rba-change"><div class="card-body">
     @include('partials.pembiayaan-toolbar')
     @if($isAllBlud)
-        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mt-3 mb-3">
-            <div>
-                <h5 class="card-title mb-1">Rekapitulasi Agregat Pembiayaan Perubahan BLUD</h5>
-                <p class="text-muted small mb-0">Tahun Anggaran {{ $tahunRba }} · Data agregat per jenis kode rekening seluruh Puskesmas / Unit BLUD</p>
+        <div class="rba-kpi-grid">
+            <div class="rba-kpi-card">
+                <div class="rba-kpi-top">
+                    <span class="rba-kpi-code">6.1</span>
+                    <i class="ri-arrow-down-circle-line text-primary fs-18"></i>
+                </div>
+                <div class="rba-kpi-label">Penerimaan Pembiayaan (Perubahan)</div>
+                <div class="rba-kpi-value">Rp {{ number_format($totalAgregat['penerimaan_pembiayaan'] ?? 0, 2, ',', '.') }}</div>
             </div>
-            <span class="badge bg-primary-subtle text-primary px-2 py-1 fs-12">
-                <i class="ri-hospital-line me-1"></i>{{ count($agregatPuskesmas ?? []) }} Unit BLUD
-            </span>
+            <div class="rba-kpi-card">
+                <div class="rba-kpi-top">
+                    <span class="rba-kpi-code">6.2</span>
+                    <i class="ri-arrow-up-circle-line text-info fs-18"></i>
+                </div>
+                <div class="rba-kpi-label">Pengeluaran Pembiayaan (Perubahan)</div>
+                <div class="rba-kpi-value">Rp {{ number_format($totalAgregat['pengeluaran_pembiayaan'] ?? 0, 2, ',', '.') }}</div>
+            </div>
+            <div class="rba-kpi-card rba-kpi-card--highlight">
+                <div class="rba-kpi-top">
+                    <span class="rba-kpi-code">TOTAL 6</span>
+                    <i class="ri-exchange-funds-line text-success fs-18"></i>
+                </div>
+                <div class="rba-kpi-label">Total Pembiayaan Perubahan</div>
+                <div class="rba-kpi-value">Rp {{ number_format($totalAgregat['total'] ?? 0, 2, ',', '.') }}</div>
+            </div>
         </div>
+
+        <div class="rba-agregat-header">
+            <div>
+                <h5 class="rba-agregat-title">
+                    <i class="ri-table-2 text-primary"></i>
+                    <span>Matriks Agregat Pembiayaan Perubahan BLUD per Kode Rekening</span>
+                </h5>
+                <p class="rba-agregat-subtitle">
+                    Tahun Anggaran <strong>{{ $tahunRba }}</strong> · Klik nama Puskesmas atau tombol <strong>Rincian</strong> untuk membuka detail perbandingan pembiayaan perubahan.
+                </p>
+            </div>
+            <div class="rba-agregat-controls">
+                <div class="rba-agregat-search">
+                    <i class="ri-search-line"></i>
+                    <input type="search" class="form-control form-control-sm" placeholder="Cari Puskesmas / BLUD..." aria-label="Cari Puskesmas" oninput="filterAgregatRows(this, 'agregat-pembiayaan-perubahan-table')">
+                </div>
+                <span class="badge bg-primary-subtle text-primary px-3 py-2 fs-12">
+                    <i class="ri-hospital-line me-1"></i>{{ $filledUnitCount }} / {{ count($agregatPuskesmas ?? []) }} Unit Terisi
+                </span>
+            </div>
+        </div>
+
         <div class="table-responsive rba-table-wrap" role="region" aria-label="Tabel Agregat Pembiayaan Perubahan Seluruh RBA" tabindex="0">
-            <table class="table table-bordered table-hover align-middle rba-table">
-                <thead class="table-light">
-                    <tr class="text-center align-middle">
-                        <th scope="col" style="width: 50px;">No</th>
-                        <th scope="col" class="text-start">Nama Puskesmas / Unit BLUD</th>
-                        <th scope="col" class="text-end" style="width: 22%;">6.1 - PENERIMAAN PEMBIAYAAN</th>
-                        <th scope="col" class="text-end" style="width: 22%;">6.2 - PENGELUARAN PEMBIAYAAN</th>
-                        <th scope="col" class="text-end" style="width: 22%;">TOTAL PEMBIAYAAN</th>
-                        <th scope="col" class="text-center" style="width: 90px;">Aksi</th>
+            <table class="table align-middle rba-table rba-table--agregat rba-table--agregat-compact" id="agregat-pembiayaan-perubahan-table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center" style="width: 48px;">No</th>
+                        <th scope="col">
+                            <div class="agregat-col-header agregat-col-header--start">
+                                <span class="agregat-col-code">UNIT BLUD</span>
+                                <span class="agregat-col-label">Nama Puskesmas / Unit BLUD</span>
+                            </div>
+                        </th>
+                        <th scope="col" class="text-end" style="width: 22%;">
+                            <div class="agregat-col-header">
+                                <span class="agregat-col-code">6.1</span>
+                                <span class="agregat-col-label">Penerimaan Pembiayaan (Rp)</span>
+                            </div>
+                        </th>
+                        <th scope="col" class="text-end" style="width: 22%;">
+                            <div class="agregat-col-header">
+                                <span class="agregat-col-code">6.2</span>
+                                <span class="agregat-col-label">Pengeluaran Pembiayaan (Rp)</span>
+                            </div>
+                        </th>
+                        <th scope="col" class="text-end agregat-total-col" style="width: 22%;">
+                            <div class="agregat-col-header">
+                                <span class="agregat-col-code agregat-col-code--total">TOTAL 6</span>
+                                <span class="agregat-col-label text-success">Total Pembiayaan (Rp)</span>
+                            </div>
+                        </th>
+                        <th scope="col" class="text-center" style="width: 95px;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($agregatPuskesmas ?? [] as $idx => $row)
-                        <tr>
-                            <td class="text-center text-muted">{{ $idx + 1 }}</td>
+                        @php
+                            $pn = (float) ($row['penerimaan_pembiayaan'] ?? 0);
+                            $pg = (float) ($row['pengeluaran_pembiayaan'] ?? 0);
+                            $tt = (float) ($row['total'] ?? 0);
+                        @endphp
+                        <tr data-unit-name="{{ strtolower($row['nama']) }}">
+                            <td class="text-center text-muted fw-semibold">{{ $idx + 1 }}</td>
                             <td>
-                                <a href="{{ route('rba-perubahan.pembiayaan', ['puskesmas' => $row['nama'], 'tahun' => $tahunRba]) }}" class="fw-semibold text-primary text-decoration-none" title="Lihat rincian perubahan pembiayaan {{ $row['nama'] }}">
-                                    {{ $row['nama'] }}
-                                </a>
-                                @if(($row['count'] ?? 0) > 0)
-                                    <span class="badge bg-light text-secondary ms-1">{{ $row['count'] }} rek</span>
-                                @endif
+                                <div class="agregat-unit-cell">
+                                    <a href="{{ route('rba-perubahan.pembiayaan', ['puskesmas' => $row['nama'], 'tahun' => $tahunRba]) }}" class="agregat-unit-link" title="Lihat rincian perubahan pembiayaan {{ $row['nama'] }}">
+                                        <span class="agregat-unit-icon"><i class="ri-hospital-line"></i></span>
+                                        <span>{{ $row['nama'] }}</span>
+                                    </a>
+                                    @if(($row['count'] ?? 0) > 0)
+                                        <span class="agregat-unit-badge">{{ $row['count'] }} rek</span>
+                                    @endif
+                                </div>
                             </td>
-                            <td class="text-end rba-amount">{{ number_format($row['penerimaan_pembiayaan'] ?? 0, 2, ',', '.') }}</td>
-                            <td class="text-end rba-amount">{{ number_format($row['pengeluaran_pembiayaan'] ?? 0, 2, ',', '.') }}</td>
-                            <td class="text-end rba-amount fw-bold {{ ($row['total'] ?? 0) > 0 ? 'text-success' : 'text-muted' }}">
-                                {{ number_format($row['total'] ?? 0, 2, ',', '.') }}
+                            <td class="text-end rba-amount {{ $pn > 0 ? 'agregat-val-positive' : 'agregat-val-zero' }}">{{ number_format($pn, 2, ',', '.') }}</td>
+                            <td class="text-end rba-amount {{ $pg > 0 ? 'agregat-val-positive' : 'agregat-val-zero' }}">{{ number_format($pg, 2, ',', '.') }}</td>
+                            <td class="text-end rba-amount agregat-total-col fw-bold {{ $tt > 0 ? 'text-success' : 'agregat-val-zero' }}">
+                                {{ number_format($tt, 2, ',', '.') }}
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('rba-perubahan.pembiayaan', ['puskesmas' => $row['nama'], 'tahun' => $tahunRba]) }}" class="btn btn-sm btn-outline-primary" title="Lihat rincian perubahan pembiayaan {{ $row['nama'] }}">
+                                <a href="{{ route('rba-perubahan.pembiayaan', ['puskesmas' => $row['nama'], 'tahun' => $tahunRba]) }}" class="btn btn-sm btn-soft-primary px-2 py-1" title="Lihat rincian perubahan pembiayaan {{ $row['nama'] }}">
                                     <i class="ri-eye-line me-1"></i>Rincian
                                 </a>
                             </td>
@@ -68,25 +136,36 @@
                         </tr>
                     @endforelse
                 </tbody>
-                <tfoot class="table-light">
+                <tfoot>
                     <tr class="fw-bold">
                         <th scope="row" colspan="2" class="text-center">TOTAL KESELURUHAN</th>
-                        <td class="text-end text-primary rba-amount">{{ number_format($totalAgregat['penerimaan_pembiayaan'] ?? 0, 2, ',', '.') }}</td>
-                        <td class="text-end text-primary rba-amount">{{ number_format($totalAgregat['pengeluaran_pembiayaan'] ?? 0, 2, ',', '.') }}</td>
-                        <td class="text-end text-success rba-amount fs-5">{{ number_format($totalAgregat['total'] ?? 0, 2, ',', '.') }}</td>
+                        <td class="text-end rba-amount">{{ number_format($totalAgregat['penerimaan_pembiayaan'] ?? 0, 2, ',', '.') }}</td>
+                        <td class="text-end rba-amount">{{ number_format($totalAgregat['pengeluaran_pembiayaan'] ?? 0, 2, ',', '.') }}</td>
+                        <td class="text-end text-success rba-amount fs-6">{{ number_format($totalAgregat['total'] ?? 0, 2, ',', '.') }}</td>
                         <td></td>
                     </tr>
                 </tfoot>
             </table>
         </div>
+        <script>
+            function filterAgregatRows(input, tableId) {
+                var q = (input.value || '').toLowerCase().trim();
+                var rows = document.querySelectorAll('#' + tableId + ' tbody tr[data-unit-name]');
+                rows.forEach(function (tr) {
+                    var name = tr.getAttribute('data-unit-name') || '';
+                    tr.style.display = (!q || name.indexOf(q) !== -1) ? '' : 'none';
+                });
+            }
+        </script>
     @else
         @if($isPerencanaanOrSuperuser)
-            <div class="alert alert-info d-flex flex-wrap align-items-center justify-content-between gap-2 mt-2 mb-3 py-2">
-                <div>
-                    <i class="ri-information-line me-1"></i> Menampilkan rincian pembiayaan perubahan untuk: <strong>{{ request('puskesmas') ?: auth()->user()->upt }}</strong>
+            <div class="rba-unit-banner">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="ri-hospital-fill fs-18"></i>
+                    <span>Menampilkan Rincian RBA Pembiayaan Perubahan Unit BLUD: <strong>{{ request('puskesmas') ?: auth()->user()->upt }}</strong></span>
                 </div>
-                <a href="{{ route('rba-perubahan.pembiayaan', ['tahun' => $tahunRba]) }}" class="btn btn-sm btn-outline-info">
-                    <i class="ri-arrow-left-line me-1"></i> Kembali ke Tampilan Agregat
+                <a href="{{ route('rba-perubahan.pembiayaan', ['tahun' => $tahunRba]) }}" class="btn btn-sm btn-info text-white">
+                    <i class="ri-arrow-left-line me-1"></i> Kembali ke Rekap Agregat Seluruh BLUD
                 </a>
             </div>
         @endif

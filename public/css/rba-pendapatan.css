@@ -206,6 +206,40 @@
     outline-offset: 3px;
 }
 
+.rba-pendapatan .pendapatan-table.pendapatan-table--agregat {
+    table-layout: auto;
+    min-width: 1140px;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.rba-pendapatan .pendapatan-table.pendapatan-table--agregat > :not(caption) > * > * {
+    padding: 11px 14px;
+    overflow-wrap: normal;
+    vertical-align: middle;
+    border-right: 1px solid var(--pendapatan-border);
+    border-bottom: 1px solid var(--pendapatan-border);
+}
+
+.rba-pendapatan .pendapatan-table.pendapatan-table--agregat > :not(caption) > * > *:last-child {
+    border-right: 0;
+}
+
+.rba-pendapatan .pendapatan-table.pendapatan-table--agregat > thead > tr > th {
+    padding: 12px 14px;
+    background: var(--pendapatan-soft);
+    border-bottom: 2px solid var(--pendapatan-border);
+    vertical-align: middle;
+}
+
+.rba-pendapatan .pendapatan-table.pendapatan-table--agregat > tbody > tr:nth-of-type(even) > * {
+    --bs-table-bg: rgba(var(--bs-tertiary-bg-rgb, 248, 249, 250), .45);
+}
+
+.rba-pendapatan .pendapatan-table.pendapatan-table--agregat > tbody > tr:hover > * {
+    --bs-table-bg: var(--bs-primary-bg-subtle);
+}
+
 @media (max-width: 767.98px) {
     .rba-pendapatan .pendapatan-heading { padding: 16px; }
     .rba-pendapatan .pendapatan-toolbar { align-items: stretch; }

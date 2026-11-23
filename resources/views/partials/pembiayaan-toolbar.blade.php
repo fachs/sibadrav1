@@ -13,13 +13,13 @@
         @if($isPerencanaanOrSuperuser)
             <form method="GET" class="d-flex align-items-center gap-2 rba-filter" action="{{ route($routePrefix) }}">
                 <input type="hidden" name="tahun" value="{{ $tahunRba }}">
-                <label for="puskesmas-filter" class="mb-0 fw-semibold">Pilih BLUD:</label>
-                <select id="puskesmas-filter" name="puskesmas" class="form-select form-select-sm" style="min-width: 220px;" onchange="this.form.submit()">
-                    <option value="">Semua Unit BLUD (Tampilan Agregat)</option>
+                <label for="puskesmas-filter" class="mb-0 fw-semibold text-nowrap"><i class="ri-hospital-line me-1 text-primary"></i>Unit BLUD:</label>
+                <select id="puskesmas-filter" name="puskesmas" class="form-select form-select-sm" style="min-width: 240px;" onchange="this.form.submit()">
+                    <option value="">Semua Unit BLUD (Rekap Agregat)</option>
                     @foreach($puskesmasList as $unit)<option value="{{ $unit->nama }}" @selected(request('puskesmas') === $unit->nama)>{{ $unit->nama }}</option>@endforeach
                 </select>
                 @if(request()->filled('puskesmas'))
-                    <a href="{{ route($routePrefix, ['tahun' => $tahunRba]) }}" class="btn btn-sm btn-outline-secondary" title="Kembali ke tampilan agregat seluruh BLUD">Reset</a>
+                    <a href="{{ route($routePrefix, ['tahun' => $tahunRba]) }}" class="btn btn-sm btn-outline-secondary" title="Kembali ke tampilan agregat seluruh BLUD"><i class="ri-refresh-line me-1"></i>Semua BLUD</a>
                 @endif
                 <noscript><button type="submit" class="btn btn-primary btn-sm">Tampilkan</button></noscript>
             </form>
