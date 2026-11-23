@@ -70,6 +70,40 @@
     const rows = () => Array.from(list.querySelectorAll('.pelayanan-row'));
     let nextIndex = Math.max(-1, ...rows().map(row => Number(row.dataset.index))) + 1;
 
+    const PUSKESMAS_UNITS = ['Klaster 1', 'Klaster 2', 'Klaster 3', 'Klaster 4', 'Lintas Klaster'];
+    const LABKES_UNITS = [
+        'Manajemen',
+        'Tim Kerja Mutu',
+        'Tim Program Layanan Laboratorium Klinik',
+        'Tim Program Biomolekuler',
+        'Tim Penguatan SDM & Kemitraan',
+        'Tim Surveilans Faktor Resiko Kesehatan & Kejadian Luar biasa',
+        'Tim Program Layanan Laboratorium Kesehatan Masyarakat',
+    ];
+
+    function getUnitsFor(upt) {
+        return String(upt || '').trim() === 'Labkes Kota Sukabumi' ? LABKES_UNITS : PUSKESMAS_UNITS;
+    }
+
+    function updateUnitOptions(select, upt, selectedValue) {
+        if (!select) return;
+        const units = getUnitsFor(upt);
+        const val = selectedValue !== undefined && selectedValue !== null ? String(selectedValue) : select.value;
+        select.replaceChildren(
+            option('', 'Pilih Unit Pelayanan'),
+            ...units.map(u => {
+                const opt = option(u, u);
+                if (u === val) opt.selected = true;
+                return opt;
+            })
+        );
+        if (val && !units.includes(val)) {
+            const customOpt = option(val, val);
+            customOpt.selected = true;
+            select.appendChild(customOpt);
+        }
+    }
+
     function option(value, text) {
         const element = document.createElement('option');
         element.value = value;
@@ -329,20 +363,29 @@
         form.querySelectorAll('.pendapatan-errors').forEach(element => { element.hidden = true; });
         list.innerHTML = '';
         nextIndex = 0;
+        const currentUpt = record?.nama_blud || blud?.value || form.dataset.currentUpt || form.dataset.userUpt || '';
+        updateUnitOptions(template.content.querySelector('.unit-pelayanan-select'), currentUpt);
         const data = record?.jenis_pelayanans?.length ? record.jenis_pelayanans : [{}];
         data.forEach(service => {
             list.insertAdjacentHTML('beforeend', template.innerHTML.replace(/__INDEX__/g, String(nextIndex++)));
             const row = rows().at(-1);
+            updateUnitOptions(row.querySelector('.unit-pelayanan-select'), currentUpt, service.unit_pelayanan);
             row.querySelectorAll('input[name], select[name]').forEach(input => {
                 const key = input.name.match(/\[([^\]]+)\]$/)?.[1];
                 if (input.classList.contains('cagr-toggle')) input.checked = Boolean(service.gunakan_cagr);
                 else if (input.classList.contains('pelayanan-select')) populateServices(row, service.uraian || '');
+                else if (input.classList.contains('unit-pelayanan-select')) { /* handled */ }
                 else if (key !== 'gunakan_cagr' && Object.hasOwn(service, key)) input.value = service[key] ?? '';
             });
             initialize(row);
         });
         refresh();
     }
+    document.getElementById('nama-blud')?.addEventListener('change', function () {
+        const upt = this.value || form.dataset.userUpt || '';
+        rows().forEach(row => updateUnitOptions(row.querySelector('.unit-pelayanan-select'), upt));
+        updateUnitOptions(template.content.querySelector('.unit-pelayanan-select'), upt);
+    });
     document.getElementById('tambah-pendapatan')?.addEventListener('click', () => openEditor());
     window.addEventListener('pendapatan:open', function (event) {
         if (!isLocalEditor) return;

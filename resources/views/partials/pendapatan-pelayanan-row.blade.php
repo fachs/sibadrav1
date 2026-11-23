@@ -12,11 +12,19 @@
         <div class="row g-3">
             <div class="col-md-4">
                 <label for="unit-{{ $index }}" class="form-label">Unit Pelayanan</label>
-                <select id="unit-{{ $index }}" name="jenis_pelayanan[{{ $index }}][unit_pelayanan]" class="form-select" required>
+                @php
+                    $currentUpt = $currentUpt ?? ($pendapatan?->nama_blud ?? old('nama_blud', request('puskesmas') ?: (auth()->user()->upt ?? '')));
+                    $unitPelayananList = \App\Models\JenisPelayananPendapatan::unitsFor($currentUpt);
+                    $selectedUnit = $row['unit_pelayanan'] ?? '';
+                @endphp
+                <select id="unit-{{ $index }}" name="jenis_pelayanan[{{ $index }}][unit_pelayanan]" class="form-select unit-pelayanan-select" required>
                     <option value="">Pilih Unit Pelayanan</option>
-                    @foreach(\App\Models\JenisPelayananPendapatan::UNIT_PELAYANAN as $unitPelayanan)
-                        <option value="{{ $unitPelayanan }}" @selected(($row['unit_pelayanan'] ?? '') === $unitPelayanan)>{{ $unitPelayanan }}</option>
+                    @foreach($unitPelayananList as $unitPelayanan)
+                        <option value="{{ $unitPelayanan }}" @selected($selectedUnit === $unitPelayanan)>{{ $unitPelayanan }}</option>
                     @endforeach
+                    @if($selectedUnit && !in_array($selectedUnit, $unitPelayananList, true))
+                        <option value="{{ $selectedUnit }}" selected>{{ $selectedUnit }}</option>
+                    @endif
                 </select>
             </div>
             <div class="col-md-8">

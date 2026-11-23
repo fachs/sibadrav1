@@ -8,7 +8,47 @@ use Illuminate\Database\Eloquent\Model;
 
 class JenisPelayananPendapatan extends Model
 {
-    public const UNIT_PELAYANAN = ['Klaster 1', 'Klaster 2', 'Klaster 3', 'Klaster 4', 'Lintas Klaster'];
+    public const UNIT_PELAYANAN_PUSKESMAS = [
+        'Klaster 1',
+        'Klaster 2',
+        'Klaster 3',
+        'Klaster 4',
+        'Lintas Klaster',
+    ];
+
+    public const UNIT_PELAYANAN_LABKES = [
+        'Manajemen',
+        'Tim Kerja Mutu',
+        'Tim Program Layanan Laboratorium Klinik',
+        'Tim Program Biomolekuler',
+        'Tim Penguatan SDM & Kemitraan',
+        'Tim Surveilans Faktor Resiko Kesehatan & Kejadian Luar biasa',
+        'Tim Program Layanan Laboratorium Kesehatan Masyarakat',
+    ];
+
+    public const UNIT_PELAYANAN = [
+        'Klaster 1',
+        'Klaster 2',
+        'Klaster 3',
+        'Klaster 4',
+        'Lintas Klaster',
+        'Manajemen',
+        'Tim Kerja Mutu',
+        'Tim Program Layanan Laboratorium Klinik',
+        'Tim Program Biomolekuler',
+        'Tim Penguatan SDM & Kemitraan',
+        'Tim Surveilans Faktor Resiko Kesehatan & Kejadian Luar biasa',
+        'Tim Program Layanan Laboratorium Kesehatan Masyarakat',
+    ];
+
+    public static function unitsFor(?string $upt): array
+    {
+        if (trim((string) $upt) === 'Labkes Kota Sukabumi') {
+            return self::UNIT_PELAYANAN_LABKES;
+        }
+
+        return self::UNIT_PELAYANAN_PUSKESMAS;
+    }
 
     protected $fillable = [
         'unit_pelayanan', 'uraian', 'volume_1', 'volume_2', 'volume_3', 'volume_4',

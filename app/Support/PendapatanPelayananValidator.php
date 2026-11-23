@@ -31,7 +31,7 @@ class PendapatanPelayananValidator
                     ->where('tahun_anggaran', $year)
                     ->ignore($pendapatan?->id)],
             'jenis_pelayanan' => ['required', 'array', 'min:1', 'max:100'],
-            'jenis_pelayanan.*.unit_pelayanan' => ['required', 'string', Rule::in(JenisPelayananPendapatan::UNIT_PELAYANAN)],
+            'jenis_pelayanan.*.unit_pelayanan' => ['required', 'string', Rule::in(JenisPelayananPendapatan::unitsFor($blud))],
             'jenis_pelayanan.*.uraian' => ['required', 'string', 'max:255'],
             'jenis_pelayanan.*.harga_satuan' => ['required', 'numeric', 'decimal:0,2', 'min:0', 'max:9999999999999.99'],
             'jenis_pelayanan.*.gunakan_cagr' => ['sometimes', 'boolean'],

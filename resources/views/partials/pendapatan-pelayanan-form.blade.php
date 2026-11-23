@@ -4,6 +4,7 @@
     $referensiRekening = app(\App\Support\ReferensiPendapatan::class)->all();
     $kodeTerpilih = old('kode_rek', '');
     $rekeningTerpilih = collect($referensiRekening)->firstWhere('kode_rek', $kodeTerpilih);
+    $currentUpt = $pendapatan?->nama_blud ?? old('nama_blud', request('puskesmas') ?: (auth()->user()->upt ?? ''));
 @endphp
 @if($errors->any())
     <div class="alert alert-danger pendapatan-errors" role="alert"><ul class="mb-0">
@@ -13,7 +14,7 @@
 @if($pendapatan && $pendapatan->jenisPelayanans->contains('is_data_lama', true))
     <div class="alert alert-info">Nilai sebelumnya dipertahankan sebagai rincian awal. Sesuaikan unit pelayanan, volume, satuan, dan harga dengan rincian pelayanan sebenarnya.</div>
 @endif
-<form id="pendapatan-pelayanan-form" method="POST" action="{{ $isPerubahan ? route('rba-perubahan.pendapatan.update', $editingId) : ($editingId ? route('rba.pendapatan.update', $editingId) : route('rba.pendapatan.store')) }}" data-change-mode="{{ $isPerubahan ? '1' : '0' }}" data-local-editor="{{ ($localEditor ?? false) ? '1' : '0' }}" data-store-url="{{ route('rba.pendapatan.store') }}" data-update-url="{{ route($isPerubahan ? 'rba-perubahan.pendapatan.update' : 'rba.pendapatan.update', 0) }}">
+<form id="pendapatan-pelayanan-form" method="POST" action="{{ $isPerubahan ? route('rba-perubahan.pendapatan.update', $editingId) : ($editingId ? route('rba.pendapatan.update', $editingId) : route('rba.pendapatan.store')) }}" data-change-mode="{{ $isPerubahan ? '1' : '0' }}" data-local-editor="{{ ($localEditor ?? false) ? '1' : '0' }}" data-store-url="{{ route('rba.pendapatan.store') }}" data-update-url="{{ route($isPerubahan ? 'rba-perubahan.pendapatan.update' : 'rba.pendapatan.update', 0) }}" data-user-upt="{{ trim((string) (auth()->user()->upt ?? '')) }}" data-current-upt="{{ trim((string) ($currentUpt ?? '')) }}">
     @csrf
     @include('partials.rba-tahun-input')
     <input type="hidden" name="_method" id="pendapatan-method" value="{{ $isPerubahan || $editingId ? 'PUT' : 'POST' }}">
@@ -68,7 +69,7 @@
     </div>
     <div id="pelayanan-list">
         @foreach(old('jenis_pelayanan', $pendapatan?->jenisPelayanans->toArray() ?: [[]]) as $index => $row)
-            @include('partials.pendapatan-pelayanan-row', ['index' => $index, 'row' => $row])
+            @include('partials.pendapatan-pelayanan-row', ['index' => $index, 'row' => $row, 'currentUpt' => $currentUpt])
         @endforeach
     </div>
     <div class="card">
@@ -88,6 +89,6 @@
     </div>
 </form>
 <template id="pelayanan-template">
-    @include('partials.pendapatan-pelayanan-row', ['index' => '__INDEX__', 'row' => []])
+    @include('partials.pendapatan-pelayanan-row', ['index' => '__INDEX__', 'row' => [], 'currentUpt' => $currentUpt])
 </template>
 <script type="application/json" id="referensi-pendapatan">@json($referensiRekening)</script>
