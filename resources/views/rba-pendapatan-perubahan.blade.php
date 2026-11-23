@@ -7,10 +7,13 @@
 
 @section('content')
 @php
-    $isSuperuser = auth()->user()->hasRole('superuser');
-    $isDinas = \App\Support\AlurPerubahanPendapatan::isDinas(auth()->user());
-    $canFilter = $isSuperuser || $isDinas;
-    $canReview = $grouped->flatten()->contains(fn ($record) => \App\Support\AlurPerubahanPendapatan::canReview(auth()->user(), $record));
+    $user = auth()->user();
+    $isSuperuser = $user->hasRole('superuser');
+    $isDinas = \App\Support\AlurPerubahanPendapatan::isDinas($user);
+    $isPerencanaanOrSuperuser = $isPerencanaanOrSuperuser ?? ($user->hasAnyRole(['Superuser', 'Perencanaan', 'Dinas', 'Dinas Kesehatan']) || $user->isDinasKesehatan());
+    $canFilter = $isSuperuser || $isDinas || $isPerencanaanOrSuperuser;
+    $isAllBlud = $isAllBlud ?? ($canFilter && (!request()->has('puskesmas') || request('puskesmas') == ''));
+    $canReview = $grouped->flatten()->contains(fn ($record) => \App\Support\AlurPerubahanPendapatan::canReview($user, $record));
     $grandTotalAwal = $grouped->flatten()->sum('jumlah');
 @endphp
 @if(session('success'))<div class="alert alert-success" role="alert">{{ session('success') }}</div>@endif
@@ -21,16 +24,18 @@
         @include('partials.rba-tahun-filter')
         <div class="rba-toolbar">
             @if($canFilter)
-                <form method="GET" action="{{ route('rba-perubahan.pendapatan') }}" class="rba-filter">
+                <form method="GET" action="{{ route('rba-perubahan.pendapatan') }}" class="rba-filter d-flex align-items-center gap-2">
                     @include('partials.rba-tahun-input')
-                    <label for="puskesmas-filter" class="form-label mb-0">BLUD</label>
-                    <select name="puskesmas" id="puskesmas-filter" class="form-select">
-                        <option value="">Semua Unit BLUD</option>
+                    <label for="puskesmas-filter" class="form-label mb-0 fw-semibold">Pilih BLUD:</label>
+                    <select name="puskesmas" id="puskesmas-filter" class="form-select form-select-sm" style="min-width: 220px;" onchange="this.form.submit()">
+                        <option value="">Semua Unit BLUD (Tampilan Agregat)</option>
                         @foreach($puskesmasList as $unit)
                             <option value="{{ $unit->nama }}" @selected(request('puskesmas') === $unit->nama)>{{ $unit->nama }}</option>
                         @endforeach
                     </select>
-                    <button type="submit" class="btn btn-outline-primary">Tampilkan</button>
+                    @if(request()->filled('puskesmas'))
+                        <a href="{{ route('rba-perubahan.pendapatan', ['tahun' => request('tahun')]) }}" class="btn btn-sm btn-outline-secondary" title="Kembali ke tampilan agregat seluruh BLUD">Reset</a>
+                    @endif
                 </form>
             @else
                 <span class="text-body-secondary">{{ auth()->user()->upt }}</span>
@@ -52,9 +57,91 @@
                 <a href="{{ route('rba-perubahan.pendapatan.pdf', ['puskesmas' => $canFilter ? request('puskesmas') : null, 'tahun' => request('tahun')]) }}" class="btn btn-success"><i class="ri-file-pdf-2-line" aria-hidden="true"></i> Unduh PDF</a>
             </div>
         </div>
-        <h5 class="visually-hidden" id="perubahan-table-title">RBA Pendapatan Perubahan</h5>
-        <div class="table-responsive rba-table-wrap" role="region" aria-labelledby="perubahan-table-title" tabindex="0">
-            <table class="table align-middle rba-table rba-table--comparison">
+        @if($isAllBlud)
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mt-3 mb-3">
+                <div>
+                    <h5 class="card-title mb-1">Rekapitulasi Agregat Pendapatan Perubahan BLUD</h5>
+                    <p class="text-muted small mb-0">Tahun Anggaran {{ $tahunRba }} · Data agregat per jenis kode rekening seluruh Puskesmas / Unit BLUD</p>
+                </div>
+                <span class="badge bg-primary-subtle text-primary px-2 py-1 fs-12">
+                    <i class="ri-hospital-line me-1"></i>{{ count($agregatPuskesmas ?? []) }} Unit BLUD
+                </span>
+            </div>
+            <div class="table-responsive rba-table-wrap" role="region" aria-label="Tabel Agregat Pendapatan Perubahan Seluruh RBA" tabindex="0">
+                <table class="table table-bordered table-hover align-middle rba-table">
+                    <thead class="table-light">
+                        <tr class="text-center align-middle">
+                            <th scope="col" style="width: 45px;">No</th>
+                            <th scope="col" class="text-start">Nama Puskesmas / Unit BLUD</th>
+                            <th scope="col" class="text-end" style="width: 13%;">4.1 - JASA LAYANAN</th>
+                            <th scope="col" class="text-end" style="width: 11%;">4.2 - HIBAH</th>
+                            <th scope="col" class="text-end" style="width: 13%;">4.3 - HASIL KERJASAMA</th>
+                            <th scope="col" class="text-end" style="width: 12%;">4.4 - APBD</th>
+                            <th scope="col" class="text-end" style="width: 15%;">4.5 - LAIN-LAIN PENDAPATAN BLUD YANG SAH</th>
+                            <th scope="col" class="text-end" style="width: 15%;">TOTAL PENDAPATAN</th>
+                            <th scope="col" class="text-center" style="width: 85px;">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($agregatPuskesmas ?? [] as $idx => $row)
+                            <tr>
+                                <td class="text-center text-muted">{{ $idx + 1 }}</td>
+                                <td>
+                                    <a href="{{ route('rba-perubahan.pendapatan', ['puskesmas' => $row['nama'], 'tahun' => request('tahun')]) }}" class="fw-semibold text-primary text-decoration-none" title="Lihat rincian perubahan {{ $row['nama'] }}">
+                                        {{ $row['nama'] }}
+                                    </a>
+                                    @if(($row['count'] ?? 0) > 0)
+                                        <span class="badge bg-light text-secondary ms-1">{{ $row['count'] }} rek</span>
+                                    @endif
+                                </td>
+                                <td class="text-end rba-amount">{{ number_format($row['jasa_layanan'] ?? 0, 2, ',', '.') }}</td>
+                                <td class="text-end rba-amount">{{ number_format($row['hibah'] ?? 0, 2, ',', '.') }}</td>
+                                <td class="text-end rba-amount">{{ number_format($row['hasil_kerjasama'] ?? 0, 2, ',', '.') }}</td>
+                                <td class="text-end rba-amount">{{ number_format($row['apbd'] ?? 0, 2, ',', '.') }}</td>
+                                <td class="text-end rba-amount">{{ number_format($row['lain_lain'] ?? 0, 2, ',', '.') }}</td>
+                                <td class="text-end rba-amount fw-bold {{ ($row['total'] ?? 0) > 0 ? 'text-success' : 'text-muted' }}">
+                                    {{ number_format($row['total'] ?? 0, 2, ',', '.') }}
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{ route('rba-perubahan.pendapatan', ['puskesmas' => $row['nama'], 'tahun' => request('tahun')]) }}" class="btn btn-sm btn-outline-primary" title="Lihat rincian perubahan {{ $row['nama'] }}">
+                                        <i class="ri-eye-line me-1"></i>Rincian
+                                    </a>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="9" class="text-center text-muted p-4">Belum ada data pendapatan perubahan untuk tahun anggaran {{ $tahunRba }}.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                    <tfoot class="table-light">
+                        <tr class="fw-bold">
+                            <th scope="row" colspan="2" class="text-center">TOTAL KESELURUHAN</th>
+                            <td class="text-end text-primary rba-amount">{{ number_format($totalAgregat['jasa_layanan'] ?? 0, 2, ',', '.') }}</td>
+                            <td class="text-end text-primary rba-amount">{{ number_format($totalAgregat['hibah'] ?? 0, 2, ',', '.') }}</td>
+                            <td class="text-end text-primary rba-amount">{{ number_format($totalAgregat['hasil_kerjasama'] ?? 0, 2, ',', '.') }}</td>
+                            <td class="text-end text-primary rba-amount">{{ number_format($totalAgregat['apbd'] ?? 0, 2, ',', '.') }}</td>
+                            <td class="text-end text-primary rba-amount">{{ number_format($totalAgregat['lain_lain'] ?? 0, 2, ',', '.') }}</td>
+                            <td class="text-end text-success rba-amount fs-5">{{ number_format($totalAgregat['total'] ?? 0, 2, ',', '.') }}</td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        @else
+            @if($canFilter)
+                <div class="alert alert-info d-flex flex-wrap align-items-center justify-content-between gap-2 mt-2 mb-3 py-2">
+                    <div>
+                        <i class="ri-information-line me-1"></i> Menampilkan rincian pendapatan perubahan untuk: <strong>{{ request('puskesmas') ?: auth()->user()->upt }}</strong>
+                    </div>
+                    <a href="{{ route('rba-perubahan.pendapatan', ['tahun' => request('tahun')]) }}" class="btn btn-sm btn-outline-info">
+                        <i class="ri-arrow-left-line me-1"></i> Kembali ke Tampilan Agregat
+                    </a>
+                </div>
+            @endif
+            <h5 class="visually-hidden" id="perubahan-table-title">RBA Pendapatan Perubahan</h5>
+            <div class="table-responsive rba-table-wrap" role="region" aria-labelledby="perubahan-table-title" tabindex="0">
+                <table class="table align-middle rba-table rba-table--comparison">
                 <caption class="visually-hidden">Perbandingan RBA Pendapatan sebelum dan sesudah perubahan tahun anggaran {{ $tahunRba }}.</caption>
                 <colgroup><col class="rba-col-code"><col><col class="rba-col-amount"><col><col class="rba-col-amount"><col class="rba-col-amount"><col class="rba-col-status"><col class="rba-col-actions"></colgroup>
                 <thead>
@@ -153,6 +240,7 @@
                 </tr></tfoot>
             </table>
         </div>
+        @endif
     </div>
 </div>
 @endsection

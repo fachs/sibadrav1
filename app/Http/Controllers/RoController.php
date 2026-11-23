@@ -178,6 +178,8 @@ class RoController extends Controller
     {
         $user = auth()->user();
         $tahunRba = TahunRba::selected();
+        $isPerencanaanOrSuperuser = $user->hasAnyRole(['Superuser', 'Perencanaan', 'Dinas', 'Dinas Kesehatan']) || $user->isDinasKesehatan();
+
         $query = \App\Models\RencanaPendapatan::with('jenisPelayanans')->select(['id', 'kode_rek', 'uraian', 'jumlah', 'nama_blud', 'uraian_perubahan', 'jumlah_perubahan', 'status_perubahan', 'verifikator_perubahan', 'is_hasil_perubahan', 'jenis_pelayanan_perubahan', 'rekening_awal', 'rekening_akhir', 'pergeseran_id']);
 
         $query->addSelect('tahun_anggaran')->where('tahun_anggaran', $tahunRba);
@@ -190,12 +192,12 @@ class RoController extends Controller
             });
         }
 
-        // Semua user kecuali Superuser hanya melihat data BLUD mereka sendiri
-        if (!$user->hasRole('Superuser') && !($isPerubahan && \App\Support\AlurPerubahanPendapatan::isDinas($user))) {
+        // Semua user kecuali Perencanaan / Superuser hanya melihat data BLUD mereka sendiri
+        if (!$isPerencanaanOrSuperuser && !($isPerubahan && \App\Support\AlurPerubahanPendapatan::isDinas($user))) {
             $query->where('nama_blud', $user->upt);
         }
 
-        if (($user->hasRole('Superuser') || ($isPerubahan && \App\Support\AlurPerubahanPendapatan::isDinas($user))) && request()->has('puskesmas') && request('puskesmas') != '') {
+        if (($isPerencanaanOrSuperuser || ($isPerubahan && \App\Support\AlurPerubahanPendapatan::isDinas($user))) && request()->has('puskesmas') && request('puskesmas') != '') {
             $query->where('nama_blud', request('puskesmas'));
         }
 
@@ -239,11 +241,72 @@ class RoController extends Controller
         }
 
         $puskesmasList = [];
-        if ($user->hasRole('Superuser') || ($isPerubahan && \App\Support\AlurPerubahanPendapatan::isDinas($user))) {
+        if ($isPerencanaanOrSuperuser || ($isPerubahan && \App\Support\AlurPerubahanPendapatan::isDinas($user))) {
             $puskesmasList = UnitBlud::orderBy('nama')->get();
         }
 
-        return compact('grouped', 'groupedByKlasifikasi', 'klasifikasi', 'grandTotalJumlah', 'puskesmasList', 'tahunRba');
+        $isAllBlud = $isPerencanaanOrSuperuser && (!request()->has('puskesmas') || request('puskesmas') == '');
+
+        $agregatPuskesmas = [];
+        $totalAgregat = [
+            'jasa_layanan' => 0,
+            'hibah' => 0,
+            'hasil_kerjasama' => 0,
+            'apbd' => 0,
+            'lain_lain' => 0,
+            'total' => 0,
+        ];
+
+        if ($isAllBlud) {
+            $byBlud = $pendapatan->groupBy(function ($item) {
+                return trim((string) $item->nama_blud);
+            });
+
+            $buildAgregatRow = function (string $nama, $items) use ($isPerubahan, &$totalAgregat) {
+                $sumByPrefix = fn (string $prefix) => (float) $items
+                    ->filter(fn ($it) => str_starts_with((string) $it->kode_rek, $prefix))
+                    ->sum(fn ($it) => (float) ($isPerubahan ? ($it->jumlah_perubahan ?? $it->jumlah) : $it->jumlah));
+
+                $jl = $sumByPrefix('4.1');
+                $hibah = $sumByPrefix('4.2');
+                $kerjasama = $sumByPrefix('4.3');
+                $apbd = $sumByPrefix('4.4');
+                $lain = $sumByPrefix('4.5');
+                $tot = (float) $items->sum(fn ($it) => (float) ($isPerubahan ? ($it->jumlah_perubahan ?? $it->jumlah) : $it->jumlah));
+
+                $totalAgregat['jasa_layanan'] += $jl;
+                $totalAgregat['hibah'] += $hibah;
+                $totalAgregat['hasil_kerjasama'] += $kerjasama;
+                $totalAgregat['apbd'] += $apbd;
+                $totalAgregat['lain_lain'] += $lain;
+                $totalAgregat['total'] += $tot;
+
+                return [
+                    'nama' => $nama,
+                    'jasa_layanan' => $jl,
+                    'hibah' => $hibah,
+                    'hasil_kerjasama' => $kerjasama,
+                    'apbd' => $apbd,
+                    'lain_lain' => $lain,
+                    'total' => $tot,
+                    'count' => $items->count(),
+                ];
+            };
+
+            foreach ($puskesmasList as $unit) {
+                $nama = trim((string) $unit->nama);
+                $agregatPuskesmas[] = $buildAgregatRow($nama, $byBlud->get($nama, collect()));
+            }
+
+            $knownNames = collect($puskesmasList)->map(fn ($u) => trim((string) $u->nama))->all();
+            foreach ($byBlud as $bludName => $items) {
+                if ($bludName !== '' && !in_array($bludName, $knownNames, true)) {
+                    $agregatPuskesmas[] = $buildAgregatRow($bludName, $items);
+                }
+            }
+        }
+
+        return compact('grouped', 'groupedByKlasifikasi', 'klasifikasi', 'grandTotalJumlah', 'puskesmasList', 'tahunRba', 'isPerencanaanOrSuperuser', 'isAllBlud', 'agregatPuskesmas', 'totalAgregat');
     }
 
     private function getPembiayaanData(array $klasifikasi, bool $isPerubahan = false, bool $onlyVerifiedChanges = false)
@@ -1125,7 +1188,7 @@ class RoController extends Controller
             'user' => $user,
             'uptName' => $uptName,
             'penandatangan' => $penandatangan,
-        ]))->setPaper('A4', 'portrait');
+        ]))->setPaper('A4', ($data['isAllBlud'] ?? false) ? 'landscape' : 'portrait');
 
         $filename = 'RBA-Perubahan-Pendapatan-' . $uptName . '-' . now()->format('Ymd-His') . '.pdf';
 
@@ -1147,8 +1210,10 @@ class RoController extends Controller
         $data = $this->getPendapatanData($klasifikasi);
 
         $uptName = $user->upt;
-        if ($user->hasRole('Superuser') && request()->has('puskesmas') && request('puskesmas') != '') {
+        if (($data['isPerencanaanOrSuperuser'] ?? false) && request()->has('puskesmas') && request('puskesmas') != '') {
             $uptName = request('puskesmas');
+        } elseif ($data['isAllBlud'] ?? false) {
+            $uptName = 'Seluruh BLUD Kota Sukabumi';
         }
 
         $penandatangan = UnitBlud::query()
@@ -1160,7 +1225,7 @@ class RoController extends Controller
             'user' => $user,
             'uptName' => $uptName,
             'penandatangan' => $penandatangan,
-        ]))->setPaper('A4', 'portrait');
+        ]))->setPaper('A4', ($data['isAllBlud'] ?? false) ? 'landscape' : 'portrait');
 
         $filename = 'RBA-Pendapatan-' . $uptName . '-' . now()->format('Ymd-His') . '.pdf';
 

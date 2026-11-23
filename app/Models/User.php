@@ -13,7 +13,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     public const AVAILABLE_ROLES = [
-        'Superuser', 'Dinas', 'Dinas Kesehatan', 'Kepala Puskesmas', 'Kepala Labkes', 'Kasubbag TU',
+        'Superuser', 'Dinas', 'Dinas Kesehatan', 'Perencanaan', 'Kepala Puskesmas', 'Kepala Labkes', 'Kasubbag TU',
         'Pejabat Keuangan', 'Bendahara Pengeluaran', 'Bendahara Penerimaan', 'PPTK',
         'Klaster 1', 'Klaster 2', 'Klaster 3', 'Klaster 4', 'Lintas Klaster',
     ];
@@ -84,7 +84,7 @@ class User extends Authenticatable
 
     public function isDinasKesehatan(): bool
     {
-        return $this->hasAnyRole(['Dinas', 'Dinas Kesehatan'])
+        return $this->hasAnyRole(['Dinas', 'Dinas Kesehatan', 'Perencanaan'])
             || strcasecmp(trim((string) $this->upt), 'Dinas Kesehatan') === 0;
     }
 

@@ -6,73 +6,164 @@
 
 @section('content')
 @php
-    $isSuperuser = auth()->user()->hasRole('Superuser');
+    $user = auth()->user();
+    $isSuperuser = $user->hasRole('Superuser');
+    $isPerencanaanOrSuperuser = $isPerencanaanOrSuperuser ?? ($user->hasAnyRole(['Superuser', 'Perencanaan', 'Dinas', 'Dinas Kesehatan']) || $user->isDinasKesehatan());
+    $isAllBlud = $isAllBlud ?? ($isPerencanaanOrSuperuser && (!request()->has('puskesmas') || request('puskesmas') == ''));
 @endphp
 @if(session('success'))<div class="alert alert-success" role="alert">{{ session('success') }}</div>@endif
 <div class="card rba-pendapatan">
     
     <div class="card-body">
         @include('partials.rba-tahun-filter')
-        <div class="pendapatan-toolbar">
-            <button type="button" id="tambah-pendapatan" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPendapatan"><i class="ri-add-line" aria-hidden="true"></i> Tambah Rincian Pendapatan</button>
-            @if($isSuperuser)
-                <form method="GET" action="{{ route('rba.pendapatan') }}" class="pendapatan-filter">
+        <div class="pendapatan-toolbar mb-3">
+            @if(!$isAllBlud)
+                <button type="button" id="tambah-pendapatan" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPendapatan"><i class="ri-add-line" aria-hidden="true"></i> Tambah Rincian Pendapatan</button>
+            @endif
+            @if($isPerencanaanOrSuperuser)
+                <form method="GET" action="{{ route('rba.pendapatan') }}" class="pendapatan-filter d-flex align-items-center gap-2">
                     @include('partials.rba-tahun-input')
-                    <label for="puskesmas-filter" class="form-label mb-0">BLUD</label>
-                    <select name="puskesmas" id="puskesmas-filter" class="form-select">
-                        <option value="">Semua Unit BLUD</option>
+                    <label for="puskesmas-filter" class="form-label mb-0 fw-semibold">Pilih BLUD:</label>
+                    <select name="puskesmas" id="puskesmas-filter" class="form-select form-select-sm" style="min-width: 220px;" onchange="this.form.submit()">
+                        <option value="">Semua Unit BLUD (Tampilan Agregat)</option>
                         @foreach($puskesmasList as $unit)
                             <option value="{{ $unit->nama }}" @selected(request('puskesmas') === $unit->nama)>{{ $unit->nama }}</option>
                         @endforeach
                     </select>
-                    <button class="btn btn-outline-primary" type="submit">Tampilkan</button>
+                    @if(request()->filled('puskesmas'))
+                        <a href="{{ route('rba.pendapatan', ['tahun' => request('tahun')]) }}" class="btn btn-sm btn-outline-secondary" title="Kembali ke tampilan agregat seluruh BLUD">Reset</a>
+                    @endif
                 </form>
             @endif
             <a href="{{ route('rba.pendapatan.pdf', ['puskesmas' => request('puskesmas'), 'tahun' => request('tahun')]) }}" class="btn btn-success"><i class="ri-file-pdf-2-line" aria-hidden="true"></i> Unduh PDF</a>
         </div>
-        <div class="table-responsive pendapatan-table-wrap" role="region" aria-labelledby="pendapatan-table-title" tabindex="0">
-            <table class="table align-middle pendapatan-table">
-                <caption class="visually-hidden">Rencana pendapatan tahun anggaran {{ $tahunRba }}, dikelompokkan berdasarkan klasifikasi rekening.</caption>
-                <colgroup><col class="pendapatan-col-code"><col><col class="pendapatan-col-amount"><col class="pendapatan-col-actions"></colgroup>
-                <thead><tr><th scope="col">Kode Rekening</th><th scope="col">Uraian dan Jenis Pelayanan</th><th scope="col" class="text-end">Jumlah (Rp)</th><th scope="col" class="text-center">Aksi</th></tr></thead>
-                <tbody>
-                    @foreach($klasifikasi as $key => $klas)
-                        @php $items = $groupedByKlasifikasi[$key]->flatten(); @endphp
-                        @if($items->isNotEmpty())
-                            <tr class="pendapatan-group pendapatan-group--{{ $key }}"><th scope="row" colspan="2"><div class="d-flex align-items-center gap-2"><i class="ri-folder-2-line" aria-hidden="true"></i><span>{{ $klas['label'] }}</span><span class="pendapatan-group-count">{{ $items->count() }} rincian</span></div></th><td class="text-end pendapatan-amount">{{ number_format($items->sum('jumlah'), 2, ',', '.') }}</td><td></td></tr>
-                            @foreach($items as $item)
-                                <tr class="pendapatan-item">
-                                    <td><span class="pendapatan-account-code">{{ $item->kode_rek }}</span>@if($isSuperuser)<div class="small text-body-secondary mt-2">{{ $item->nama_blud }}</div>@endif</td>
-                                    <td>
-                                        <div class="fw-semibold text-body-emphasis">{{ $item->uraian }}</div>
-                                        <details class="pendapatan-service-details">
-                                            <summary><i class="ri-arrow-right-s-line pendapatan-disclosure-icon" aria-hidden="true"></i><i class="ri-list-check" aria-hidden="true"></i>{{ $item->jenisPelayanans->count() }} jenis pelayanan</summary>
-                                            @if($item->jenisPelayanans->contains('is_data_lama', true))<p class="text-muted small mt-2 mb-0">Rincian awal dari data sebelumnya; lengkapi melalui Kelola Pelayanan.</p>@endif
-                                            @include('partials.pendapatan-pelayanan-table', ['pelayanans' => $item->jenisPelayanans])
-                                        </details>
-                                    </td>
-                                    <td class="text-end pendapatan-amount fw-semibold">{{ number_format($item->jumlah, 2, ',', '.') }}</td>
-                                    <td>
-                                        <div class="d-flex align-items-center justify-content-center gap-1">
-                                            <button type="button" class="btn btn-sm btn-warning edit-pendapatan" data-pendapatan-id="{{ $item->id }}" data-record="{{ $item->toJson() }}" data-bs-toggle="modal" data-bs-target="#modalPendapatan" title="Kelola Pelayanan" aria-label="Kelola Pelayanan"><i class="ri-edit-box-line" aria-hidden="true"></i></button>
-                                            <form method="POST" action="{{ route('rba.pendapatan.destroy', $item->id) }}" class="m-0" data-confirm-delete data-confirm-title="Hapus Rencana Pendapatan?" data-confirm-message="Hapus rencana pendapatan beserta seluruh rincian pelayanannya?">
-                                                @csrf @method('DELETE')
-                                                @include('partials.rba-tahun-input')
-                                                <button class="btn btn-sm btn-danger" type="submit" title="Hapus Rencana Pendapatan" aria-label="Hapus Rencana Pendapatan"><i class="ri-delete-bin-2-line" aria-hidden="true"></i></button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
+
+        @if($isAllBlud)
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mt-3 mb-3">
+                <div>
+                    <h5 class="card-title mb-1">Rekapitulasi Agregat Pendapatan BLUD</h5>
+                    <p class="text-muted small mb-0">Tahun Anggaran {{ $tahunRba }} · Data agregat per jenis kode rekening seluruh Puskesmas / Unit BLUD</p>
+                </div>
+                <span class="badge bg-primary-subtle text-primary px-2 py-1 fs-12">
+                    <i class="ri-hospital-line me-1"></i>{{ count($agregatPuskesmas ?? []) }} Unit BLUD
+                </span>
+            </div>
+            <div class="table-responsive pendapatan-table-wrap" role="region" aria-label="Tabel Agregat Pendapatan Seluruh RBA" tabindex="0">
+                <table class="table table-bordered table-hover align-middle pendapatan-table">
+                    <thead class="table-light">
+                        <tr class="text-center align-middle">
+                            <th scope="col" style="width: 45px;">No</th>
+                            <th scope="col" class="text-start">Nama Puskesmas / Unit BLUD</th>
+                            <th scope="col" class="text-end" style="width: 13%;">4.1 - JASA LAYANAN</th>
+                            <th scope="col" class="text-end" style="width: 11%;">4.2 - HIBAH</th>
+                            <th scope="col" class="text-end" style="width: 13%;">4.3 - HASIL KERJASAMA</th>
+                            <th scope="col" class="text-end" style="width: 12%;">4.4 - APBD</th>
+                            <th scope="col" class="text-end" style="width: 15%;">4.5 - LAIN-LAIN PENDAPATAN BLUD YANG SAH</th>
+                            <th scope="col" class="text-end" style="width: 15%;">TOTAL PENDAPATAN</th>
+                            <th scope="col" class="text-center" style="width: 85px;">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($agregatPuskesmas ?? [] as $idx => $row)
+                            <tr>
+                                <td class="text-center text-muted">{{ $idx + 1 }}</td>
+                                <td>
+                                    <a href="{{ route('rba.pendapatan', ['puskesmas' => $row['nama'], 'tahun' => request('tahun')]) }}" class="fw-semibold text-primary text-decoration-none" title="Lihat rincian akun {{ $row['nama'] }}">
+                                        {{ $row['nama'] }}
+                                    </a>
+                                    @if(($row['count'] ?? 0) > 0)
+                                        <span class="badge bg-light text-secondary ms-1">{{ $row['count'] }} rek</span>
+                                    @endif
+                                </td>
+                                <td class="text-end pendapatan-amount">{{ number_format($row['jasa_layanan'] ?? 0, 2, ',', '.') }}</td>
+                                <td class="text-end pendapatan-amount">{{ number_format($row['hibah'] ?? 0, 2, ',', '.') }}</td>
+                                <td class="text-end pendapatan-amount">{{ number_format($row['hasil_kerjasama'] ?? 0, 2, ',', '.') }}</td>
+                                <td class="text-end pendapatan-amount">{{ number_format($row['apbd'] ?? 0, 2, ',', '.') }}</td>
+                                <td class="text-end pendapatan-amount">{{ number_format($row['lain_lain'] ?? 0, 2, ',', '.') }}</td>
+                                <td class="text-end pendapatan-amount fw-bold {{ ($row['total'] ?? 0) > 0 ? 'text-success' : 'text-muted' }}">
+                                    {{ number_format($row['total'] ?? 0, 2, ',', '.') }}
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{ route('rba.pendapatan', ['puskesmas' => $row['nama'], 'tahun' => request('tahun')]) }}" class="btn btn-sm btn-outline-primary" title="Lihat rincian akun {{ $row['nama'] }}">
+                                        <i class="ri-eye-line me-1"></i>Rincian
+                                    </a>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="9" class="text-center text-muted p-4">Belum ada data pendapatan untuk tahun anggaran {{ $tahunRba }}.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                    <tfoot class="table-light">
+                        <tr class="fw-bold">
+                            <th scope="row" colspan="2" class="text-center">TOTAL KESELURUHAN</th>
+                            <td class="text-end text-primary pendapatan-amount">{{ number_format($totalAgregat['jasa_layanan'] ?? 0, 2, ',', '.') }}</td>
+                            <td class="text-end text-primary pendapatan-amount">{{ number_format($totalAgregat['hibah'] ?? 0, 2, ',', '.') }}</td>
+                            <td class="text-end text-primary pendapatan-amount">{{ number_format($totalAgregat['hasil_kerjasama'] ?? 0, 2, ',', '.') }}</td>
+                            <td class="text-end text-primary pendapatan-amount">{{ number_format($totalAgregat['apbd'] ?? 0, 2, ',', '.') }}</td>
+                            <td class="text-end text-primary pendapatan-amount">{{ number_format($totalAgregat['lain_lain'] ?? 0, 2, ',', '.') }}</td>
+                            <td class="text-end text-success pendapatan-amount fs-5">{{ number_format($totalAgregat['total'] ?? 0, 2, ',', '.') }}</td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        @else
+            @if($isPerencanaanOrSuperuser)
+                <div class="alert alert-info d-flex flex-wrap align-items-center justify-content-between gap-2 mt-2 mb-3 py-2">
+                    <div>
+                        <i class="ri-information-line me-1"></i> Menampilkan rincian pendapatan untuk: <strong>{{ request('puskesmas') ?: auth()->user()->upt }}</strong>
+                    </div>
+                    <a href="{{ route('rba.pendapatan', ['tahun' => request('tahun')]) }}" class="btn btn-sm btn-outline-info">
+                        <i class="ri-arrow-left-line me-1"></i> Kembali ke Tampilan Agregat
+                    </a>
+                </div>
+            @endif
+            <div class="table-responsive pendapatan-table-wrap" role="region" aria-labelledby="pendapatan-table-title" tabindex="0">
+                <table class="table align-middle pendapatan-table">
+                    <caption class="visually-hidden">Rencana pendapatan tahun anggaran {{ $tahunRba }}, dikelompokkan berdasarkan klasifikasi rekening.</caption>
+                    <colgroup><col class="pendapatan-col-code"><col><col class="pendapatan-col-amount"><col class="pendapatan-col-actions"></colgroup>
+                    <thead><tr><th scope="col">Kode Rekening</th><th scope="col">Uraian dan Jenis Pelayanan</th><th scope="col" class="text-end">Jumlah (Rp)</th><th scope="col" class="text-center">Aksi</th></tr></thead>
+                    <tbody>
+                        @foreach($klasifikasi as $key => $klas)
+                            @php $items = $groupedByKlasifikasi[$key]->flatten(); @endphp
+                            @if($items->isNotEmpty())
+                                <tr class="pendapatan-group pendapatan-group--{{ $key }}"><th scope="row" colspan="2"><div class="d-flex align-items-center gap-2"><i class="ri-folder-2-line" aria-hidden="true"></i><span>{{ $klas['label'] }}</span><span class="pendapatan-group-count">{{ $items->count() }} rincian</span></div></th><td class="text-end pendapatan-amount">{{ number_format($items->sum('jumlah'), 2, ',', '.') }}</td><td></td></tr>
+                                @foreach($items as $item)
+                                    <tr class="pendapatan-item">
+                                        <td><span class="pendapatan-account-code">{{ $item->kode_rek }}</span>@if($isPerencanaanOrSuperuser)<div class="small text-body-secondary mt-2">{{ $item->nama_blud }}</div>@endif</td>
+                                        <td>
+                                            <div class="fw-semibold text-body-emphasis">{{ $item->uraian }}</div>
+                                            <details class="pendapatan-service-details">
+                                                <summary><i class="ri-arrow-right-s-line pendapatan-disclosure-icon" aria-hidden="true"></i><i class="ri-list-check" aria-hidden="true"></i>{{ $item->jenisPelayanans->count() }} jenis pelayanan</summary>
+                                                @if($item->jenisPelayanans->contains('is_data_lama', true))<p class="text-muted small mt-2 mb-0">Rincian awal dari data sebelumnya; lengkapi melalui Kelola Pelayanan.</p>@endif
+                                                @include('partials.pendapatan-pelayanan-table', ['pelayanans' => $item->jenisPelayanans])
+                                            </details>
+                                        </td>
+                                        <td class="text-end pendapatan-amount fw-semibold">{{ number_format($item->jumlah, 2, ',', '.') }}</td>
+                                        <td>
+                                            <div class="d-flex align-items-center justify-content-center gap-1">
+                                                <button type="button" class="btn btn-sm btn-warning edit-pendapatan" data-pendapatan-id="{{ $item->id }}" data-record="{{ $item->toJson() }}" data-bs-toggle="modal" data-bs-target="#modalPendapatan" title="Kelola Pelayanan" aria-label="Kelola Pelayanan"><i class="ri-edit-box-line" aria-hidden="true"></i></button>
+                                                <form method="POST" action="{{ route('rba.pendapatan.destroy', $item->id) }}" class="m-0" data-confirm-delete data-confirm-title="Hapus Rencana Pendapatan?" data-confirm-message="Hapus rencana pendapatan beserta seluruh rincian pelayanannya?">
+                                                    @csrf @method('DELETE')
+                                                    @include('partials.rba-tahun-input')
+                                                    <button class="btn btn-sm btn-danger" type="submit" title="Hapus Rencana Pendapatan" aria-label="Hapus Rencana Pendapatan"><i class="ri-delete-bin-2-line" aria-hidden="true"></i></button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        @endforeach
+                        @if($grouped->isEmpty())
+                            <tr><td colspan="4" class="pendapatan-empty"><i class="ri-file-list-3-line" aria-hidden="true"></i><p class="fw-semibold text-body-emphasis mb-1">Belum ada rencana pendapatan.</p><p class="small mb-0">Gunakan tombol Tambah Rincian Pendapatan untuk mulai mengisi.</p></td></tr>
                         @endif
-                    @endforeach
-                    @if($grouped->isEmpty())
-                        <tr><td colspan="4" class="pendapatan-empty"><i class="ri-file-list-3-line" aria-hidden="true"></i><p class="fw-semibold text-body-emphasis mb-1">Belum ada rencana pendapatan.</p><p class="small mb-0">Gunakan tombol Tambah Rincian Pendapatan untuk mulai mengisi.</p></td></tr>
-                    @endif
-                </tbody>
-                <tfoot><tr><th scope="row" colspan="2">TOTAL RENCANA PENDAPATAN</th><td class="text-end pendapatan-amount">{{ number_format($grandTotalJumlah, 2, ',', '.') }}</td><td></td></tr></tfoot>
-            </table>
-        </div>
+                    </tbody>
+                    <tfoot><tr><th scope="row" colspan="2">TOTAL RENCANA PENDAPATAN</th><td class="text-end pendapatan-amount">{{ number_format($grandTotalJumlah, 2, ',', '.') }}</td><td></td></tr></tfoot>
+                </table>
+            </div>
+        @endif
     </div>
 </div>
 @endsection

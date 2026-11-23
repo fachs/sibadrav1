@@ -14,7 +14,7 @@ class AlurPerubahanPendapatan
 
     public static function isDinas(User $user): bool
     {
-        return $user->hasAnyRole(['dinas', 'dinas kesehatan'])
+        return $user->hasAnyRole(['dinas', 'dinas kesehatan', 'perencanaan'])
             || strtolower(trim((string) $user->upt)) === 'dinas kesehatan';
     }
 
