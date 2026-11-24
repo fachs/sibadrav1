@@ -44,7 +44,7 @@ class RbaDocumentGenerator
         ];
         $appendixContext = $this->appendixContext($upt, $tahun);
         $sourceFingerprint = $this->rbaSourceFingerprint($upt, $tahun);
-        $key = hash('sha256', json_encode([hash_file('sha256', $template), $upt, $tahun, $spmValues, $ambang, $totalPendapatan, $totalBelanja, $totalPembiayaan, $prakiraan, $values, $appendixContext, $sourceFingerprint, hash_file('sha256', public_path('images/logo-pemkot.png')), 'v26'], JSON_THROW_ON_ERROR));
+        $key = hash('sha256', json_encode([hash_file('sha256', $template), $upt, $tahun, $spmValues, $ambang, $totalPendapatan, $totalBelanja, $totalPembiayaan, $prakiraan, $values, $appendixContext, $sourceFingerprint, hash_file('sha256', public_path('images/logo-pemkot.png')), 'v27'], JSON_THROW_ON_ERROR));
         $directory = config('dokumen-rba.cache_path').DIRECTORY_SEPARATOR.$key;
         File::ensureDirectoryExists($directory);
         $lock = fopen($directory.'/generate.lock', 'c');
