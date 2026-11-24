@@ -44,7 +44,7 @@ class RbaDocumentGenerator
         ];
         $appendixContext = $this->appendixContext($upt, $tahun);
         $sourceFingerprint = $this->rbaSourceFingerprint($upt, $tahun);
-        $key = hash('sha256', json_encode([hash_file('sha256', $template), $upt, $tahun, $spmValues, $ambang, $totalPendapatan, $totalBelanja, $totalPembiayaan, $prakiraan, $values, $appendixContext, $sourceFingerprint, hash_file('sha256', public_path('images/logo-pemkot.png')), 'v27'], JSON_THROW_ON_ERROR));
+        $key = hash('sha256', json_encode([hash_file('sha256', $template), $upt, $tahun, $spmValues, $ambang, $totalPendapatan, $totalBelanja, $totalPembiayaan, $prakiraan, $values, $appendixContext, $sourceFingerprint, hash_file('sha256', public_path('images/logo-pemkot.png')), 'v28'], JSON_THROW_ON_ERROR));
         $directory = config('dokumen-rba.cache_path').DIRECTORY_SEPARATOR.$key;
         File::ensureDirectoryExists($directory);
         $lock = fopen($directory.'/generate.lock', 'c');
@@ -163,15 +163,15 @@ class RbaDocumentGenerator
 
     private function appendRbaPdfTables(string $xml, string $upt, int $tahun, array $values, array $context): string
     {
-        preg_match_all('~<w:tbl(?:\s[^>]*)?>.*?</w:tbl>~s', $xml, $tables);
-        if (! isset($tables[0][2], $tables[0][3], $tables[0][4])) {
+        $extracted = $this->extractWordTables($xml);
+        if (! isset($extracted[2][0], $extracted[3][0], $extracted[4][0])) {
             return $xml;
         }
 
         $appendices = [
-            '{HALAMAN HASIL UNDUH RBA PENDAPATAN}' => ['PENDAPATAN', $tables[0][2]],
-            '{HALAMAN HASIL UNDUH RBA BELANJA}' => ['BELANJA', $tables[0][3]],
-            '{HALAMAN HASIL UNDUH RBA PEMBIAYAAN}' => ['PEMBIAYAAN', $tables[0][4]],
+            '{HALAMAN HASIL UNDUH RBA PENDAPATAN}' => ['PENDAPATAN', $extracted[2][0]],
+            '{HALAMAN HASIL UNDUH RBA BELANJA}' => ['BELANJA', $extracted[3][0]],
+            '{HALAMAN HASIL UNDUH RBA PEMBIAYAAN}' => ['PEMBIAYAAN', $extracted[4][0]],
         ];
         $logoNumber = 9001;
 
@@ -626,7 +626,7 @@ class RbaDocumentGenerator
 
     private function replaceRingkasanTable(string $xml, array $pendapatan, array $belanja, array $pembiayaan): string
     {
-        preg_match_all('~<w:tbl(?:\s[^>]*)?>.*?</w:tbl>~s', $xml, $matches, PREG_OFFSET_CAPTURE);
+        $matches = [$this->extractWordTables($xml)];
         if (! isset($matches[0][5])) {
             return $xml;
         }
@@ -677,7 +677,7 @@ class RbaDocumentGenerator
 
     private function replaceRincianTable(string $xml, array $pendapatan, array $belanja, array $pembiayaan): string
     {
-        preg_match_all('~<w:tbl(?:\s[^>]*)?>.*?</w:tbl>~s', $xml, $matches, PREG_OFFSET_CAPTURE);
+        $matches = [$this->extractWordTables($xml)];
         if (! isset($matches[0][6])) {
             return $xml;
         }
@@ -761,7 +761,7 @@ class RbaDocumentGenerator
 
     private function replaceAmbangTable(string $xml, array $ambang): string
     {
-        preg_match_all('~<w:tbl(?:\s[^>]*)?>.*?</w:tbl>~s', $xml, $matches, PREG_OFFSET_CAPTURE);
+        $matches = [$this->extractWordTables($xml)];
         if (! isset($matches[0][7])) {
             return $xml;
         }
@@ -945,7 +945,7 @@ class RbaDocumentGenerator
 
     private function replacePendapatanTable(string $xml, array $pendapatan): string
     {
-        preg_match_all('~<w:tbl(?:\s[^>]*)?>.*?</w:tbl>~s', $xml, $matches, PREG_OFFSET_CAPTURE);
+        $matches = [$this->extractWordTables($xml)];
         if (! isset($matches[0][2])) {
             return $xml;
         }
@@ -1045,7 +1045,7 @@ class RbaDocumentGenerator
 
     private function replacePembiayaanTable(string $xml, array $pembiayaan): string
     {
-        preg_match_all('~<w:tbl(?:\s[^>]*)?>.*?</w:tbl>~s', $xml, $matches, PREG_OFFSET_CAPTURE);
+        $matches = [$this->extractWordTables($xml)];
         if (! isset($matches[0][4])) {
             return $xml;
         }
@@ -1192,7 +1192,7 @@ class RbaDocumentGenerator
 
     private function replaceBelanjaTable(string $xml, array $belanja): string
     {
-        preg_match_all('~<w:tbl(?:\s[^>]*)?>.*?</w:tbl>~s', $xml, $matches, PREG_OFFSET_CAPTURE);
+        $matches = [$this->extractWordTables($xml)];
         if (! isset($matches[0][3])) {
             return $xml;
         }
@@ -1326,7 +1326,7 @@ class RbaDocumentGenerator
 
     private function replaceTablesByIndex(string $xml, array $tables): string
     {
-        preg_match_all('~<w:tbl(?:\s[^>]*)?>.*?</w:tbl>~s', $xml, $matches, PREG_OFFSET_CAPTURE);
+        $matches = [$this->extractWordTables($xml)];
         foreach ($tables as $index => [$dataRows, $footer, $headerValues]) {
             if (!isset($matches[0][$index])) continue;
             $table = $matches[0][$index][0];
@@ -1343,9 +1343,68 @@ class RbaDocumentGenerator
             $newRows[] = $this->setRowCells($footerTemplate, $footer);
             $updated = substr($table, 0, strpos($table, $rows[0][0])).implode('', $newRows).substr($table, strrpos($table, $rows[0][count($rows[0]) - 1]) + strlen($rows[0][count($rows[0]) - 1]));
             $xml = substr_replace($xml, $updated, $matches[0][$index][1], strlen($table));
-            preg_match_all('~<w:tbl(?:\s[^>]*)?>.*?</w:tbl>~s', $xml, $matches, PREG_OFFSET_CAPTURE);
+            $matches = [$this->extractWordTables($xml)];
         }
         return $xml;
+    }
+
+    /**
+     * Extract top-level <w:tbl>...</w:tbl> blocks with byte offsets without PCRE backtracking limits.
+     *
+     * @return array<int, array{0: string, 1: int}>
+     */
+    private function extractWordTables(string $xml): array
+    {
+        $tables = [];
+        $len = strlen($xml);
+        $pos = 0;
+
+        while ($pos < $len) {
+            $open = strpos($xml, '<w:tbl', $pos);
+            if ($open === false) {
+                break;
+            }
+            $nextChar = $xml[$open + 6] ?? '';
+            if ($nextChar !== '>' && $nextChar !== ' ' && $nextChar !== "\t" && $nextChar !== "\n" && $nextChar !== "\r") {
+                $pos = $open + 6;
+                continue;
+            }
+
+            $depth = 1;
+            $scan = $open + 6;
+            $closeEnd = false;
+
+            while ($depth > 0 && $scan < $len) {
+                $nextOpen = strpos($xml, '<w:tbl', $scan);
+                $nextClose = strpos($xml, '</w:tbl>', $scan);
+                if ($nextClose === false) {
+                    break;
+                }
+
+                if ($nextOpen !== false && $nextOpen < $nextClose) {
+                    $c = $xml[$nextOpen + 6] ?? '';
+                    if ($c === '>' || $c === ' ' || $c === "\t" || $c === "\n" || $c === "\r") {
+                        $depth++;
+                    }
+                    $scan = $nextOpen + 6;
+                } else {
+                    $depth--;
+                    $scan = $nextClose + 8;
+                    if ($depth === 0) {
+                        $closeEnd = $scan;
+                    }
+                }
+            }
+
+            if ($closeEnd === false) {
+                break;
+            }
+
+            $tables[] = [substr($xml, $open, $closeEnd - $open), $open];
+            $pos = $closeEnd;
+        }
+
+        return $tables;
     }
 
     private function setRowCells(string $row, array $values, bool $plain = false): string

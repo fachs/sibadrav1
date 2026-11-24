@@ -25,6 +25,13 @@ class DocxToHtmlConverter
 
     private ZipArchive $zip;
 
+    private float $pageWidthMm = 210.0;
+    private float $pageHeightMm = 297.0;
+    private float $marginTopMm = 18.0;
+    private float $marginRightMm = 16.0;
+    private float $marginBottomMm = 18.0;
+    private float $marginLeftMm = 18.0;
+
     public function convertToHtml(string $docxPath): string
     {
         if (! is_file($docxPath)) {
@@ -152,10 +159,12 @@ class DocxToHtmlConverter
     private function extractPageCss(DOMXPath $xpath): string
     {
         $sectPr = $xpath->query('/w:document/w:body/w:sectPr')->item(0);
-        $marginTop = '18mm';
-        $marginRight = '16mm';
-        $marginBottom = '18mm';
-        $marginLeft = '18mm';
+        $this->pageWidthMm = 210.0;
+        $this->pageHeightMm = 297.0;
+        $this->marginTopMm = 18.0;
+        $this->marginRightMm = 16.0;
+        $this->marginBottomMm = 18.0;
+        $this->marginLeftMm = 18.0;
         $size = 'A4 portrait';
 
         if ($sectPr instanceof DOMElement) {
@@ -165,10 +174,12 @@ class DocxToHtmlConverter
                 $wTwips = (float) $pgSz->getAttributeNS(self::W_NS, 'w');
                 $hTwips = (float) $pgSz->getAttributeNS(self::W_NS, 'h');
                 if ($wTwips > 0 && $hTwips > 0) {
-                    $wMm = round($wTwips * 25.4 / 1440, 1);
-                    $hMm = round($hTwips * 25.4 / 1440, 1);
-                    $size = "{$wMm}mm {$hMm}mm";
+                    $this->pageWidthMm = round($wTwips * 25.4 / 1440, 1);
+                    $this->pageHeightMm = round($hTwips * 25.4 / 1440, 1);
+                    $size = "{$this->pageWidthMm}mm {$this->pageHeightMm}mm";
                 } elseif ($orient === 'landscape') {
+                    $this->pageWidthMm = 297.0;
+                    $this->pageHeightMm = 210.0;
                     $size = 'A4 landscape';
                 }
             }
@@ -180,21 +191,21 @@ class DocxToHtmlConverter
                 $bottom = (float) $pgMar->getAttributeNS(self::W_NS, 'bottom');
                 $left = (float) $pgMar->getAttributeNS(self::W_NS, 'left');
                 if ($top > 0) {
-                    $marginTop = round(max(10, min(35, $top * 25.4 / 1440)), 1).'mm';
+                    $this->marginTopMm = round(max(10, min(35, $top * 25.4 / 1440)), 1);
                 }
                 if ($right > 0) {
-                    $marginRight = round(max(10, min(35, $right * 25.4 / 1440)), 1).'mm';
+                    $this->marginRightMm = round(max(10, min(35, $right * 25.4 / 1440)), 1);
                 }
                 if ($bottom > 0) {
-                    $marginBottom = round(max(10, min(35, $bottom * 25.4 / 1440)), 1).'mm';
+                    $this->marginBottomMm = round(max(10, min(35, $bottom * 25.4 / 1440)), 1);
                 }
                 if ($left > 0) {
-                    $marginLeft = round(max(10, min(35, $left * 25.4 / 1440)), 1).'mm';
+                    $this->marginLeftMm = round(max(10, min(35, $left * 25.4 / 1440)), 1);
                 }
             }
         }
 
-        return "@page { size: {$size}; margin: {$marginTop} {$marginRight} {$marginBottom} {$marginLeft}; }";
+        return "@page { size: {$size}; margin: {$this->marginTopMm}mm {$this->marginRightMm}mm {$this->marginBottomMm}mm {$this->marginLeftMm}mm; }";
     }
 
     private function renderParagraph(DOMElement $p, DOMXPath $xpath, bool $inTable = false): string
@@ -372,6 +383,12 @@ class DocxToHtmlConverter
                 case 'pict':
                     $content .= $this->renderImageFromNode($child, $xpath);
                     break;
+                case 'AlternateContent':
+                    $choiceDrawing = $xpath->query('.//w:drawing', $child)->item(0);
+                    if ($choiceDrawing instanceof DOMElement) {
+                        $content .= $this->renderImageFromNode($choiceDrawing, $xpath);
+                    }
+                    break;
             }
         }
 
@@ -390,6 +407,13 @@ class DocxToHtmlConverter
 
     private function renderImageFromNode(DOMElement $node, DOMXPath $xpath): string
     {
+        // 1. Check if this drawing is a floating text box (e.g. Cover Nama Puskesmas / Tahun)
+        $txbxContent = $xpath->query('.//w:txbxContent', $node)->item(0);
+        if ($txbxContent instanceof DOMElement) {
+            return $this->renderTextBoxFromNode($node, $txbxContent, $xpath);
+        }
+
+        // 2. Otherwise render embedded image (uncompressed original bytes)
         $rId = '';
         $blip = $xpath->query('.//a:blip', $node)->item(0);
         if ($blip instanceof DOMElement) {
@@ -421,21 +445,61 @@ class DocxToHtmlConverter
             default => 'image/png',
         };
 
-        $widthStyle = 'max-width: 100%; height: auto;';
-        $extent = $xpath->query('.//wp:extent', $node)->item(0);
-        if ($extent instanceof DOMElement) {
-            $cx = (float) $extent->getAttribute('cx');
-            if ($cx > 0) {
-                $px = round($cx / 9525);
-                if ($px > 10 && $px <= 680) {
-                    $widthStyle = "width: {$px}px; max-width: 100%; height: auto;";
-                }
-            }
-        }
-
         $b64 = base64_encode($bytes);
 
+        $anchor = $xpath->query('.//wp:anchor', $node)->item(0);
+        $extent = $xpath->query('.//wp:extent', $node)->item(0);
+        $wMm = 0.0;
+        $hMm = 0.0;
+        if ($extent instanceof DOMElement) {
+            $wMm = round(((float) $extent->getAttribute('cx')) / 36000, 1);
+            $hMm = round(((float) $extent->getAttribute('cy')) / 36000, 1);
+        }
+
+        // Full-page cover background image (e.g. behindDoc="1" ~ 210mm x 297mm)
+        $isFullPageCover = ($anchor instanceof DOMElement)
+            && $anchor->getAttribute('behindDoc') === '1'
+            && $wMm >= ($this->pageWidthMm * 0.85)
+            && $hMm >= ($this->pageHeightMm * 0.85);
+
+        if ($isFullPageCover) {
+            $top = -$this->marginTopMm;
+            $left = -$this->marginLeftMm;
+            $w = $this->pageWidthMm;
+            $h = $this->pageHeightMm;
+
+            return "<img src=\"data:{$mime};base64,{$b64}\" style=\"position: absolute; top: {$top}mm; left: {$left}mm; width: {$w}mm; height: {$h}mm; z-index: -1;\" alt=\"\">";
+        }
+
+        $widthStyle = 'max-width: 100%; height: auto;';
+        if ($wMm > 3 && $hMm > 3) {
+            $widthStyle = "width: {$wMm}mm; height: {$hMm}mm; max-width: 100%;";
+        }
+
         return "<img src=\"data:{$mime};base64,{$b64}\" style=\"{$widthStyle}\" alt=\"\">";
+    }
+
+    private function renderTextBoxFromNode(DOMElement $node, DOMElement $txbxContent, DOMXPath $xpath): string
+    {
+        $inner = '';
+        foreach ($txbxContent->childNodes as $child) {
+            if ($child instanceof DOMElement && $child->localName === 'p') {
+                $inner .= $this->renderParagraph($child, $xpath, true);
+            }
+        }
+        if (trim(strip_tags($inner)) === '') {
+            return '';
+        }
+
+        $posHNode = $xpath->query('.//wp:positionH/wp:posOffset', $node)->item(0);
+        $posVNode = $xpath->query('.//wp:positionV/wp:posOffset', $node)->item(0);
+        $extent = $xpath->query('.//wp:extent', $node)->item(0);
+
+        $leftMm = $posHNode ? round(((float) $posHNode->textContent) / 36000, 1) : 0.0;
+        $topMm = $posVNode ? round(((float) $posVNode->textContent) / 36000, 1) : 0.0;
+        $widthMm = ($extent instanceof DOMElement) ? round(((float) $extent->getAttribute('cx')) / 36000, 1) : 90.0;
+
+        return "<div style=\"position: absolute; left: {$leftMm}mm; top: {$topMm}mm; width: {$widthMm}mm; z-index: 5;\">{$inner}</div>";
     }
 
     private function renderTable(DOMElement $tbl, DOMXPath $xpath): string
