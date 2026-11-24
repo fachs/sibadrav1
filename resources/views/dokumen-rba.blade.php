@@ -2,9 +2,47 @@
 
 @section('css')
     <style>
-        .rba-document-preview { display: block; width: 100%; height: 78vh; min-height: 560px; border: 0; }
         .spm-modal-body { max-height: calc(100vh - 190px); overflow-y: auto; }
-        @media (max-width: 575.98px) { .rba-document-preview { min-height: 420px; } }
+        .docx-preview-viewport {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            min-height: 580px;
+            overflow: auto;
+            background: #e9ecef;
+            border-bottom-left-radius: inherit;
+            border-bottom-right-radius: inherit;
+        }
+        .docx-preview-stage {
+            transform-origin: top center;
+            transition: transform .15s ease;
+            padding: 16px 0 32px;
+        }
+        .docx-preview-viewport .docx-rba-wrapper {
+            background: transparent !important;
+            padding: 12px 16px !important;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+        .docx-preview-viewport section.docx-rba {
+            background: #ffffff !important;
+            box-shadow: 0 4px 18px rgba(15, 23, 42, .14) !important;
+            margin-bottom: 0 !important;
+        }
+        .docx-preview-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 460px;
+            gap: 12px;
+            color: #475569;
+        }
+        @media (max-width: 575.98px) {
+            .docx-preview-viewport { min-height: 420px; }
+        }
     </style>
 @endsection
 
@@ -78,36 +116,192 @@
 
     <div class="card">
         <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2">
-            <h5 class="card-title mb-0">Preview Dokumen</h5>
-            @if ($pdfAvailable)
-                <a class="btn btn-sm btn-outline-secondary" href="{{ route('dokumen-rba.preview', ['jenis' => $jenis]) }}" target="_blank" rel="noopener">
-                    <i class="ri-external-link-line me-1" aria-hidden="true"></i> Buka Preview
-                </a>
+            <div class="d-flex align-items-center gap-2">
+                <h5 class="card-title mb-0">Preview Dokumen Word</h5>
+                <span class="badge bg-info-subtle text-info">DOCX Live Preview</span>
+            </div>
+            @if ($wordAvailable)
+                <div class="d-flex flex-wrap align-items-center gap-2">
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Zoom Preview">
+                        <button type="button" class="btn btn-outline-secondary" id="docx-zoom-out" title="Perkecil"><i class="ri-zoom-out-line"></i></button>
+                        <button type="button" class="btn btn-outline-secondary" id="docx-zoom-reset" title="Reset Zoom"><span id="docx-zoom-label">100%</span></button>
+                        <button type="button" class="btn btn-outline-secondary" id="docx-zoom-in" title="Perbesar"><i class="ri-zoom-in-line"></i></button>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-primary" id="docx-print-btn" disabled title="Cetak atau Simpan sebagai PDF lewat Browser">
+                        <i class="ri-printer-line me-1" aria-hidden="true"></i> Cetak / Simpan PDF
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" id="docx-reload-btn" title="Muat Ulang Preview">
+                        <i class="ri-refresh-line me-1" aria-hidden="true"></i> Muat Ulang
+                    </button>
+                </div>
             @endif
         </div>
         <div class="card-body p-0">
-            @if ($pdfAvailable)
-                <iframe class="rba-document-preview" title="Preview Dokumen {{ $label }}"
-                    src="{{ route('dokumen-rba.preview', ['jenis' => $jenis]) }}#view=FitH">
-                </iframe>
-                <p class="small text-muted px-3 py-2 mb-0">Jika preview tidak tampil, pilih Buka Preview atau Unduh PDF.</p>
-            @elseif (! $wordAvailable)
-                <div class="text-center text-muted p-5">Template PDF belum tersedia. Preview akan ditampilkan setelah template tersedia.</div>
-            @else
-                <div class="text-center p-5">
-                    <div class="avatar-lg bg-light rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center">
-                        <i class="ri-file-word-2-line text-primary fs-24"></i>
+            @if ($wordAvailable)
+                <div class="docx-preview-viewport" id="docx-preview-viewport">
+                    <div class="docx-preview-loading" id="docx-preview-loading">
+                        <div class="spinner-border text-primary" role="status" aria-hidden="true"></div>
+                        <div class="fw-semibold">Memuat pratinjau dokumen Word (.docx)...</div>
+                        <div class="small text-muted">Menyiapkan data RBA dan merender halaman di browser Anda.</div>
                     </div>
-                    <h5 class="text-dark mb-2">Preview & Unduh PDF Memerlukan LibreOffice di Server</h5>
-                    <p class="text-muted mx-auto mb-4" style="max-width: 650px;">
-                        Server hosting belum memiliki library <code>libreoffice</code> untuk konversi dokumen RBA ke format PDF. 
-                        Seluruh isi Dokumen RBA (Kata Pengantar, Ringkasan Eksekutif, Bab I - IV, dan Lampiran 1 - 21) dapat langsung diunduh dan dicetak secara lengkap melalui file <strong>Word (.docx)</strong>.
-                    </p>
-                    <a class="btn btn-info px-4 py-2" href="{{ route('dokumen-rba.download', ['jenis' => $jenis, 'format' => 'word']) }}">
-                        <i class="ri-file-word-2-line me-1" aria-hidden="true"></i> Unduh Dokumen Word (.docx)
-                    </a>
+                    <div class="docx-preview-stage d-none" id="docx-preview-stage">
+                        <div id="docx-preview-container"></div>
+                    </div>
+                    <div class="text-center p-5 d-none" id="docx-preview-error">
+                        <div class="avatar-lg bg-danger-subtle rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center">
+                            <i class="ri-error-warning-line text-danger fs-24"></i>
+                        </div>
+                        <h5 class="text-dark mb-2">Gagal Memuat Pratinjau Word</h5>
+                        <p class="text-muted mx-auto mb-3" id="docx-preview-error-msg" style="max-width: 560px;">
+                            Terjadi kendala saat memuat dokumen Word. Anda tetap dapat mengunduh dokumen langsung dalam format Word (.docx).
+                        </p>
+                        <div class="d-flex justify-content-center gap-2">
+                            <button type="button" class="btn btn-outline-secondary" onclick="window.loadRbaDocxPreview && window.loadRbaDocxPreview()">
+                                <i class="ri-refresh-line me-1"></i> Coba Lagi
+                            </button>
+                            <a class="btn btn-info" href="{{ route('dokumen-rba.download', ['jenis' => $jenis, 'format' => 'word']) }}">
+                                <i class="ri-file-word-2-line me-1"></i> Unduh Word (.docx)
+                            </a>
+                        </div>
+                    </div>
                 </div>
+                <p class="small text-muted px-3 py-2 mb-0">
+                    Pratinjau dirender langsung dari file Word (<code>.docx</code>) di browser. Untuk hasil cetak/edit resmi 100% presisi, gunakan tombol <strong>Unduh Word</strong> atau <strong>Cetak / Simpan PDF</strong>.
+                </p>
+            @else
+                <div class="text-center text-muted p-5">Template dokumen belum tersedia. Preview akan ditampilkan setelah template tersedia.</div>
             @endif
         </div>
     </div>
 @endsection
+
+@if ($wordAvailable)
+@section('script')
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docx-preview@0.3.3/dist/docx-preview.min.js"></script>
+    <script>
+        (function () {
+            var docxUrl = @json(route('dokumen-rba.download', ['jenis' => $jenis, 'format' => 'word']));
+            var loadingEl = document.getElementById('docx-preview-loading');
+            var stageEl = document.getElementById('docx-preview-stage');
+            var containerEl = document.getElementById('docx-preview-container');
+            var errorEl = document.getElementById('docx-preview-error');
+            var errorMsgEl = document.getElementById('docx-preview-error-msg');
+            var printBtn = document.getElementById('docx-print-btn');
+            var reloadBtn = document.getElementById('docx-reload-btn');
+            var zoomOutBtn = document.getElementById('docx-zoom-out');
+            var zoomInBtn = document.getElementById('docx-zoom-in');
+            var zoomResetBtn = document.getElementById('docx-zoom-reset');
+            var zoomLabelEl = document.getElementById('docx-zoom-label');
+
+            var currentZoom = 1;
+
+            function applyZoom(scale) {
+                currentZoom = Math.max(0.5, Math.min(1.5, Math.round(scale * 10) / 10));
+                if (stageEl) {
+                    stageEl.style.transform = 'scale(' + currentZoom + ')';
+                }
+                if (zoomLabelEl) {
+                    zoomLabelEl.textContent = Math.round(currentZoom * 100) + '%';
+                }
+            }
+
+            if (zoomOutBtn) zoomOutBtn.addEventListener('click', function () { applyZoom(currentZoom - 0.1); });
+            if (zoomInBtn) zoomInBtn.addEventListener('click', function () { applyZoom(currentZoom + 0.1); });
+            if (zoomResetBtn) zoomResetBtn.addEventListener('click', function () { applyZoom(1); });
+
+            function showError(message) {
+                if (loadingEl) loadingEl.classList.add('d-none');
+                if (stageEl) stageEl.classList.add('d-none');
+                if (errorEl) errorEl.classList.remove('d-none');
+                if (errorMsgEl && message) errorMsgEl.textContent = message;
+                if (printBtn) printBtn.disabled = true;
+            }
+
+            window.loadRbaDocxPreview = function () {
+                if (typeof window.docx === 'undefined' || typeof window.JSZip === 'undefined') {
+                    showError('Library pratinjau Word gagal dimuat dari CDN. Periksa koneksi internet Anda atau klik Unduh Word.');
+                    return;
+                }
+
+                if (loadingEl) loadingEl.classList.remove('d-none');
+                if (stageEl) stageEl.classList.add('d-none');
+                if (errorEl) errorEl.classList.add('d-none');
+                if (printBtn) printBtn.disabled = true;
+                if (containerEl) containerEl.innerHTML = '';
+
+                fetch(docxUrl, {
+                    method: 'GET',
+                    credentials: 'same-origin',
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('Server mengembalikan status ' + response.status + '.');
+                    }
+                    return response.blob();
+                })
+                .then(function (blob) {
+                    return window.docx.renderAsync(blob, containerEl, null, {
+                        className: 'docx-rba',
+                        inWrapper: true,
+                        ignoreWidth: false,
+                        ignoreHeight: false,
+                        ignoreFonts: false,
+                        breakPages: true,
+                        ignoreLastRenderedPageBreak: false,
+                        experimental: true,
+                        useBase64URL: true,
+                        renderHeaders: true,
+                        renderFooters: true,
+                        renderFootnotes: true,
+                        renderEndnotes: true
+                    });
+                })
+                .then(function () {
+                    if (loadingEl) loadingEl.classList.add('d-none');
+                    if (stageEl) stageEl.classList.remove('d-none');
+                    if (printBtn) printBtn.disabled = false;
+                })
+                .catch(function (err) {
+                    showError('Gagal merender pratinjau dokumen Word: ' + (err && err.message ? err.message : 'Kesalahan tidak diketahui.'));
+                });
+            };
+
+            if (reloadBtn) {
+                reloadBtn.addEventListener('click', function () {
+                    window.loadRbaDocxPreview();
+                });
+            }
+
+            if (printBtn) {
+                printBtn.addEventListener('click', function () {
+                    var printWin = window.open('', '_blank');
+                    if (!printWin) {
+                        alert('Pop-up diblokir oleh browser. Izinkan pop-up untuk mencetak dokumen.');
+                        return;
+                    }
+                    var styles = '';
+                    containerEl.querySelectorAll('style').forEach(function (s) {
+                        styles += s.outerHTML;
+                    });
+                    printWin.document.open();
+                    printWin.document.write(
+                        '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Dokumen {{ $label }}</title>' +
+                        styles +
+                        '<style>@media print { body { margin: 0; background: #fff; } .docx-rba-wrapper { background: #fff !important; padding: 0 !important; } section.docx-rba { box-shadow: none !important; margin: 0 auto !important; page-break-after: always; } }</style>' +
+                        '</head><body>' + containerEl.innerHTML + '</body></html>'
+                    );
+                    printWin.document.close();
+                    printWin.focus();
+                    setTimeout(function () { printWin.print(); }, 400);
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                window.loadRbaDocxPreview();
+            });
+        })();
+    </script>
+@endsection
+@endif
