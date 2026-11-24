@@ -23,6 +23,9 @@ class DocxToHtmlConverter
     /** @var array<string, array<string, mixed>> */
     private array $styles = [];
 
+    /** @var array<string, string> */
+    private array $imageCache = [];
+
     private ZipArchive $zip;
 
     public function convertToHtml(string $docxPath): string
@@ -31,6 +34,7 @@ class DocxToHtmlConverter
             throw new RuntimeException("File Word tidak ditemukan: {$docxPath}");
         }
 
+        $this->imageCache = [];
         $this->zip = new ZipArchive();
         if ($this->zip->open($docxPath) !== true) {
             throw new RuntimeException("Gagal membuka arsip DOCX: {$docxPath}");
@@ -296,7 +300,7 @@ class DocxToHtmlConverter
         return $prefix."<p{$styleAttr}>{$innerHtml}</p>\n";
     }
 
-    private function renderRun(DOMElement $r, DOMXPath $xpath, bool $inheritBold, ?float $inheritSizePt, bool &$hasPageBreak): string
+    private function renderRun(DOMElement $r, DOMXPath $xpath, bool $inheritBold, ?float $inheritSizePt, bool &$hasPageBreak, bool $inTableCell = false): string
     {
         $rPr = $xpath->query('w:rPr', $r)->item(0);
         $css = [];
@@ -320,32 +324,26 @@ class DocxToHtmlConverter
                 $val = $uNode->getAttributeNS(self::W_NS, 'val');
                 $underline = ($val !== 'none' && $val !== '0' && $val !== 'false');
             }
-            $szNode = $xpath->query('w:sz', $rPr)->item(0);
-            if ($szNode instanceof DOMElement && is_numeric($szNode->getAttributeNS(self::W_NS, 'val'))) {
-                $pt = ((float) $szNode->getAttributeNS(self::W_NS, 'val')) / 2.0;
-                $css['font-size'] = max(7, min(28, $pt)).'pt';
-            } elseif ($inheritSizePt !== null) {
-                $css['font-size'] = max(7, min(28, $inheritSizePt)).'pt';
+            if (! $inTableCell) {
+                $szNode = $xpath->query('w:sz', $rPr)->item(0);
+                if ($szNode instanceof DOMElement && is_numeric($szNode->getAttributeNS(self::W_NS, 'val'))) {
+                    $pt = ((float) $szNode->getAttributeNS(self::W_NS, 'val')) / 2.0;
+                    if (abs($pt - 10.0) > 0.5) {
+                        $css['font-size'] = max(7, min(28, $pt)).'pt';
+                    }
+                } elseif ($inheritSizePt !== null && abs($inheritSizePt - 10.0) > 0.5) {
+                    $css['font-size'] = max(7, min(28, $inheritSizePt)).'pt';
+                }
             }
             $colorNode = $xpath->query('w:color', $rPr)->item(0);
             if ($colorNode instanceof DOMElement) {
                 $hex = $colorNode->getAttributeNS(self::W_NS, 'val');
-                if ($hex !== '' && strtolower($hex) !== 'auto' && preg_match('/^[0-9a-fA-F]{6}$/', $hex)) {
+                if ($hex !== '' && ! in_array(strtolower($hex), ['auto', '000000', '111111'], true) && preg_match('/^[0-9a-fA-F]{6}$/', $hex)) {
                     $css['color'] = '#'.$hex;
                 }
             }
-        } elseif ($inheritSizePt !== null) {
+        } elseif (! $inTableCell && $inheritSizePt !== null && abs($inheritSizePt - 10.0) > 0.5) {
             $css['font-size'] = max(7, min(28, $inheritSizePt)).'pt';
-        }
-
-        if ($bold) {
-            $css['font-weight'] = 'bold';
-        }
-        if ($italic) {
-            $css['font-style'] = 'italic';
-        }
-        if ($underline) {
-            $css['text-decoration'] = 'underline';
         }
 
         $content = '';
@@ -379,6 +377,34 @@ class DocxToHtmlConverter
             return '';
         }
 
+        if ($inTableCell) {
+            if ($bold) {
+                $content = "<b>{$content}</b>";
+            }
+            if ($italic) {
+                $content = "<i>{$content}</i>";
+            }
+            if ($underline) {
+                $content = "<u>{$content}</u>";
+            }
+            if ($css === []) {
+                return $content;
+            }
+            $styleAttr = $this->buildStyleAttr($css);
+
+            return "<span{$styleAttr}>{$content}</span>";
+        }
+
+        if ($bold) {
+            $css['font-weight'] = 'bold';
+        }
+        if ($italic) {
+            $css['font-style'] = 'italic';
+        }
+        if ($underline) {
+            $css['text-decoration'] = 'underline';
+        }
+
         if ($css === []) {
             return $content;
         }
@@ -407,19 +433,19 @@ class DocxToHtmlConverter
 
         $target = $this->rels[$rId];
         $zipPath = str_starts_with($target, 'word/') ? $target : 'word/'.ltrim($target, '/');
-        $bytes = $this->zip->getFromName($zipPath);
-        if ($bytes === false) {
-            return '';
+
+        if (! isset($this->imageCache[$zipPath])) {
+            $bytes = $this->zip->getFromName($zipPath);
+            if ($bytes === false) {
+                return '';
+            }
+            $this->imageCache[$zipPath] = $this->buildOptimizedDataUri($bytes, $zipPath);
         }
 
-        $ext = strtolower(pathinfo($zipPath, PATHINFO_EXTENSION));
-        $mime = match ($ext) {
-            'png' => 'image/png',
-            'jpg', 'jpeg' => 'image/jpeg',
-            'gif' => 'image/gif',
-            'webp' => 'image/webp',
-            default => 'image/png',
-        };
+        $dataUri = $this->imageCache[$zipPath];
+        if ($dataUri === '') {
+            return '';
+        }
 
         $widthStyle = 'max-width: 100%; height: auto;';
         $extent = $xpath->query('.//wp:extent', $node)->item(0);
@@ -433,9 +459,55 @@ class DocxToHtmlConverter
             }
         }
 
-        $b64 = base64_encode($bytes);
+        return "<img src=\"{$dataUri}\" style=\"{$widthStyle}\" alt=\"\">";
+    }
 
-        return "<img src=\"data:{$mime};base64,{$b64}\" style=\"{$widthStyle}\" alt=\"\">";
+    private function buildOptimizedDataUri(string $bytes, string $zipPath): string
+    {
+        // Compress large images (> 80 KB) via GD to keep DomPDF memory footprint low
+        if (strlen($bytes) > 81920 && function_exists('imagecreatefromstring')) {
+            $img = @imagecreatefromstring($bytes);
+            if ($img !== false) {
+                $w = imagesx($img);
+                $h = imagesy($img);
+                $maxDim = 320;
+                if ($w > $maxDim || $h > $maxDim) {
+                    $scale = min($maxDim / max(1, $w), $maxDim / max(1, $h));
+                    $nw = max(1, (int) round($w * $scale));
+                    $nh = max(1, (int) round($h * $scale));
+                } else {
+                    $nw = $w;
+                    $nh = $h;
+                }
+                $canvas = imagecreatetruecolor($nw, $nh);
+                if ($canvas !== false) {
+                    $white = imagecolorallocate($canvas, 255, 255, 255);
+                    imagefilledrectangle($canvas, 0, 0, $nw, $nh, $white);
+                    imagecopyresampled($canvas, $img, 0, 0, 0, 0, $nw, $nh, $w, $h);
+                    ob_start();
+                    imagejpeg($canvas, null, 82);
+                    $jpegBytes = ob_get_clean();
+                    imagedestroy($canvas);
+                    imagedestroy($img);
+                    if (is_string($jpegBytes) && $jpegBytes !== '') {
+                        return 'data:image/jpeg;base64,'.base64_encode($jpegBytes);
+                    }
+                } else {
+                    imagedestroy($img);
+                }
+            }
+        }
+
+        $ext = strtolower(pathinfo($zipPath, PATHINFO_EXTENSION));
+        $mime = match ($ext) {
+            'png' => 'image/png',
+            'jpg', 'jpeg' => 'image/jpeg',
+            'gif' => 'image/gif',
+            'webp' => 'image/webp',
+            default => 'image/png',
+        };
+
+        return "data:{$mime};base64,".base64_encode($bytes);
     }
 
     private function renderTable(DOMElement $tbl, DOMXPath $xpath): string
@@ -580,13 +652,36 @@ class DocxToHtmlConverter
 
         $tableClass = $hasTableBorders ? 'docx-table docx-table--bordered' : 'docx-table docx-table--borderless';
         $html = "<table class=\"{$tableClass}\">\n<tbody>\n";
+        $activeRowspans = [];
+        $rowsInChunk = 0;
+        $firstRowColWidths = [];
 
-        foreach ($rowsData as $row) {
+        foreach ($rowsData as $rIdx => $row) {
+            if ($rIdx === 0) {
+                foreach ($row['cells'] as $cell) {
+                    if (! $cell['skip'] && $cell['widthPct'] !== null) {
+                        $firstRowColWidths[$cell['colStart'].':'.$cell['colspan']] = $cell['widthPct'];
+                    }
+                }
+            }
+
+            // Safely split very large tables (> 35 rows) when no active rowspan crosses the boundary
+            // so DomPDF doesn't hold hundreds of table rows in Cellmap memory at once.
+            $canSplit = $rowsInChunk >= 35 && empty($activeRowspans);
+            if ($canSplit) {
+                $html .= "</tbody>\n</table>\n<table class=\"{$tableClass} docx-table--continued\">\n<tbody>\n";
+                $rowsInChunk = 0;
+            }
+
             $html .= "<tr>\n";
             foreach ($row['cells'] as $cell) {
                 if ($cell['skip']) {
                     continue;
                 }
+                if ($cell['rowspan'] > 1) {
+                    $activeRowspans[$cell['colStart']] = $cell['rowspan'] - 1;
+                }
+
                 $attrs = '';
                 if ($cell['colspan'] > 1) {
                     $attrs .= ' colspan="'.$cell['colspan'].'"';
@@ -596,29 +691,37 @@ class DocxToHtmlConverter
                 }
 
                 $cellCss = [];
-                if ($cell['widthPct'] !== null) {
+                if ($rowsInChunk === 0 && $cell['widthPct'] !== null) {
                     $cellCss['width'] = $cell['widthPct'].'%';
                 }
                 if ($cell['bg'] !== null) {
                     $cellCss['background-color'] = $cell['bg'];
                 }
-                if ($cell['vAlign'] !== null) {
-                    $cellCss['vertical-align'] = match ($cell['vAlign']) {
-                        'center' => 'middle',
-                        'bottom' => 'bottom',
-                        default => 'top',
-                    };
+                if ($cell['vAlign'] === 'center') {
+                    $cellCss['vertical-align'] = 'middle';
+                } elseif ($cell['vAlign'] === 'bottom') {
+                    $cellCss['vertical-align'] = 'bottom';
                 }
                 if ($cell['borderNone']) {
                     $cellCss['border'] = 'none';
                 }
 
+                $cellContent = $this->renderCellContent($cell['node'], $xpath, $cellCss);
                 $styleAttr = $this->buildStyleAttr($cellCss);
-                $cellContent = $this->renderCellContent($cell['node'], $xpath);
                 $tag = $row['isHeader'] ? 'th' : 'td';
                 $html .= "<{$tag}{$attrs}{$styleAttr}>{$cellContent}</{$tag}>\n";
             }
             $html .= "</tr>\n";
+
+            // Decrement remaining rowspans for next row
+            foreach ($activeRowspans as $col => $rem) {
+                if ($rem <= 1) {
+                    unset($activeRowspans[$col]);
+                } else {
+                    $activeRowspans[$col] = $rem - 1;
+                }
+            }
+            $rowsInChunk++;
         }
 
         $html .= "</tbody>\n</table>\n";
@@ -626,13 +729,47 @@ class DocxToHtmlConverter
         return $html;
     }
 
-    private function renderCellContent(DOMElement $tc, DOMXPath $xpath): string
+    /**
+     * @param  array<string, string>  $cellCss
+     */
+    private function renderCellContent(DOMElement $tc, DOMXPath $xpath, array &$cellCss): string
     {
-        $out = '';
+        $children = [];
         foreach ($tc->childNodes as $child) {
-            if (! ($child instanceof DOMElement)) {
-                continue;
+            if ($child instanceof DOMElement && ($child->localName === 'p' || $child->localName === 'tbl')) {
+                $children[] = $child;
             }
+        }
+
+        // Fast path for single-paragraph table cell: avoid extra <p> wrapper to drastically reduce DomPDF DOM nodes & memory
+        if (count($children) === 1 && $children[0]->localName === 'p') {
+            $p = $children[0];
+            $pPr = $xpath->query('w:pPr', $p)->item(0);
+            if ($pPr instanceof DOMElement) {
+                $jc = $xpath->query('w:jc', $pPr)->item(0);
+                if ($jc instanceof DOMElement) {
+                    $align = $this->mapAlignment($jc->getAttributeNS(self::W_NS, 'val'));
+                    if ($align !== 'left') {
+                        $cellCss['text-align'] = $align;
+                    }
+                }
+            }
+            $innerHtml = '';
+            $hasBreak = false;
+            foreach ($p->childNodes as $child) {
+                if (! ($child instanceof DOMElement)) {
+                    continue;
+                }
+                if ($child->localName === 'r') {
+                    $innerHtml .= $this->renderRun($child, $xpath, false, null, $hasBreak, true);
+                }
+            }
+
+            return trim($innerHtml) !== '' ? $innerHtml : '&nbsp;';
+        }
+
+        $out = '';
+        foreach ($children as $child) {
             if ($child->localName === 'p') {
                 $out .= $this->renderParagraph($child, $xpath, true);
             } elseif ($child->localName === 'tbl') {
@@ -721,7 +858,7 @@ class DocxToHtmlConverter
 <style>
 {$pageCss}
 body {
-    font-family: DejaVu Sans, Arial, Helvetica, sans-serif;
+    font-family: sans-serif;
     font-size: 10pt;
     line-height: 1.35;
     color: #111;
@@ -744,6 +881,9 @@ table.docx-table {
     border-collapse: collapse;
     margin: 6pt 0 8pt 0;
     font-size: 9pt;
+}
+table.docx-table--continued {
+    margin-top: -8pt;
 }
 table.docx-table--bordered th,
 table.docx-table--bordered td {
