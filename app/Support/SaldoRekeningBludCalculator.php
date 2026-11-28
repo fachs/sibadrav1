@@ -45,10 +45,16 @@ class SaldoRekeningBludCalculator
                 ->whereIn('penerimaan_id', $disetorkanIds)
                 ->sum('total_biaya');
 
-        $totalPengembalian = (float) Pengembalian::query()
+        $pengembalianPenerimaanIds = Pengembalian::query()
             ->where('unit_blud_id', $unitBludId)
             ->whereHas('penerimaan', fn ($q) => $q->where('tahun_anggaran', $tahun))
-            ->sum('jumlah');
+            ->pluck('penerimaan_id');
+
+        $totalPengembalian = $pengembalianPenerimaanIds->isEmpty()
+            ? 0.0
+            : (float) DB::table('transaksi_penerimaans')
+                ->whereIn('penerimaan_id', $pengembalianPenerimaanIds)
+                ->sum('total_biaya');
 
         // 2. Pencairan SPD UP, GU, LS (Keluar dari Rekening BLUD -> Masuk ke Rek. Bendahara Pengeluaran)
         $totalSpdUp = (float) Up::query()
