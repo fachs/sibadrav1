@@ -256,6 +256,14 @@
                          <span class="nav-text">Data UPTD</span>
                     </a>
                </li>
+               <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('rekening-blud.*') ? 'active' : '' }}" href="{{ route('rekening-blud.index') }}">
+                         <span class="nav-icon">
+                              <i class="ri-bank-card-line"></i>
+                         </span>
+                         <span class="nav-text">Rekening BLUD</span>
+                    </a>
+               </li>
           </ul>
      </div>
 </div>

@@ -15,6 +15,7 @@ use App\Http\Controllers\RbaPergeseranController;
 use App\Http\Controllers\RbaPerubahanController;
 use App\Http\Controllers\PrakiraanMajuController;
 use App\Http\Controllers\UnitBludController;
+use App\Http\Controllers\RekeningBludController;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\BuktiDukungPenerimaanController;
 use App\Http\Controllers\PenerimaanController;
@@ -183,6 +184,10 @@ Route::middleware(['auth', \App\Http\Middleware\GunakanTahunAnggaran::class])->g
     Route::resource('data-user', DataUserController::class);
     Route::put('/data-user/{id}/roles', [DataUserController::class, 'updateRoles'])->name('data-user.roles.update');
     Route::resource('data-uptd', UnitBludController::class)->only(['index', 'show']);
+    Route::get('/rekening-blud', [RekeningBludController::class, 'index'])->name('rekening-blud.index');
+    Route::post('/rekening-blud', [RekeningBludController::class, 'store'])->name('rekening-blud.store');
+    Route::put('/rekening-blud/{id}', [RekeningBludController::class, 'update'])->whereNumber('id')->name('rekening-blud.update');
+    Route::delete('/rekening-blud/{id}', [RekeningBludController::class, 'destroy'])->whereNumber('id')->name('rekening-blud.destroy');
 
     Route::middleware('kapusktu')->group(function () {
         Route::delete('/rencana-kebutuhan/{id}', [RenbutController::class, 'destroy'])

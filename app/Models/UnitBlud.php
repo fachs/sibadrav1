@@ -40,4 +40,9 @@ class UnitBlud extends Model
     {
         return $this->hasMany(KinerjaKegiatan::class);
     }
+
+    public function rekeningBluds()
+    {
+        return $this->hasMany(RekeningBlud::class, 'unit_blud_id');
+    }
 }
