@@ -167,6 +167,7 @@ Route::middleware(['auth', \App\Http\Middleware\GunakanTahunAnggaran::class])->g
     Route::get('/penerimaan/{uuid}/transaksi', [\App\Http\Controllers\TransaksiPenerimaanController::class, 'show'])->whereUuid('uuid')->name('penerimaan.transaksi');
     Route::post('/penerimaan/{uuid}/transaksi/manual', [\App\Http\Controllers\TransaksiPenerimaanController::class, 'storeManual'])->whereUuid('uuid')->name('penerimaan.transaksi.manual');
     Route::post('/penerimaan/{uuid}/transaksi/import', [\App\Http\Controllers\TransaksiPenerimaanController::class, 'importExcel'])->whereUuid('uuid')->name('penerimaan.transaksi.import');
+    Route::patch('/transaksi-penerimaan/{id}/nomor-tbp', [\App\Http\Controllers\TransaksiPenerimaanController::class, 'updateNomorTbp'])->whereNumber('id')->name('transaksi-penerimaan.update-nomor-tbp');
     Route::delete('/transaksi-penerimaan/{id}', [\App\Http\Controllers\TransaksiPenerimaanController::class, 'destroy'])->name('transaksi-penerimaan.destroy');
     Route::post('/penerimaan/bukti-dukung', [BuktiDukungPenerimaanController::class, 'store'])
     ->name('penerimaan.upload-bukti-dukung');

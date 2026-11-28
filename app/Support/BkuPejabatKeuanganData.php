@@ -26,14 +26,16 @@ class BkuPejabatKeuanganData
                 return $row;
             });
 
-        $amounts = DB::table('transaksi_penerimaans')->selectRaw('penerimaan_id, SUM(total_biaya) AS jumlah')->groupBy('penerimaan_id');
+        $amounts = DB::table('transaksi_penerimaans')
+            ->selectRaw("penerimaan_id, SUM(total_biaya) AS jumlah, MIN(NULLIF(nomor_tbp, '')) AS first_tbp")
+            ->groupBy('penerimaan_id');
         $deposits = DB::table('penerimaans as p')->joinSub($amounts, 't', 't.penerimaan_id', '=', 'p.id')
             ->when($year !== null, fn ($query) => TahunAnggaran::dates($query, 'p.tanggal_setor', $year))
             ->whereNull('p.deleted_at')->whereNotNull('p.tanggal_setor')
             ->when(!$allUnits, fn ($query) => $unitId === null ? $query->whereRaw('1 = 0') : $query->where('p.unit_blud_id', $unitId))
             ->when($before !== null, fn ($query) => $query->where('p.tanggal_setor', '<', $before))
             ->select(['p.id', 'p.unit_blud_id', 'p.kode_rekening', 'p.uraian', 'p.tanggal_setor as tanggal'])
-            ->selectRaw("COALESCE(NULLIF(p.nomor_tbp, ''), p.nomor_terima) AS no_transaksi, t.jumlah AS penerimaan, 0 AS pengeluaran, 0 AS giro, 0 AS saldo, 0 AS is_saldo_awal")
+            ->selectRaw("COALESCE(NULLIF(p.nomor_tbp, ''), NULLIF(p.nomor_terima, ''), t.first_tbp, '-') AS no_transaksi, t.jumlah AS penerimaan, 0 AS pengeluaran, 0 AS giro, 0 AS saldo, 0 AS is_saldo_awal")
             ->get()->map(function ($row) {
                 $row->is_penyetoran = true;
                 $row->is_spd = false;

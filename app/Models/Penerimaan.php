@@ -65,4 +65,9 @@ class Penerimaan extends Model
     {
         return $this->transaksis->sum('total_biaya');
     }
+
+    public function isTbpPerTransaksi(): bool
+    {
+        return in_array($this->cara_pembayaran, ['Kas Penerimaan BLUD', 'Kas BLUD'], true);
+    }
 }

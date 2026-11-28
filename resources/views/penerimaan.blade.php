@@ -316,18 +316,26 @@
                                             </div>
 
                                             <div class="col-md-6">
-                                                <label class="form-label">Nomor TBP</label>
-                                                <input type="text" class="form-control" name="nomor_tbp" maxlength="100" required>
+                                                <label class="form-label">Cara Pembayaran</label>
+                                                <select name="cara_pembayaran" id="cara_pembayaran_tambah" class="form-select" onchange="toggleTbpInputByCaraPembayaran(this, 'wrap_tbp_tambah', 'info_tbp_tambah', 'nomor_tbp_tambah')" required>
+                                                    <option value="">-- Pilih Cara Pembayaran --</option>
+                                                    <option value="Tunai" @selected(old('cara_pembayaran') === 'Tunai')>Tunai</option>
+                                                    <option value="Kas Penerimaan BLUD" @selected(old('cara_pembayaran') === 'Kas Penerimaan BLUD')>Kas Penerimaan BLUD</option>
+                                                    <option value="Kas BLUD" @selected(old('cara_pembayaran') === 'Kas BLUD')>Kas BLUD</option>
+                                                </select>
                                             </div>
 
-                                            <div class="col-md-6">
-                                                <label class="form-label">Cara Pembayaran</label>
-                                                <select name="cara_pembayaran" class="form-select" required>
-                                                    <option value="">-- Pilih Cara Pembayaran --</option>
-                                                    <option value="Kas Penerimaan BLUD">Kas Penerimaan BLUD</option>
-                                                    <option value="Kas BLUD">Kas BLUD</option>
-                                                    <option value="Tunai">Tunai</option>
-                                                </select>
+                                            <div class="col-md-6" id="wrap_tbp_tambah">
+                                                <label class="form-label">Nomor TBP <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" name="nomor_tbp" id="nomor_tbp_tambah" maxlength="100" value="{{ old('nomor_tbp') }}" placeholder="1 TBP untuk transaksi tunai" required>
+                                                <small class="text-muted">1 Nomor TBP berlaku untuk banyak transaksi tunai.</small>
+                                            </div>
+
+                                            <div class="col-md-6 d-none" id="info_tbp_tambah">
+                                                <label class="form-label">Nomor TBP</label>
+                                                <div class="alert alert-info py-2 px-3 mb-0 small">
+                                                    <i class="ri-information-line me-1"></i> Untuk pembayaran ke <strong>Kas Penerimaan BLUD</strong> atau <strong>Kas BLUD</strong>, Nomor TBP diisikan pada halaman <strong>Detail Transaksi</strong> (1 TBP untuk 1 transaksi).
+                                                </div>
                                             </div>
 
                                             <div class="col-md-6">
@@ -388,8 +396,30 @@
                                     </tr>
                                 @else --}}
                                 @forelse ($penerimaans as $item)
+                                    @php
+                                        $isPerTrxTbp = $item->isTbpPerTransaksi();
+                                        $trxTotalCount = $item->transaksis ? $item->transaksis->count() : 0;
+                                        $trxTbpList = $item->transaksis ? $item->transaksis->pluck('nomor_tbp')->filter(fn ($v) => trim((string) $v) !== '')->values() : collect();
+                                    @endphp
                                     <tr>
-                                        <td><a href="{{ route('penerimaan.transaksi', $item->uuid) }}" class="fw-bold text-primary">{{ $item->nomor_terima }}</a></td>
+                                        <td>
+                                            @if ($isPerTrxTbp)
+                                                @if ($trxTbpList->count() === 1 && $trxTotalCount === 1)
+                                                    <a href="{{ route('penerimaan.transaksi', $item->uuid) }}" class="fw-bold text-primary">{{ $trxTbpList->first() }}</a>
+                                                @elseif ($trxTbpList->isNotEmpty())
+                                                    <a href="{{ route('penerimaan.transaksi', $item->uuid) }}" class="fw-bold text-primary text-decoration-none">
+                                                        {{ $trxTbpList->first() }}
+                                                        <span class="badge bg-info-subtle text-info ms-1">{{ $trxTbpList->count() }}/{{ $trxTotalCount }} TBP</span>
+                                                    </a>
+                                                @else
+                                                    <a href="{{ route('penerimaan.transaksi', $item->uuid) }}" class="btn btn-sm btn-outline-primary py-1 px-2">
+                                                        <i class="ri-edit-line me-1"></i>Isi TBP Detail ({{ $trxTotalCount }} trx)
+                                                    </a>
+                                                @endif
+                                            @else
+                                                <a href="{{ route('penerimaan.transaksi', $item->uuid) }}" class="fw-bold text-primary">{{ $item->nomor_tbp ?: ($item->nomor_terima ?: 'Detail Transaksi') }}</a>
+                                            @endif
+                                        </td>
                                         <td>{{ \Carbon\Carbon::parse($item->tanggal_terima)->locale('id')->translatedFormat('d F Y') }}</td>
                                         <td>
                                             @if ($item->tanggal_setor)
@@ -526,25 +556,35 @@
                                                                             </div>
 
                                                                             <div class="col-md-6">
-                                                                                <label class="form-label">Nomor TBP</label>
-                                                                                <input type="text" class="form-control" name="nomor_tbp" maxlength="100"
-                                                                                    value="{{ $item->nomor_terima }}" required>
-                                                                            </div>
-
-                                                                            <div class="col-md-6">
                                                                                 <label class="form-label">Cara Pembayaran</label>
-                                                                                <select name="cara_pembayaran" class="form-select" required>
+                                                                                <select name="cara_pembayaran" class="form-select"
+                                                                                    onchange="toggleTbpInputByCaraPembayaran(this, 'wrap_tbp_edit_{{ $item->id }}', 'info_tbp_edit_{{ $item->id }}', 'nomor_tbp_edit_{{ $item->id }}')"
+                                                                                    required>
                                                                                     <option value="">-- Pilih Cara Pembayaran --</option>
+                                                                                    <option value="Tunai" {{ $item->cara_pembayaran === 'Tunai' ? 'selected' : '' }}>
+                                                                                        Tunai
+                                                                                    </option>
                                                                                     <option value="Kas Penerimaan BLUD" {{ $item->cara_pembayaran === 'Kas Penerimaan BLUD' ? 'selected' : '' }}>
                                                                                         Kas Penerimaan BLUD
                                                                                     </option>
                                                                                     <option value="Kas BLUD" {{ $item->cara_pembayaran === 'Kas BLUD' ? 'selected' : '' }}>
                                                                                         Kas BLUD
                                                                                     </option>
-                                                                                    <option value="Tunai" {{ $item->cara_pembayaran === 'Tunai' ? 'selected' : '' }}>
-                                                                                        Tunai
-                                                                                    </option>
                                                                                 </select>
+                                                                            </div>
+
+                                                                            <div class="col-md-6 {{ $item->cara_pembayaran === 'Tunai' ? '' : 'd-none' }}" id="wrap_tbp_edit_{{ $item->id }}">
+                                                                                <label class="form-label">Nomor TBP <span class="text-danger">*</span></label>
+                                                                                <input type="text" class="form-control" name="nomor_tbp" id="nomor_tbp_edit_{{ $item->id }}" maxlength="100"
+                                                                                    value="{{ $item->nomor_tbp ?: $item->nomor_terima }}" {{ $item->cara_pembayaran === 'Tunai' ? 'required' : '' }}>
+                                                                                <small class="text-muted">1 Nomor TBP berlaku untuk banyak transaksi tunai.</small>
+                                                                            </div>
+
+                                                                            <div class="col-md-6 {{ $item->cara_pembayaran === 'Tunai' ? 'd-none' : '' }}" id="info_tbp_edit_{{ $item->id }}">
+                                                                                <label class="form-label">Nomor TBP</label>
+                                                                                <div class="alert alert-info py-2 px-3 mb-0 small">
+                                                                                    <i class="ri-information-line me-1"></i> Nomor TBP diisikan pada halaman <strong>Detail Transaksi</strong> (1 TBP untuk 1 transaksi).
+                                                                                </div>
                                                                             </div>
 
                                                                             <div class="col-md-6">
@@ -660,7 +700,31 @@
                 }
             }
 
+            function toggleTbpInputByCaraPembayaran(selectEl, wrapId, infoId, inputId) {
+                const wrapEl = document.getElementById(wrapId);
+                const infoEl = document.getElementById(infoId);
+                const inputEl = document.getElementById(inputId);
+                if (!wrapEl || !infoEl || !inputEl) return;
+
+                const isPerTransaksi = (selectEl.value === 'Kas Penerimaan BLUD' || selectEl.value === 'Kas BLUD');
+                if (isPerTransaksi) {
+                    wrapEl.classList.add('d-none');
+                    infoEl.classList.remove('d-none');
+                    inputEl.required = false;
+                    inputEl.value = '';
+                } else {
+                    wrapEl.classList.remove('d-none');
+                    infoEl.classList.add('d-none');
+                    inputEl.required = true;
+                }
+            }
+
             document.addEventListener('DOMContentLoaded', function() {
+                const caraTambah = document.getElementById('cara_pembayaran_tambah');
+                if (caraTambah && caraTambah.value) {
+                    toggleTbpInputByCaraPembayaran(caraTambah, 'wrap_tbp_tambah', 'info_tbp_tambah', 'nomor_tbp_tambah');
+                }
+
                 // Implementasi format-rupiah.js untuk input form
                 document.querySelectorAll('.format-rupiah').forEach(function(input) {
                     input.addEventListener('input', function(e) {

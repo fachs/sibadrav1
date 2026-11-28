@@ -97,8 +97,11 @@
         </thead>
         <tbody>
             @forelse($penerimaans as $item)
+                @php
+                    $tbpDisplay = $item->nomor_tbp ?: ($item->nomor_terima ?: $item->transaksis->pluck('nomor_tbp')->filter()->implode(', '));
+                @endphp
                 <tr>
-                    <td>{{ $item->nomor_terima }}</td>
+                    <td>{{ $item->nomor_terima ?: $tbpDisplay }}</td>
                     <td class="text-center">
                         {{ $item->tanggal_terima ? \Carbon\Carbon::parse($item->tanggal_terima)->translatedFormat('d F Y') : '' }}
                     </td>
@@ -110,7 +113,7 @@
                     <td class="text-center">
                         {{ $item->tanggal_setor ? \Carbon\Carbon::parse($item->tanggal_setor)->translatedFormat('d F Y') : '' }}
                     </td>
-                    <td>{{ $item->nomor_tbp ?? '' }}</td>
+                    <td>{{ $tbpDisplay }}</td>
                     <td class="text-end">
                         {{ $item->tanggal_setor ? 'Rp ' . number_format($item->jumlah, 0, ',', '.') : '' }}
                     </td>

@@ -108,6 +108,7 @@ class PenerimaanController extends Controller
         $totalSelisih = $totalDiterima - $totalDisetorkan;
 
         $penerimaans = $query
+            ->with(['transaksis:id,penerimaan_id,nomor_tbp'])
             ->withSum('transaksis', 'total_biaya')
             ->orderByDesc('tanggal_terima')
             ->paginate(6)
@@ -190,19 +191,47 @@ class PenerimaanController extends Controller
         ));
     }
 
+    private function ensureTbpSchema(): void
+    {
+        static $checked = false;
+        if ($checked) {
+            return;
+        }
+        $checked = true;
+
+        if (\Illuminate\Support\Facades\Schema::hasTable('transaksi_penerimaans')
+            && ! \Illuminate\Support\Facades\Schema::hasColumn('transaksi_penerimaans', 'nomor_tbp')) {
+            \Illuminate\Support\Facades\Schema::table('transaksi_penerimaans', function (\Illuminate\Database\Schema\Blueprint $table) {
+                $table->string('nomor_tbp', 100)->nullable()->after('nomor_transaksi');
+            });
+        }
+
+        try {
+            $col = \Illuminate\Support\Facades\DB::selectOne("SHOW COLUMNS FROM `penerimaans` LIKE 'nomor_terima'");
+            if ($col && strtoupper((string) ($col->Null ?? '')) === 'NO') {
+                \Illuminate\Support\Facades\DB::statement('ALTER TABLE `penerimaans` MODIFY `nomor_terima` VARCHAR(100) NULL');
+            }
+        } catch (\Throwable $e) {
+            // Ignore on non-MySQL drivers
+        }
+    }
+
     public function store(Request $request)
     {
+        $this->ensureTbpSchema();
+
         if ($request->has('jumlah')) {
             $request->merge([
                 'jumlah' => str_replace('.', '', $request->jumlah)
             ]);
         }
 
-        if ($request->has('nomor_tbp')) {
-            $request->merge([
-                'nomor_terima' => $request->nomor_tbp
-            ]);
-        }
+        $isTunai = $request->input('cara_pembayaran') === 'Tunai';
+        $nomorTbpInput = $isTunai ? trim((string) $request->input('nomor_tbp', '')) : null;
+        $request->merge([
+            'nomor_tbp' => $nomorTbpInput !== '' ? $nomorTbpInput : null,
+            'nomor_terima' => $nomorTbpInput !== '' ? $nomorTbpInput : null,
+        ]);
 
         $bulanValid = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
 
@@ -211,20 +240,24 @@ class PenerimaanController extends Controller
             'periode'          => ['required','string','max:50', Rule::in($bulanValid)],
             'tanggal_terima'   => \App\Support\TahunAnggaran::dateRules(),
             'tanggal_setor'    => 'nullable|date',
-            'nomor_terima'     => [
-                'required',
-                'string',
-                'max:100',
-                Rule::unique('penerimaans', 'nomor_terima')->whereNull('deleted_at'),
-            ],
-            'nomor_tbp'        => 'nullable|string|max:100',
             'cara_pembayaran'  => ['required', Rule::in([
                 'Kas Penerimaan BLUD',
                 'Kas BLUD',
                 'Tunai',
             ])],
+            'nomor_terima'     => $isTunai ? [
+                'required',
+                'string',
+                'max:100',
+                Rule::unique('penerimaans', 'nomor_terima')->whereNull('deleted_at'),
+            ] : ['nullable', 'string', 'max:100'],
+            'nomor_tbp'        => $isTunai ? ['required', 'string', 'max:100'] : ['nullable', 'string', 'max:100'],
             'kode_rekening'    => 'required|string|max:100',
             'uraian'           => 'nullable|string',
+        ], [
+            'nomor_tbp.required' => 'Nomor TBP wajib diisi untuk cara pembayaran Tunai.',
+            'nomor_terima.required' => 'Nomor TBP wajib diisi untuk cara pembayaran Tunai.',
+            'nomor_terima.unique' => 'Nomor TBP tersebut sudah terdaftar.',
         ]);
 
         $user = auth()->user();
@@ -291,43 +324,50 @@ class PenerimaanController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->ensureTbpSchema();
+
         if ($request->has('jumlah')) {
             $request->merge([
                 'jumlah' => str_replace('.', '', $request->jumlah)
             ]);
         }
 
-        if ($request->has('nomor_tbp')) {
-            $request->merge([
-                'nomor_terima' => $request->nomor_tbp
-            ]);
-        }
+        $penerimaan = Penerimaan::where('tahun_anggaran', \App\Support\TahunAnggaran::selected())->findOrFail($id);
+
+        $isTunai = $request->input('cara_pembayaran') === 'Tunai';
+        $nomorTbpInput = $isTunai ? trim((string) $request->input('nomor_tbp', '')) : null;
+        $request->merge([
+            'nomor_tbp' => $nomorTbpInput !== '' ? $nomorTbpInput : null,
+            'nomor_terima' => $nomorTbpInput !== '' ? $nomorTbpInput : null,
+        ]);
 
         $bulanValid = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-
-        $penerimaan = Penerimaan::where('tahun_anggaran', \App\Support\TahunAnggaran::selected())->findOrFail($id);
 
         $validated = $request->validate([
             'tahun_anggaran'   => 'required|string|max:50',
             'periode'          => ['required', 'string', 'max:50', Rule::in($bulanValid)],
             'tanggal_terima'   => \App\Support\TahunAnggaran::dateRules(),
             'tanggal_setor'    => 'nullable|date',
-            'nomor_terima'     => [
+            'cara_pembayaran'  => ['required', Rule::in([
+                'Kas Penerimaan BLUD',
+                'Kas BLUD',
+                'Tunai',
+            ])],
+            'nomor_terima'     => $isTunai ? [
                 'required',
                 'string',
                 'max:100',
                 Rule::unique('penerimaans', 'nomor_terima')
                     ->ignore($penerimaan->id)
                     ->whereNull('deleted_at'),
-            ],
-            'nomor_tbp'        => 'nullable|string|max:100',
-            'cara_pembayaran'  => ['required', Rule::in([
-                'Kas Penerimaan BLUD',
-                'Kas BLUD',
-                'Tunai',
-            ])],
+            ] : ['nullable', 'string', 'max:100'],
+            'nomor_tbp'        => $isTunai ? ['required', 'string', 'max:100'] : ['nullable', 'string', 'max:100'],
             'kode_rekening'    => 'required|string|max:100',
             'uraian'           => 'nullable|string',
+        ], [
+            'nomor_tbp.required' => 'Nomor TBP wajib diisi untuk cara pembayaran Tunai.',
+            'nomor_terima.required' => 'Nomor TBP wajib diisi untuk cara pembayaran Tunai.',
+            'nomor_terima.unique' => 'Nomor TBP tersebut sudah terdaftar.',
         ]);
 
         $user = auth()->user();

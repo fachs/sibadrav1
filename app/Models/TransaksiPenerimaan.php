@@ -15,6 +15,7 @@ class TransaksiPenerimaan extends Model
         'penerimaan_id',
         'tanggal',
         'nomor_transaksi',
+        'nomor_tbp',
         'nama_penjamin',
         'metode_pembayaran',
         'total_biaya',

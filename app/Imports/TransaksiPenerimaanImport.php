@@ -113,10 +113,13 @@ class TransaksiPenerimaanImport implements ToModel, WithHeadingRow, WithEvents, 
         $totalBiayaRaw = preg_replace('/[^0-9]/', '', $row['total'] ?? '0');
         $totalBiaya = empty($totalBiayaRaw) ? 0 : (int) $totalBiayaRaw;
 
+        $nomorTbpRaw = isset($row['nomor_tbp']) ? trim((string) $row['nomor_tbp']) : '';
+
         return new TransaksiPenerimaan([
             'penerimaan_id' => $this->penerimaanId,
             'tanggal' => $parsedTanggal,
             'nomor_transaksi' => $row['nomor_transaksi'] ?? '-',
+            'nomor_tbp' => $nomorTbpRaw !== '' ? $nomorTbpRaw : null,
             'nama_penjamin' => $namaPenjamin,
             'total_biaya' => $totalBiaya,
             'metode_pembayaran' => $row['metode_pembayaran'] ?? '-',
