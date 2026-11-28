@@ -5,18 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\RekeningBlud;
 use App\Models\UnitBlud;
 use App\Models\User;
+use App\Support\SaldoRekeningBludCalculator;
+use App\Support\TahunAnggaran;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Validation\Rule;
 
 class RekeningBludController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, SaldoRekeningBludCalculator $calculator)
     {
         $this->ensureTableExists();
 
         $user = $request->user();
+        $tahun = TahunAnggaran::selected();
         $canManage = $this->canManageRekening($user);
         $isGlobalViewer = $user->hasAnyRole(['Superuser', 'Dinas', 'Dinas Kesehatan', 'Perencanaan']) || $user->isDinasKesehatan();
 
@@ -35,17 +39,38 @@ class RekeningBludController extends Controller
         }
 
         $rekeningByJenis = collect();
+        $mutations = [];
         if ($selectedUnit) {
             $rekeningByJenis = RekeningBlud::with('updater:id,name')
                 ->where('unit_blud_id', $selectedUnit->id)
                 ->get()
                 ->keyBy('jenis');
+
+            $mutations = $calculator->mutationsForUnit($selectedUnit->id, $tahun);
         }
 
-        $slots = collect(RekeningBlud::JENIS_LIST)->map(function (string $jenis) use ($rekeningByJenis) {
+        $totalSaldo = 0.0;
+        $totalSaldoAwal = 0.0;
+
+        $slots = collect(RekeningBlud::JENIS_LIST)->map(function (string $jenis) use ($rekeningByJenis, $mutations, $calculator, &$totalSaldo, &$totalSaldoAwal) {
+            /** @var RekeningBlud|null $record */
+            $record = $rekeningByJenis->get($jenis);
+            $mutation = $mutations[$jenis] ?? ['masuk' => 0.0, 'keluar' => 0.0];
+            $saldoAwal = $record ? (float) $record->saldo_awal : 0.0;
+            $saldoAkhir = $record ? $calculator->syncRekeningSaldo($record, $mutation) : 0.0;
+
+            if ($record) {
+                $totalSaldoAwal += $saldoAwal;
+                $totalSaldo += $saldoAkhir;
+            }
+
             return [
                 'jenis' => $jenis,
-                'record' => $rekeningByJenis->get($jenis),
+                'record' => $record,
+                'saldo_awal' => $saldoAwal,
+                'masuk' => (float) $mutation['masuk'],
+                'keluar' => (float) $mutation['keluar'],
+                'saldo_akhir' => $saldoAkhir,
             ];
         });
 
@@ -54,13 +79,13 @@ class RekeningBludController extends Controller
             ->pluck('jenis')
             ->values();
 
-        $totalSaldo = (float) $rekeningByJenis->sum(fn ($item) => (float) $item->saldo);
-
         return view('rekening-blud', [
             'slots' => $slots,
             'jenisList' => RekeningBlud::JENIS_LIST,
             'availableJenisForCreate' => $availableJenisForCreate,
+            'totalSaldoAwal' => $totalSaldoAwal,
             'totalSaldo' => $totalSaldo,
+            'tahunAnggaran' => $tahun,
             'canManage' => $canManage,
             'isGlobalViewer' => $isGlobalViewer && ! $canManage,
             'puskesmasList' => $puskesmasList,
@@ -68,7 +93,7 @@ class RekeningBludController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, SaldoRekeningBludCalculator $calculator)
     {
         $this->ensureTableExists();
         $user = $request->user();
@@ -86,21 +111,29 @@ class RekeningBludController extends Controller
             ],
             'nama_bank' => ['required', 'string', 'max:150'],
             'nomor_rekening' => ['required', 'string', 'max:100'],
-            'saldo' => ['required', 'numeric', 'min:0'],
+            'saldo_awal' => ['nullable', 'numeric', 'min:0'],
         ], [
-            'jenis.unique' => 'Data rekening untuk jenis tersebut sudah terdaftar. Gunakan tombol Edit untuk memperbarui.',
+            'jenis.unique' => 'Data rekening untuk jenis tersebut sudah terdaftar. Gunakan tombol Edit untuk memperbarui info bank/nomor rekening.',
             'jenis.in' => 'Jenis rekening tidak valid.',
         ]);
 
-        RekeningBlud::create([
+        $saldoAwal = isset($validated['saldo_awal']) && $validated['saldo_awal'] !== '' && $validated['saldo_awal'] !== null
+            ? (float) $validated['saldo_awal']
+            : 0.0;
+
+        $rekening = RekeningBlud::create([
             'unit_blud_id' => $unit->id,
             'nama_blud' => $unit->nama,
             'jenis' => $validated['jenis'],
             'nama_bank' => trim($validated['nama_bank']),
             'nomor_rekening' => trim($validated['nomor_rekening']),
-            'saldo' => $validated['saldo'],
+            'saldo_awal' => $saldoAwal,
+            'saldo' => $saldoAwal,
             'updated_by' => $user->id,
         ]);
+
+        $mutations = $calculator->mutationsForUnit($unit->id, TahunAnggaran::selected());
+        $calculator->syncRekeningSaldo($rekening, $mutations[$rekening->jenis] ?? ['masuk' => 0.0, 'keluar' => 0.0]);
 
         return redirect()->route('rekening-blud.index')
             ->with('success', 'Data '.$validated['jenis'].' berhasil ditambahkan.');
@@ -117,6 +150,7 @@ class RekeningBludController extends Controller
 
         $rekening = RekeningBlud::where('unit_blud_id', $unit->id)->findOrFail($id);
 
+        // Saldo / saldo_awal sengaja tidak dapat diubah melalui fitur Edit Rekening.
         $validated = $request->validate([
             'jenis' => [
                 'required',
@@ -128,7 +162,6 @@ class RekeningBludController extends Controller
             ],
             'nama_bank' => ['required', 'string', 'max:150'],
             'nomor_rekening' => ['required', 'string', 'max:100'],
-            'saldo' => ['required', 'numeric', 'min:0'],
         ], [
             'jenis.unique' => 'Jenis rekening tersebut sudah digunakan oleh rekening lain di unit ini.',
         ]);
@@ -137,12 +170,11 @@ class RekeningBludController extends Controller
             'jenis' => $validated['jenis'],
             'nama_bank' => trim($validated['nama_bank']),
             'nomor_rekening' => trim($validated['nomor_rekening']),
-            'saldo' => $validated['saldo'],
             'updated_by' => $user->id,
         ]);
 
         return redirect()->route('rekening-blud.index')
-            ->with('success', 'Data '.$validated['jenis'].' berhasil diperbarui.');
+            ->with('success', 'Informasi bank & nomor '.$validated['jenis'].' berhasil diperbarui.');
     }
 
     public function destroy(Request $request, int $id)
@@ -192,22 +224,33 @@ class RekeningBludController extends Controller
 
     private function ensureTableExists(): void
     {
-        if (Schema::hasTable('rekening_bluds')) {
+        if (! Schema::hasTable('rekening_bluds')) {
+            Schema::create('rekening_bluds', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('unit_blud_id')->constrained('unit_bluds')->cascadeOnDelete();
+                $table->string('nama_blud');
+                $table->string('jenis', 100);
+                $table->string('nama_bank', 150);
+                $table->string('nomor_rekening', 100);
+                $table->decimal('saldo_awal', 18, 2)->default(0);
+                $table->decimal('saldo', 18, 2)->default(0);
+                $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
+                $table->timestamps();
+
+                $table->unique(['unit_blud_id', 'jenis']);
+            });
+
             return;
         }
 
-        Schema::create('rekening_bluds', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('unit_blud_id')->constrained('unit_bluds')->cascadeOnDelete();
-            $table->string('nama_blud');
-            $table->string('jenis', 100);
-            $table->string('nama_bank', 150);
-            $table->string('nomor_rekening', 100);
-            $table->decimal('saldo', 18, 2)->default(0);
-            $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
-            $table->timestamps();
+        if (! Schema::hasColumn('rekening_bluds', 'saldo_awal')) {
+            Schema::table('rekening_bluds', function (Blueprint $table) {
+                $table->decimal('saldo_awal', 18, 2)->default(0)->after('nomor_rekening');
+            });
 
-            $table->unique(['unit_blud_id', 'jenis']);
-        });
+            DB::table('rekening_bluds')->update([
+                'saldo_awal' => DB::raw('saldo'),
+            ]);
+        }
     }
 }

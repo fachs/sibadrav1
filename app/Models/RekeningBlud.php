@@ -27,11 +27,13 @@ class RekeningBlud extends Model
         'jenis',
         'nama_bank',
         'nomor_rekening',
+        'saldo_awal',
         'saldo',
         'updated_by',
     ];
 
     protected $casts = [
+        'saldo_awal' => 'decimal:2',
         'saldo' => 'decimal:2',
     ];
 
