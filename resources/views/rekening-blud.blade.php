@@ -159,8 +159,7 @@
                 </div>
                 <div class="rek-kpi-meta">
                     @if($rec)
-                        <div><strong>{{ $rec->nama_bank }}</strong> · {{ $rec->nomor_rekening }}</div>
-                        <div class="mt-1">Saldo Awal: Rp {{ number_format($slot['saldo_awal'], 2, ',', '.') }}</div>
+                        <strong>{{ $rec->nama_bank }}</strong> · {{ $rec->nomor_rekening }}
                     @else
                         Belum ada data rekening terdaftar
                     @endif
@@ -174,7 +173,7 @@
                 <span class="badge bg-success text-white">{{ $filledCount }} / 3 Rekening</span>
             </div>
             <div>
-                <div class="rek-kpi-label">Total Saldo Saat Ini ({{ $tahunAnggaran }})</div>
+                <div class="rek-kpi-label">Total Saldo Rekening BLUD</div>
                 <h4 class="rek-kpi-value mt-1">Rp {{ number_format($totalSaldo, 2, ',', '.') }}</h4>
             </div>
             <div class="rek-kpi-meta">
@@ -188,7 +187,7 @@
             <div>
                 <h5 class="card-title mb-1">Daftar Rekening BLUD — {{ $selectedUnit->nama }}</h5>
                 <p class="text-muted small mb-0">
-                    Saldo saat ini dihitung otomatis dari <strong>Saldo Awal</strong> ditambah transaksi <strong>Penerimaan</strong> dan dikurangi transaksi <strong>Pengeluaran</strong> Tahun Anggaran {{ $tahunAnggaran }}.
+                    Memuat 3 jenis rekening utama BLUD (Bendahara Penerimaan, Bendahara Pengeluaran, dan Rekening BLUD).
                 </p>
             </div>
 
@@ -230,15 +229,13 @@
                 <table class="table table-bordered table-hover align-middle mb-0 rek-table">
                     <thead>
                         <tr>
-                            <th class="text-center" style="width: 48px;">No</th>
-                            <th style="width: 23%;">Jenis Rekening</th>
-                            <th style="width: 15%;">Nama Bank</th>
-                            <th style="width: 16%;">Nomor Rekening</th>
-                            <th class="text-end" style="width: 14%;">Saldo Awal (Rp)</th>
-                            <th class="text-end" style="width: 16%;">Mutasi Transaksi</th>
-                            <th class="text-end" style="width: 16%;">Saldo Saat Ini (Rp)</th>
+                            <th class="text-center" style="width: 52px;">No</th>
+                            <th style="width: 28%;">Jenis Rekening</th>
+                            <th style="width: 20%;">Nama Bank</th>
+                            <th style="width: 22%;">Nomor Rekening</th>
+                            <th class="text-end" style="width: 18%;">Saldo (Rp)</th>
                             @if($canManage)
-                                <th class="text-center" style="width: 115px;">Aksi</th>
+                                <th class="text-center" style="width: 120px;">Aksi</th>
                             @endif
                         </tr>
                     </thead>
@@ -264,18 +261,11 @@
                                 @if($rec)
                                     <td class="fw-medium">{{ $rec->nama_bank }}</td>
                                     <td><span class="rek-number-chip">{{ $rec->nomor_rekening }}</span></td>
-                                    <td class="text-end rek-amount text-muted">{{ number_format($slot['saldo_awal'], 2, ',', '.') }}</td>
-                                    <td class="text-end">
-                                        <div class="d-flex flex-column align-items-end gap-1">
-                                            <span class="rek-mutasi-pill text-success" title="Total Penerimaan">+{{ number_format($slot['masuk'], 2, ',', '.') }}</span>
-                                            <span class="rek-mutasi-pill text-danger" title="Total Pengeluaran">-{{ number_format($slot['keluar'], 2, ',', '.') }}</span>
-                                        </div>
-                                    </td>
                                     <td class="text-end fw-bold {{ $slot['saldo_akhir'] < 0 ? 'text-danger' : 'text-success' }} rek-amount">
                                         {{ number_format($slot['saldo_akhir'], 2, ',', '.') }}
                                     </td>
                                 @else
-                                    <td colspan="5" class="text-muted fst-italic">Belum ada data rekening yang ditambahkan untuk jenis ini.</td>
+                                    <td colspan="3" class="text-muted fst-italic">Belum ada data rekening yang ditambahkan untuk jenis ini.</td>
                                 @endif
 
                                 @if($canManage)
@@ -290,8 +280,7 @@
                                                     data-jenis="{{ $rec->jenis }}"
                                                     data-bank="{{ $rec->nama_bank }}"
                                                     data-nomor="{{ $rec->nomor_rekening }}"
-                                                    data-saldo-awal="Rp {{ number_format($slot['saldo_awal'], 2, ',', '.') }}"
-                                                    data-saldo-akhir="Rp {{ number_format($slot['saldo_akhir'], 2, ',', '.') }}"
+                                                    data-saldo="Rp {{ number_format($slot['saldo_akhir'], 2, ',', '.') }}"
                                                     title="Edit Informasi Bank / Nomor Rekening">
                                                     <i class="ri-edit-box-line"></i>
                                                 </button>
@@ -319,9 +308,7 @@
                     </tbody>
                     <tfoot class="table-light">
                         <tr class="fw-bold">
-                            <td colspan="4" class="text-end">TOTAL KESELURUHAN</td>
-                            <td class="text-end text-muted rek-amount">{{ number_format($totalSaldoAwal, 2, ',', '.') }}</td>
-                            <td></td>
+                            <td colspan="4" class="text-end">TOTAL SALDO REKENING BLUD</td>
                             <td class="text-end {{ $totalSaldo < 0 ? 'text-danger' : 'text-success' }} rek-amount fs-6">{{ number_format($totalSaldo, 2, ',', '.') }}</td>
                             @if($canManage)
                                 <td></td>
@@ -421,15 +408,11 @@
 
                         <div class="p-3 rounded-3 bg-light border">
                             <div class="d-flex justify-content-between small mb-1">
-                                <span class="text-muted">Saldo Awal Tercatat:</span>
-                                <strong id="edit-info-saldo-awal">Rp 0,00</strong>
-                            </div>
-                            <div class="d-flex justify-content-between small mb-2">
-                                <span class="text-muted">Saldo Saat Ini (Otomatis):</span>
-                                <strong class="text-success" id="edit-info-saldo-akhir">Rp 0,00</strong>
+                                <span class="text-muted">Saldo Rekening:</span>
+                                <strong class="text-success" id="edit-info-saldo">Rp 0,00</strong>
                             </div>
                             <div class="text-muted" style="font-size: .75rem;">
-                                <i class="ri-lock-line me-1"></i>Saldo tidak dapat diubah secara manual karena otomatis dihitung dari transaksi penerimaan dan pengeluaran.
+                                <i class="ri-lock-line me-1"></i>Saldo tidak dapat diubah secara manual melalui fitur ini karena otomatis bertambah dan berkurang dari transaksi penerimaan dan pengeluaran.
                             </div>
                         </div>
                     </div>
@@ -460,8 +443,7 @@
         var editJenis = document.getElementById('edit-jenis');
         var editBank = document.getElementById('edit-nama-bank');
         var editNomor = document.getElementById('edit-nomor-rekening');
-        var infoSaldoAwal = document.getElementById('edit-info-saldo-awal');
-        var infoSaldoAkhir = document.getElementById('edit-info-saldo-akhir');
+        var infoSaldo = document.getElementById('edit-info-saldo');
 
         document.querySelectorAll('.btn-edit-rekening').forEach(function (btn) {
             btn.addEventListener('click', function () {
@@ -469,8 +451,7 @@
                 if (editJenis) editJenis.value = btn.getAttribute('data-jenis') || '';
                 if (editBank) editBank.value = btn.getAttribute('data-bank') || '';
                 if (editNomor) editNomor.value = btn.getAttribute('data-nomor') || '';
-                if (infoSaldoAwal) infoSaldoAwal.textContent = btn.getAttribute('data-saldo-awal') || 'Rp 0,00';
-                if (infoSaldoAkhir) infoSaldoAkhir.textContent = btn.getAttribute('data-saldo-akhir') || 'Rp 0,00';
+                if (infoSaldo) infoSaldo.textContent = btn.getAttribute('data-saldo') || 'Rp 0,00';
             });
         });
     });
